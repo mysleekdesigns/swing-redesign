@@ -1,17 +1,20 @@
 import Image from "next/image";
 import { MapPin, Camera, Heart, MessageCircle, Shield } from "lucide-react";
-import { SingleProfile } from "@/lib/types";
+import { CoupleProfile } from "@/lib/types";
 
-interface UserCardProps extends SingleProfile {
+interface CoupleCardProps extends CoupleProfile {
   showActions?: boolean;
   variant?: 'default' | 'compact' | 'featured';
 }
 
-export function UserCard({
+export function CoupleCard({
   username,
   age,
+  partnerName,
+  partnerAge,
   location,
   imageUrl,
+  partnerImageUrl,
   isOnline = false,
   distance,
   photosCount,
@@ -21,7 +24,7 @@ export function UserCard({
   variant = 'default',
   verified = false,
   lookingFor,
-}: UserCardProps) {
+}: CoupleCardProps) {
   const aspectRatio = variant === 'compact' ? 'aspect-[4/5]' : 'aspect-[3/4]';
   
   return (
@@ -29,25 +32,46 @@ export function UserCard({
       variant === 'featured' ? 'ring-2 ring-primary/20 shadow-lg shadow-primary/10' : ''
     }`}>
       <div className={`${aspectRatio} relative overflow-hidden`}>
-        <Image
-          src={imageUrl}
-          alt={`${username}'s profile photo`}
-          fill
-          className="object-cover transition-all duration-500 group-hover:scale-110"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-          priority={variant === 'featured'}
-        />
+        {/* Couple Images Side by Side */}
+        <div className="flex h-full">
+          {/* Partner 1 Image */}
+          <div className="flex-1 relative overflow-hidden">
+            <Image
+              src={imageUrl}
+              alt={`${username.split(' & ')[0]}'s profile photo`}
+              fill
+              className="object-cover transition-all duration-500 group-hover:scale-110"
+              sizes="(max-width: 768px) 25vw, (max-width: 1200px) 16vw, 12vw"
+              priority={variant === 'featured'}
+            />
+          </div>
+          
+          {/* Divider with golden accent */}
+          <div className="w-0.5 bg-gradient-to-b from-transparent via-primary/60 to-transparent relative z-10" />
+          
+          {/* Partner 2 Image */}
+          <div className="flex-1 relative overflow-hidden">
+            <Image
+              src={partnerImageUrl}
+              alt={`${partnerName}'s profile photo`}
+              fill
+              className="object-cover transition-all duration-500 group-hover:scale-110"
+              sizes="(max-width: 768px) 25vw, (max-width: 1200px) 16vw, 12vw"
+              priority={variant === 'featured'}
+            />
+          </div>
+        </div>
         
-        {/* Enhanced gradient overlay with subtle gold accent */}
+        {/* Unified gradient overlay with golden couple accent */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
-        {/* Status indicators with improved glassmorphism */}
+        {/* Couple-specific status indicators */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-          {/* Single badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-dark border border-white/20">
-            <div className="w-2 h-2 rounded-full bg-white/80" />
-            <span className="text-xs font-medium text-white tracking-wide">Single</span>
+          {/* Couple badge with golden accent */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-dark border border-primary/20 bg-primary/10">
+            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs font-medium text-primary tracking-wide">Couple</span>
           </div>
           
           {verified && (
@@ -58,6 +82,7 @@ export function UserCard({
           )}
         </div>
         
+        {/* Status and photo count indicators */}
         <div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
           {isOnline && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-dark border border-white/10">
@@ -94,12 +119,16 @@ export function UserCard({
           </div>
         )}
         
-        {/* Enhanced content area with better typography */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+        {/* Enhanced content area with couple-specific styling */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
           <div className="space-y-2">
-            <h3 className="text-xl font-bold text-white tracking-tight leading-tight">
-              {username}, <span className={variant === 'featured' ? 'text-primary' : 'text-white'}>{age}</span>
-            </h3>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-lg font-bold text-white tracking-tight leading-tight flex-1">
+                {username.split(' & ')[0]}, <span className={variant === 'featured' ? 'text-primary' : 'text-white'}>{age}</span>
+                <span className="text-primary mx-1">&</span>
+                {partnerName}, <span className={variant === 'featured' ? 'text-primary' : 'text-white'}>{partnerAge}</span>
+              </h3>
+            </div>
             
             <div className="flex items-center gap-2 text-white/90">
               <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
@@ -113,14 +142,12 @@ export function UserCard({
             </div>
             
             {/* Looking for indicator */}
-            {lookingFor && (
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-white/70">Looking for:</span>
-                <span className="text-xs font-medium text-primary/90 bg-primary/15 rounded-full px-2 py-1 border border-primary/20">
-                  {lookingFor === 'both' ? 'Couples & Singles' : lookingFor === 'couples' ? 'Couples' : 'Singles'}
-                </span>
-              </div>
-            )}
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-white/70">Looking for:</span>
+              <span className="text-xs font-medium text-primary bg-primary/20 rounded-full px-2 py-1 border border-primary/30">
+                {lookingFor === 'both' ? 'Couples & Singles' : lookingFor === 'couples' ? 'Couples' : 'Singles'}
+              </span>
+            </div>
             
             {viewedTime && (
               <p className="text-xs text-white/70 font-medium bg-black/20 rounded-full px-2 py-1 inline-block">

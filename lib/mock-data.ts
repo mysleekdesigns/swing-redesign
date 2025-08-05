@@ -1,84 +1,106 @@
 // Mock data for Swing dating website
-export interface User {
-  id: string;
-  username: string;
-  age: number;
-  location: string;
-  imageUrl: string;
-  isOnline?: boolean;
-  distance?: string;
-  photosCount?: number;
-  viewedTime?: string;
-  isLiked?: boolean;
-  bio?: string;
-  interests?: string[];
-}
+import { User, HotDate } from './types';
 
-export interface HotDate {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  time: string;
-  location: string;
-  imageUrl: string;
-  attendeeCount: number;
-  category: 'party' | 'outdoor' | 'cultural' | 'sports' | 'dining';
-  price?: string;
-}
 
-// Mock users for "Who's On" section
+// Mock users for "Who's On" section (70% couples, 30% singles)
 export const whoIsOnUsers: User[] = [
+  // Couples (70%)
   {
     id: '1',
-    username: 'Sarah',
+    username: 'Sarah & Jake',
     age: 28,
     location: 'Downtown LA',
     imageUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=600&fit=crop&crop=face',
     isOnline: true,
     distance: '2 mi',
-    photosCount: 8,
+    photosCount: 18,
+    isCouple: true,
+    partnerName: 'Jake',
+    partnerAge: 30,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Fun-loving couple exploring the lifestyle together. We love wine tastings and beach days!',
+    interests: ['wine', 'beach', 'dancing', 'travel']
   },
   {
     id: '2',
-    username: 'Emma',
+    username: 'Emma & Ryan',
     age: 25,
     location: 'Hollywood',
     imageUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=600&fit=crop&crop=face',
     isOnline: true,
     distance: '3 mi',
-    photosCount: 12,
+    photosCount: 22,
+    isCouple: true,
+    partnerName: 'Ryan',
+    partnerAge: 27,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'New to the scene and excited to meet other couples. We love good food and great company!',
+    interests: ['food', 'fitness', 'movies', 'nightlife']
   },
   {
     id: '3',
-    username: 'Mia',
+    username: 'Mia & David',
     age: 30,
     location: 'Santa Monica',
     imageUrl: 'https://images.unsplash.com/photo-1496440737103-cd596325d314?w=400&h=600&fit=crop&crop=face',
     isOnline: true,
     distance: '5 mi',
-    photosCount: 6,
+    photosCount: 16,
+    isCouple: true,
+    partnerName: 'David',
+    partnerAge: 32,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Adventurous couple who loves trying new experiences. Beach lovers and party enthusiasts!',
+    interests: ['beach', 'parties', 'yoga', 'photography']
   },
   {
     id: '4',
-    username: 'Zoe',
+    username: 'Zoe & Marcus',
     age: 27,
     location: 'Venice Beach',
     imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face',
     isOnline: true,
     distance: '4 mi',
-    photosCount: 15,
+    photosCount: 25,
+    isCouple: true,
+    partnerName: 'Marcus',
+    partnerAge: 29,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'singles',
+    verified: true,
+    bio: 'Creative couple in Venice looking for fun connections. We love art, music, and good vibes!',
+    interests: ['art', 'music', 'surfing', 'festivals']
   },
   {
     id: '5',
-    username: 'Luna',
+    username: 'Luna & Alex',
     age: 26,
     location: 'Beverly Hills',
     imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop&crop=face',
     isOnline: true,
     distance: '6 mi',
-    photosCount: 9,
+    photosCount: 19,
+    isCouple: true,
+    partnerName: 'Alex',
+    partnerAge: 28,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Sophisticated couple who enjoys the finer things. Looking for quality connections!',
+    interests: ['wine', 'theater', 'fine dining', 'travel']
   },
+  // Singles (30% - emphasizing attractive women as requested)
   {
     id: '6',
     username: 'Aria',
@@ -88,6 +110,12 @@ export const whoIsOnUsers: User[] = [
     isOnline: true,
     distance: '3 mi',
     photosCount: 11,
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'Single and ready to explore with the right couple. Love nightlife and adventure!',
+    interests: ['dancing', 'cocktails', 'fashion', 'travel']
   },
   {
     id: '7',
@@ -98,6 +126,12 @@ export const whoIsOnUsers: User[] = [
     isOnline: true,
     distance: '7 mi',
     photosCount: 14,
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Confident woman looking for fun experiences. Open-minded and adventurous!',
+    interests: ['fitness', 'hiking', 'wine', 'cooking']
   },
   {
     id: '8',
@@ -108,53 +142,97 @@ export const whoIsOnUsers: User[] = [
     isOnline: true,
     distance: '4 mi',
     photosCount: 10,
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'Young and curious about the lifestyle. Looking for experienced couples to show me the way!',
+    interests: ['art', 'music', 'yoga', 'photography']
   },
 ];
 
-// Mock users for "Who Viewed Me" section
+// Mock users for "Who Viewed Me" section (70% couples, 30% singles)
 export const whoViewedMeUsers: User[] = [
+  // Couples (70%)
   {
-    id: '7',
-    username: 'Olivia',
+    id: '9',
+    username: 'Olivia & Tom',
     age: 24,
     location: 'Pasadena',
     imageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=600&fit=crop&crop=face',
     distance: '8 mi',
-    photosCount: 7,
+    photosCount: 17,
     viewedTime: '2 hours ago',
+    isCouple: true,
+    partnerName: 'Tom',
+    partnerAge: 26,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Young couple new to the lifestyle. Looking for patient and understanding connections!',
+    interests: ['hiking', 'movies', 'cooking', 'games']
   },
   {
-    id: '8',
-    username: 'Sophia',
+    id: '10',
+    username: 'Sophia & Chris',
     age: 31,
     location: 'Long Beach',
     imageUrl: 'https://images.unsplash.com/photo-1506863530036-1efeddceb993?w=400&h=600&fit=crop&crop=face',
     distance: '12 mi',
-    photosCount: 14,
+    photosCount: 24,
     viewedTime: '5 hours ago',
+    isCouple: true,
+    partnerName: 'Chris',
+    partnerAge: 33,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'Experienced couple seeking other like-minded couples for friendship and fun!',
+    interests: ['sailing', 'wine', 'travel', 'dining']
   },
   {
-    id: '9',
-    username: 'Ava',
+    id: '11',
+    username: 'Ava & Jason',
     age: 26,
     location: 'Culver City',
     imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=600&fit=crop&crop=face',
     distance: '7 mi',
-    photosCount: 10,
+    photosCount: 20,
     viewedTime: '1 day ago',
+    isCouple: true,
+    partnerName: 'Jason',
+    partnerAge: 28,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'singles',
+    verified: true,
+    bio: 'Fun couple looking to add some excitement to our relationship with the right person!',
+    interests: ['fitness', 'beach', 'cocktails', 'dancing']
   },
   {
-    id: '10',
-    username: 'Isabella',
+    id: '12',
+    username: 'Isabella & Mike',
     age: 28,
     location: 'Manhattan Beach',
     imageUrl: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&h=600&fit=crop&crop=face',
     distance: '15 mi',
-    photosCount: 8,
+    photosCount: 18,
     viewedTime: '2 days ago',
+    isCouple: true,
+    partnerName: 'Mike',
+    partnerAge: 30,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Beach-loving couple who enjoys good company and great conversations!',
+    interests: ['surfing', 'volleyball', 'bbq', 'music']
   },
+  // Singles (30% - emphasizing attractive women)
   {
-    id: '11',
+    id: '13',
     username: 'Ruby',
     age: 30,
     location: 'Playa Vista',
@@ -162,9 +240,15 @@ export const whoViewedMeUsers: User[] = [
     distance: '10 mi',
     photosCount: 12,
     viewedTime: '3 days ago',
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'Experienced in the lifestyle and looking for genuine connections with couples!',
+    interests: ['yoga', 'wine', 'travel', 'photography']
   },
   {
-    id: '12',
+    id: '14',
     username: 'Hazel',
     age: 23,
     location: 'Hermosa Beach',
@@ -172,53 +256,97 @@ export const whoViewedMeUsers: User[] = [
     distance: '13 mi',
     photosCount: 6,
     viewedTime: '3 days ago',
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Free spirit who loves meeting new people and trying new experiences!',
+    interests: ['beach', 'festivals', 'art', 'music']
   },
 ];
 
-// Mock users for "Newest Matches" section
+// Mock users for "Newest Matches" section (70% couples, 30% singles)
 export const newestMatches: User[] = [
+  // Couples (70%)
   {
-    id: '11',
-    username: 'Maya',
+    id: '15',
+    username: 'Maya & Daniel',
     age: 27,
     location: 'Brentwood',
     imageUrl: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=600&fit=crop&crop=face',
     distance: '4 mi',
-    photosCount: 13,
+    photosCount: 23,
     isLiked: true,
+    isCouple: true,
+    partnerName: 'Daniel',
+    partnerAge: 29,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Perfect match! We love outdoor adventures and cozy nights in. Excited to connect!',
+    interests: ['hiking', 'wine', 'cooking', 'travel']
   },
   {
-    id: '12',
-    username: 'Chloe',
+    id: '16',
+    username: 'Chloe & Sam',
     age: 25,
     location: 'Marina del Rey',
     imageUrl: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=400&h=600&fit=crop&crop=face',
     distance: '6 mi',
-    photosCount: 9,
+    photosCount: 19,
     isLiked: true,
+    isCouple: true,
+    partnerName: 'Sam',
+    partnerAge: 27,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'Young couple looking for other fun couples to share experiences with!',
+    interests: ['boating', 'nightlife', 'fitness', 'beach']
   },
   {
-    id: '13',
-    username: 'Grace',
+    id: '17',
+    username: 'Grace & Tyler',
     age: 29,
     location: 'Redondo Beach',
     imageUrl: 'https://images.unsplash.com/photo-1512310604669-443f26c35f52?w=400&h=600&fit=crop&crop=face',
     distance: '11 mi',
-    photosCount: 16,
+    photosCount: 26,
     isLiked: true,
+    isCouple: true,
+    partnerName: 'Tyler',
+    partnerAge: 31,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'singles',
+    verified: true,
+    bio: 'Beach couple seeking a special someone to join our adventures!',
+    interests: ['surfing', 'yoga', 'festivals', 'photography']
   },
   {
-    id: '14',
-    username: 'Lily',
+    id: '18',
+    username: 'Lily & Kevin',
     age: 26,
     location: 'El Segundo',
     imageUrl: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=600&fit=crop&crop=face',
     distance: '9 mi',
-    photosCount: 7,
+    photosCount: 17,
     isLiked: true,
+    isCouple: true,
+    partnerName: 'Kevin',
+    partnerAge: 28,
+    partnerImageUrl: 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&h=600&fit=crop&crop=face',
+    relationshipType: 'couple',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Tech couple who loves to explore the city and meet amazing people!',
+    interests: ['tech', 'gaming', 'food', 'concerts']
   },
+  // Singles (30% - emphasizing attractive women)
   {
-    id: '15',
+    id: '19',
     username: 'Scarlett',
     age: 28,
     location: 'Burbank',
@@ -226,9 +354,15 @@ export const newestMatches: User[] = [
     distance: '14 mi',
     photosCount: 11,
     isLiked: true,
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'couples',
+    verified: true,
+    bio: 'Creative professional looking for meaningful connections with couples!',
+    interests: ['art', 'theater', 'wine', 'travel']
   },
   {
-    id: '16',
+    id: '20',
     username: 'Violet',
     age: 31,
     location: 'Studio City',
@@ -236,56 +370,70 @@ export const newestMatches: User[] = [
     distance: '12 mi',
     photosCount: 9,
     isLiked: true,
+    isCouple: false,
+    relationshipType: 'single',
+    lookingFor: 'both',
+    verified: true,
+    bio: 'Entertainment industry professional who loves meeting new people and trying new things!',
+    interests: ['movies', 'dining', 'cocktails', 'networking']
   },
 ];
 
-// Mock hot dates/events
+// Mock hot dates/events (couple-friendly)
 export const hotDates: HotDate[] = [
   {
     id: '1',
-    title: 'Sunset Rooftop Party',
-    description: 'Join us for cocktails and city views as the sun sets over LA. Great music, amazing people!',
+    title: 'Couples Sunset Rooftop Party',
+    description: 'Exclusive rooftop party for couples and select singles. Premium cocktails, city views, and sophisticated atmosphere.',
     date: '2025-08-08',
     time: '7:00 PM',
     location: 'Downtown LA Rooftop',
     imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=400&fit=crop',
-    attendeeCount: 24,
+    attendeeCount: 32,
     category: 'party',
-    price: '$25',
+    price: '$35',
+    isAdultOnly: true,
+    couplesFriendly: true,
   },
   {
     id: '2',
-    title: 'Beach Volleyball & BBQ',
-    description: 'Active singles meet-up at the beach. Volleyball games followed by a group BBQ dinner.',
+    title: 'Beach Volleyball & BBQ Mixer',
+    description: 'Fun beach day for couples and singles. Volleyball tournament followed by group BBQ and socializing.',
     date: '2025-08-10',
     time: '4:00 PM',
     location: 'Santa Monica Beach',
     imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop',
-    attendeeCount: 18,
+    attendeeCount: 28,
     category: 'outdoor',
+    couplesFriendly: true,
   },
   {
     id: '3',
-    title: 'Wine Tasting Night',
-    description: 'Discover new wines and meet fellow wine enthusiasts in an intimate setting.',
+    title: 'Intimate Wine Tasting Experience',
+    description: 'Private wine tasting for couples and discerning singles. Limited seating for an exclusive experience.',
     date: '2025-08-12',
     time: '6:30 PM',
     location: 'Beverly Hills Wine Bar',
     imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=400&fit=crop',
-    attendeeCount: 16,
+    attendeeCount: 20,
     category: 'dining',
-    price: '$40',
+    price: '$50',
+    isAdultOnly: true,
+    couplesFriendly: true,
   },
   {
     id: '4',
-    title: 'Art Gallery Opening',
-    description: 'Experience contemporary art and connect with creative souls at this exclusive gallery opening.',
+    title: 'Exclusive Art Gallery Night',
+    description: 'After-hours gallery experience with contemporary art, champagne, and sophisticated mingling.',
     date: '2025-08-15',
     time: '7:00 PM',
     location: 'West Hollywood Gallery',
     imageUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=400&fit=crop',
-    attendeeCount: 12,
+    attendeeCount: 24,
     category: 'cultural',
+    price: '$30',
+    isAdultOnly: true,
+    couplesFriendly: true,
   },
 ];
 

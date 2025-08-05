@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Calendar, Clock, MapPin, Users, DollarSign } from "lucide-react";
-import { HotDate } from "@/lib/mock-data";
+import { HotDate } from "@/lib/types";
 
 interface HotDateCardProps extends HotDate {
   variant?: 'default' | 'compact';

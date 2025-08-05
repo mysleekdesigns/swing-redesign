@@ -1,7 +1,7 @@
 "use client";
 
 import { Sidebar } from "@/components/layout/Sidebar";
-import { UserCard } from "@/components/ui/UserCard";
+import { ProfileCard } from "@/components/ui/ProfileCard";
 import { HotDateCard } from "@/components/ui/HotDateCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { 
@@ -28,40 +28,67 @@ export default function Home() {
         <div className="max-w-screen-2xl mx-auto space-y-8">
           
           {/* Welcome Section */}
-          <div className="relative overflow-hidden rounded-3xl section-glass p-8">
+          <div className="relative overflow-hidden rounded-3xl couples-hero-bg section-glass p-8 lg:p-12">
             <div className="relative z-10">
-              <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 tracking-tight">
-                Welcome to Swing
+              <div className="flex items-center gap-3 mb-6">
+                <div className="couple-badge flex items-center gap-2 px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-sm font-medium text-primary tracking-wide">Premium Couples Platform</span>
+                </div>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight leading-tight">
+                Where Couples <span className="text-primary">Connect</span>
+                <br />
+                <span className="text-2xl sm:text-3xl lg:text-4xl text-muted-foreground font-normal">
+                  & Adventures Begin
+                </span>
               </h1>
-              <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
-                Discover meaningful connections with like-minded people in your area. 
-                Your perfect match is just a swipe away.
+              
+              <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl leading-relaxed">
+                Join the most sophisticated community for couples in the lifestyle. 
+                Connect with like-minded partners, discover exclusive events, and explore 
+                new experiences together in a safe, premium environment.
               </p>
+              
               <div className="flex flex-wrap gap-4">
-                <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold transition-colors">
-                  Start Swiping
+                <button className="couple-primary-btn px-8 py-4 text-primary-foreground rounded-xl font-semibold">
+                  Explore Couples
                 </button>
-                <button className="px-6 py-3 border border-border hover:bg-accent text-foreground rounded-xl font-semibold transition-colors">
-                  Browse Events
+                <button className="couple-secondary-btn px-8 py-4 text-foreground rounded-xl font-semibold">
+                  Premium Events
                 </button>
               </div>
+              
+              <div className="flex items-center gap-6 mt-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-primary/60" />
+                  <span>70% Verified Couples</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-primary/60" />
+                  <span>Exclusive Member Events</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-primary/60" />
+                  <span>Premium Community</span>
+                </div>
+              </div>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
           </div>
 
           {/* Who's On Section */}
           <section>
             <SectionHeader
-              title="Who's On"
-              subtitle="People currently online and ready to connect"
+              title="Couples Online"
+              subtitle="Premium members currently online and ready to connect"
               icon={Users}
               count={whoIsOnUsers.length}
               variant="glass"
             />
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
               {displayedOnlineUsers.map((user) => (
-                <UserCard
+                <ProfileCard
                   key={user.id}
                   {...user}
                   variant="compact"
@@ -74,15 +101,15 @@ export default function Home() {
           {/* Who Viewed Me Section */}
           <section>
             <SectionHeader
-              title="Who Viewed Me"
-              subtitle="Recent profile visitors - someone's interested!"
+              title="Premium Interest"
+              subtitle="Quality members have viewed your profile - someone's intrigued!"
               icon={Eye}
               count={whoViewedMeUsers.length}
               variant="glass"
             />
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
               {displayedViewers.map((user) => (
-                <UserCard
+                <ProfileCard
                   key={user.id}
                   {...user}
                   showActions={true}
@@ -94,15 +121,15 @@ export default function Home() {
           {/* Newest Matches Section */}
           <section>
             <SectionHeader
-              title="Newest Matches"
-              subtitle="Fresh connections waiting for your message"
+              title="Perfect Connections"
+              subtitle="Premium matches curated just for you - start the conversation"
               icon={Heart}
               count={newestMatches.length}
               variant="glass"
             />
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
               {displayedMatches.map((user) => (
-                <UserCard
+                <ProfileCard
                   key={user.id}
                   {...user}
                   variant="featured"
@@ -115,8 +142,8 @@ export default function Home() {
           {/* Hot Dates Section */}
           <section>
             <SectionHeader
-              title="Hot Dates"
-              subtitle="Exciting events and group activities near you"
+              title="Exclusive Experiences"
+              subtitle="Premium events crafted for couples and select singles"
               icon={Calendar}
               count={hotDates.length}
               variant="glass"
@@ -129,29 +156,29 @@ export default function Home() {
             
             {/* View More Events Button */}
             <div className="text-center mt-8">
-              <button className="px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-xl font-semibold transition-all hover:scale-105">
-                View All Events
+              <button className="couple-secondary-btn px-8 py-3 text-foreground rounded-xl font-semibold">
+                Discover Premium Events
               </button>
             </div>
           </section>
 
           {/* Stats Section */}
           <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="section-glass rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">2.5K+</div>
-              <div className="text-sm text-muted-foreground font-medium">Members Online Now</div>
+            <div className="couple-stat-card rounded-2xl p-6 text-center">
+              <div className="text-3xl font-bold text-primary mb-2">1.8K+</div>
+              <div className="text-sm text-muted-foreground font-medium">Verified Couples Online</div>
             </div>
-            <div className="section-glass rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">150+</div>
-              <div className="text-sm text-muted-foreground font-medium">Events This Month</div>
+            <div className="couple-stat-card rounded-2xl p-6 text-center">
+              <div className="text-3xl font-bold text-primary mb-2">85+</div>
+              <div className="text-sm text-muted-foreground font-medium">Premium Events Monthly</div>
             </div>
-            <div className="section-glass rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">95%</div>
-              <div className="text-sm text-muted-foreground font-medium">Successful Connections</div>
+            <div className="couple-stat-card rounded-2xl p-6 text-center">
+              <div className="text-3xl font-bold text-primary mb-2">97%</div>
+              <div className="text-sm text-muted-foreground font-medium">Quality Connections</div>
             </div>
-            <div className="section-glass rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground font-medium">Support Available</div>
+            <div className="couple-stat-card rounded-2xl p-6 text-center">
+              <div className="text-3xl font-bold text-primary mb-2">VIP</div>
+              <div className="text-sm text-muted-foreground font-medium">Concierge Support</div>
             </div>
           </section>
         </div>
