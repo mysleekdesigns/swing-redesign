@@ -179,7 +179,8 @@ export function PhotoGalleryModal({
 
         {/* Thumbnail Grid - Fixed Implementation */}
         <div className="mt-4 overflow-hidden">
-          <div className="grid gap-2 mx-auto max-w-3xl" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(64px, 1fr))" }}>            {images.map((image, index) => (
+          <div className="grid gap-2 mx-auto max-w-3xl grid-cols-8">
+            {images.map((image, index) => (
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
