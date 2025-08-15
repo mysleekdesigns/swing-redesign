@@ -70,7 +70,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-background">
       <Sidebar />
       
-      <main className="2xl:ml-64 p-4 sm:p-6 lg:p-8">
+      <main className="2xl:ml-64 pt-20 2xl:pt-4 p-4 sm:p-6 lg:p-8">
         <div className="w-full space-y-4 sm:space-y-6">
           
           {/* Profile Header */}
