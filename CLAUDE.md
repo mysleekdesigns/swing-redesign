@@ -37,7 +37,7 @@ This is a Next.js 15 application using the App Router with the following key cha
   - `profile/page.tsx` - User profile page
   - `search/page.tsx` - Search functionality
 - `/components` - Reusable components
-  - `/ui` - shadcn/ui components (button, carousel, dropdown-menu, theme-toggle, ConventionCard, HotDateCard, UserCard, FilterPill, AdvancedFilters, photo-gallery-modal)
+  - `/ui` - shadcn/ui components (button, carousel, dropdown-menu, theme-toggle, ConventionCard, HotDateCard, UserCard, FilterPill, AdvancedFilters, photo-gallery-modal, Footer, SectionHeader)
   - `/layout` - Layout components (Sidebar)
   - `providers.tsx` - Context providers wrapper
 - `/lib` - Utility functions and context
