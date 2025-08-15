@@ -33,8 +33,11 @@ This is a Next.js 15 application using the App Router with the following key cha
 
 ### Project Structure
 - `/app` - Next.js App Router pages and layouts
+  - `page.tsx` - Main landing page
+  - `profile/page.tsx` - User profile page
+  - `search/page.tsx` - Search functionality
 - `/components` - Reusable components
-  - `/ui` - shadcn/ui components (ConventionCard, HotDateCard, UserCard, dropdown-menu, theme-toggle)
+  - `/ui` - shadcn/ui components (button, carousel, dropdown-menu, theme-toggle, ConventionCard, HotDateCard, UserCard, FilterPill, AdvancedFilters, photo-gallery-modal)
   - `/layout` - Layout components (Sidebar)
   - `providers.tsx` - Context providers wrapper
 - `/lib` - Utility functions and context
@@ -49,7 +52,8 @@ This is a Next.js 15 application using the App Router with the following key cha
 ### Styling System
 - Tailwind CSS v4 with CSS variables for theming
 - Dark mode support with `.dark` class variant
-- Multiple theme variants: default, bubble-gum, cyberpunk, golden accent
+- Multiple theme variants: default, dark, bubble-gum, cyberpunk
+- OKLCH color space for precise color control
 - Custom utilities in `app/globals.css` including hover-lift effects and status indicators
 - Responsive breakpoints for mobile/tablet/desktop layouts
 
@@ -69,9 +73,15 @@ This is a Next.js 15 application using the App Router with the following key cha
 - Extends Next.js core-web-vitals and TypeScript rules
 - Uses FlatCompat for ESLint configuration
 
+### shadcn/ui Config
+- Style: New York
+- Base color: Neutral
+- CSS variables enabled
+- Icon library: Lucide React
+
 ## Key Dependencies
 
-- **UI Libraries**: Radix UI (dropdown-menu), Lucide React (icons), Class Variance Authority (component variants)
+- **UI Libraries**: Radix UI (dropdown-menu, slot), Lucide React (icons), Class Variance Authority (component variants), Embla Carousel
 - **Styling**: Tailwind Merge, clsx for className utilities, tw-animate-css for animations
 - **Development**: ESLint with Next.js rules, PostCSS with Tailwind
 
@@ -118,4 +128,4 @@ No test framework is currently configured. When adding tests, first check README
 - Leverage existing UI components before creating new ones
 - Follow TypeScript strict mode requirements
 - Check existing code patterns before implementing new features
-- the project mananger is only supposed to delegate tasks to relevant sub agentms depending on the task at hand. the sub agents are supposed to do the work.
+- The project manager is only supposed to delegate tasks to relevant sub-agents depending on the task at hand. The sub-agents are supposed to do the work.
