@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "@/lib/theme-context";
+import { useEffect, useState } from "react";
 import { 
   Heart, 
   Calendar, 
@@ -33,6 +35,14 @@ interface FooterSection {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const logoSrc = mounted && (theme === "dark" || theme === "cyberpunk") ? "/images/Swing.png" : "/images/logo-swing.svg";
 
   const footerSections: FooterSection[] = [
     {
@@ -88,7 +98,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mt-16 section-glass border-t border-border/30">
+    <footer className="mt-16 bg-[oklch(0.965_0_0)] border border-gray-300 rounded-2xl dark:backdrop-blur-[16px] dark:bg-white/5 dark:border-white/10">
       <div className="px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
         
         {/* Main Footer Content */}
@@ -99,17 +109,19 @@ export function Footer() {
             <div className="lg:col-span-2 md:col-span-3 space-y-8">
               <div>
                 <Link href="/" className="inline-block">
-                  <Image
-                    src="/images/Swing.png"
-                    alt="Swing Dating"
-                    width={220}
-                    height={70}
-                    className="h-12 w-auto"
-                  />
+                  {mounted && (
+                    <Image
+                      src={logoSrc}
+                      alt="Swing Dating"
+                      width={220}
+                      height={70}
+                      className="h-12 w-auto"
+                    />
+                  )}
                 </Link>
               </div>
               
-              <p className="text-muted-foreground text-base leading-relaxed max-w-lg">
+              <p className="text-gray-600 dark:text-muted-foreground text-base leading-relaxed max-w-lg">
                 Discover meaningful connections with like-minded people in your area. 
                 Join exclusive events and find your perfect match in the modern dating world.
               </p>
@@ -118,7 +130,7 @@ export function Footer() {
               <div className="space-y-3">
                 {contactInfo.map((contact) => {
                   const Content = (
-                    <div className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors">
                       <contact.icon className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>{contact.value}</span>
                     </div>
@@ -164,7 +176,7 @@ export function Footer() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                        className="flex items-center gap-2 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
                       >
                         {link.icon && (
                           <link.icon className="w-4 h-4 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -180,11 +192,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border/30 py-8">
+        <div className="border-t border-gray-200 dark:border-white/10 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             
             {/* Copyright */}
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-muted-foreground">
               <span>© {currentYear} Swing Dating.</span>
               <span>All rights reserved.</span>
               <Heart className="w-4 h-4 text-primary ml-1" />
@@ -194,17 +206,17 @@ export function Footer() {
             <div className="flex items-center gap-6 text-sm">
               <Link 
                 href="/accessibility" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
               >
                 Accessibility
               </Link>
               <Link 
                 href="/sitemap" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
               >
                 Sitemap
               </Link>
-              <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="flex items-center gap-1 text-gray-600 dark:text-muted-foreground">
                 <span>Made with</span>
                 <Heart className="w-3 h-3 text-primary" />
                 <span>in San Francisco</span>

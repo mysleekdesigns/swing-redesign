@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FilterPill } from "./FilterPill";
 
@@ -74,11 +74,6 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
           : [...group, value]
       };
     });
-  };
-
-  const clearAllFilters = () => {
-    setSelectedFilters({});
-    setIsPhotoVerified(false);
   };
 
   const activeFilterCount = Object.values(selectedFilters).flat().length + (isPhotoVerified ? 1 : 0);
