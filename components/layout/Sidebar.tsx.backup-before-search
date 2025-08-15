@@ -13,7 +13,6 @@ import {
   Calendar,
   MapPin,
   Globe,
-  Search,
   Settings,
   LogOut,
   X,
@@ -39,11 +38,10 @@ export function Sidebar() {
     { icon: MessageSquare, label: "Messages", href: "/messages" },
     { icon: Heart, label: "Matches", href: "/matches" },
     { icon: User, label: "My Account", href: "/account" },
-    { icon: UserCircle, label: "My Profile", href: "/profile" },
+        { icon: UserCircle, label: "My Profile", href: "/profile" },
     { icon: Calendar, label: "Events", href: "/events" },
     { icon: MapPin, label: "Hot Date", href: "/hot-date" },
     { icon: Globe, label: "Travel", href: "/travel" },
-    { icon: Search, label: "Search", href: "/search" },
   ];
 
   const secondaryItems: NavItem[] = [
@@ -61,7 +59,9 @@ export function Sidebar() {
       </button>
 
       <aside
-        className="fixed inset-y-0 left-0 z-40 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 2xl:translate-x-0"
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 2xl:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="flex flex-col h-full">
           <div className="p-6 border-b border-sidebar-border">
@@ -82,7 +82,11 @@ export function Sidebar() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground ${
+                  item.active
+                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                    : "text-sidebar-foreground"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 <item.icon className="w-5 h-5 flex-shrink-0" />

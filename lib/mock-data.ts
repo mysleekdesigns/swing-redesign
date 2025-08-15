@@ -183,7 +183,7 @@ export const whoIsOnUsers: User[] = [
     username: 'hotdates',
     age: 26,
     location: 'Silver Lake',
-    imageUrl: 'https://images.unsplash.com/photo-1552374196-c4e7fbd312ed?w=400&h=600&fit=crop&crop=face',
+    imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face',
     isOnline: true,
     distance: '6 mi',
     photosCount: 17,
