@@ -48,37 +48,109 @@ export default function ProfilePage() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
             
             <div className="relative p-4 sm:p-6 lg:p-8">
+              {/* Action Buttons - positioned absolute top right */}
+              <div className="flex flex-col md:flex-row gap-2 lg:gap-3 absolute top-4 right-4 sm:top-6 lg:right-8 z-10">
+                {currentUserProfile.verified && (
+                  <div className="flex items-center gap-1 lg:gap-2 p-2 md:px-3 md:py-2 lg:px-4 rounded-xl bg-primary/10 border border-primary/20">
+                    <CheckCircle className="w-4 h-4 text-primary" />
+                    <span className="text-xs lg:text-base font-medium text-primary hidden md:inline">Premium Member</span>
+                  </div>
+                )}
+                <button className="flex items-center gap-1 lg:gap-2 p-2 md:px-3 md:py-2 lg:px-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                  <Edit3 className="w-4 h-4" />
+                  <span className="text-xs lg:text-base font-medium hidden md:inline">Edit Profile</span>
+                </button>
+                <button className="p-2 rounded-xl bg-muted hover:bg-muted/80 transition-colors">
+                  <Settings className="w-4 h-4 lg:w-5 lg:h-5" />
+                </button>
+              </div>
+              
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 items-start">
                 
-                {/* Profile Image and Basic Info */}
-                <div className="flex flex-col items-center lg:items-start">
-                  <div className="relative group">
-                    <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-3xl overflow-hidden ring-4 ring-primary/20 shadow-xl">
-                      <Image
-                        src={currentUserProfile.imageUrl}
-                        alt="Profile image"
-                        width={160}
-                        height={160}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        priority
-                      />
+                {/* Mobile Layout */}
+                <div className="w-full lg:hidden">
+                  <div className="flex gap-4 w-full">
+                    {/* Left side - Image Only */}
+                    <div className="flex-shrink-0">
+                      <div className="relative group">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl overflow-hidden ring-4 ring-primary/20 shadow-xl">
+                          <Image
+                            src={currentUserProfile.imageUrl}
+                            alt="Profile image"
+                            width={160}
+                            height={160}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                            priority
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <button className="absolute -bottom-2 -right-2 p-2 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all hover:scale-110">
-                      <Camera className="w-4 h-4" />
-                    </button>
+
+                    {/* Right side - Name, Location, Member Since */}
+                    <div className="flex-1 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+                          {currentUserProfile.displayName}
+                        </h1>
+                        <span className="text-lg sm:text-xl text-muted-foreground">
+                          {currentUserProfile.age}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 text-muted-foreground">
+                        <MapPin className="w-4 h-4" />
+                        <span className="font-medium text-sm">{currentUserProfile.location}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 text-muted-foreground">
+                        <Calendar className="w-4 h-4" />
+                        <span className="text-sm">
+                          Member since {new Date(currentUserProfile.joinDate).toLocaleDateString('en-US', { 
+                            month: 'long', 
+                            year: 'numeric' 
+                          })}
+                        </span>
+                      </div>
+                      
+                      {/* About Me Section - Shows inline on screens above md (768px) */}
+                      <div className="mt-3 hidden md:block lg:hidden">
+                        <h2 className="text-base font-semibold text-foreground mb-1">About Me</h2>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {currentUserProfile.bio}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                   
-                  {currentUserProfile.verified && (
-                    <div className="flex items-center gap-2 mt-4 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                      <CheckCircle className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium text-primary">Verified</span>
-                    </div>
-                  )}
+                  {/* About Me Section - Full width below image on screens md and below */}
+                  <div className="mt-4 block md:hidden">
+                    <h2 className="text-base font-semibold text-foreground mb-2">About Me</h2>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {currentUserProfile.bio}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Profile Details */}
-                <div className="flex-1 space-y-4 sm:space-y-6">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                {/* Desktop Layout - Keep original structure */}
+                <div className="hidden lg:flex lg:flex-row gap-4 sm:gap-6 lg:gap-8 items-start">
+                  {/* Profile Image - Enlarged */}
+                  <div className="flex-shrink-0">
+                    <div className="relative group">
+                      <div className="w-48 h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden ring-4 ring-primary/20 shadow-xl">
+                        <Image
+                          src={currentUserProfile.imageUrl}
+                          alt="Profile image"
+                          width={224}
+                          height={224}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          priority
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Profile Details */}
+                  <div className="flex-1 space-y-4 sm:space-y-6">
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
                         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
@@ -103,67 +175,13 @@ export default function ProfilePage() {
                           })}
                         </span>
                       </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3">
-                      <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                        <Edit3 className="w-4 h-4" />
-                        <span className="font-medium">Edit Profile</span>
-                      </button>
-                      <button className="p-2 rounded-xl bg-muted hover:bg-muted/80 transition-colors">
-                        <Settings className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Stats Cards */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-                    <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10">
-                          <Eye className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Profile Views</p>
-                          <p className="text-lg font-bold text-foreground">{stats.profileViews.toLocaleString()}</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10">
-                          <Heart className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Matches</p>
-                          <p className="text-lg font-bold text-foreground">{stats.matches}</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10">
-                          <Users className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Events</p>
-                          <p className="text-lg font-bold text-foreground">{stats.eventsAttended}</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10">
-                          <Trophy className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Profile</p>
-                          <p className="text-lg font-bold text-foreground">{stats.profileCompleteness}%</p>
-                        </div>
+                      
+                      {/* About Me Section - Moved here */}
+                      <div className="mt-4">
+                        <h2 className="text-lg font-semibold text-foreground mb-2">About Me</h2>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {currentUserProfile.bio}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -201,19 +219,6 @@ export default function ProfilePage() {
               
               {activeTab === 'about' && (
                 <>
-                  {/* Bio Section */}
-                  <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
-                    <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-xl font-bold text-foreground">About Me</h2>
-                      <button className="p-2 rounded-lg hover:bg-muted transition-colors">
-                        <Edit3 className="w-4 h-4 text-muted-foreground" />
-                      </button>
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {currentUserProfile.bio}
-                    </p>
-                  </div>
-
                   {/* Interests Section */}
                   <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
                     <div className="flex items-center justify-between mb-4">
@@ -466,6 +471,57 @@ export default function ProfilePage() {
 
             {/* Sidebar Content */}
             <div className="space-y-4 sm:space-y-6">
+              
+              {/* Stats Cards - Above Quick Actions */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Eye className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Profile Views</p>
+                      <p className="text-lg font-bold text-foreground">{stats.profileViews.toLocaleString()}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Heart className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Matches</p>
+                      <p className="text-lg font-bold text-foreground">{stats.matches}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Users className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Events</p>
+                      <p className="text-lg font-bold text-foreground">{stats.eventsAttended}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Trophy className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Profile</p>
+                      <p className="text-lg font-bold text-foreground">{stats.profileCompleteness}%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
               {/* Quick Actions */}
               <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
