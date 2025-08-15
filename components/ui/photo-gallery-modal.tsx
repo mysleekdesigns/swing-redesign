@@ -27,6 +27,7 @@ export function PhotoGalleryModal({
   onClose
 }: PhotoGalleryModalProps) {
   const [api, setApi] = React.useState<CarouselApi>();
+  const [thumbnailApi, setThumbnailApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(initialIndex);
 
   React.useEffect(() => {
@@ -37,15 +38,54 @@ export function PhotoGalleryModal({
     setCurrent(api.selectedScrollSnap());
 
     api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
+      const selectedIndex = api.selectedScrollSnap();
+      setCurrent(selectedIndex);
+      
+      // Sync thumbnail carousel to show the selected image
+      if (thumbnailApi) {
+        // Get the current viewport width to determine thumbnail count
+        const width = window.innerWidth;
+        let thumbnailsPerPage = 10; // default for large screens
+        if (width < 640) {
+          thumbnailsPerPage = 6; // mobile
+        } else if (width < 1024) {
+          thumbnailsPerPage = 8; // tablet
+        }
+        
+        // If selected thumbnail is not in the current viewport, scroll to it
+        const visibleIndexes = thumbnailApi.slidesInView();
+        if (!visibleIndexes.includes(selectedIndex)) {
+          // Calculate the best position to show the selected thumbnail
+          // Try to center it if possible, otherwise show it at the start or end
+          const idealStart = Math.max(0, selectedIndex - Math.floor(thumbnailsPerPage / 2));
+          const maxStart = Math.max(0, images.length - thumbnailsPerPage);
+          const scrollTarget = Math.min(idealStart, maxStart);
+          thumbnailApi.scrollTo(scrollTarget);
+        }
+      }
     });
-  }, [api]);
+  }, [api, thumbnailApi, images.length]);
 
   React.useEffect(() => {
     if (api && initialIndex !== undefined) {
       api.scrollTo(initialIndex);
     }
-  }, [api, initialIndex]);
+    if (thumbnailApi && initialIndex !== undefined) {
+      // Ensure initial thumbnail is visible
+      const width = window.innerWidth;
+      let thumbnailsPerPage = 10;
+      if (width < 640) {
+        thumbnailsPerPage = 6;
+      } else if (width < 1024) {
+        thumbnailsPerPage = 8;
+      }
+      
+      const idealStart = Math.max(0, initialIndex - Math.floor(thumbnailsPerPage / 2));
+      const maxStart = Math.max(0, images.length - thumbnailsPerPage);
+      const scrollTarget = Math.min(idealStart, maxStart);
+      thumbnailApi.scrollTo(scrollTarget);
+    }
+  }, [api, thumbnailApi, initialIndex, images.length]);
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -177,38 +217,50 @@ export function PhotoGalleryModal({
           )} />
         </Carousel>
 
-        {/* Thumbnail Row - Single Row Flex Layout */}
-        <div className="mt-4 p-1 overflow-x-auto">
-          <div className="flex flex-nowrap gap-2 mx-auto max-w-full justify-center">
-            {images.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => api?.scrollTo(index)}
-                className={cn(
-                  "relative aspect-[4/5] rounded-lg overflow-hidden flex-shrink-0",
-                  "border-2 transition-all duration-200",
-                  current === index 
-                    ? "border-white/60 scale-105 shadow-lg" 
-                    : "border-white/20 hover:border-white/40 hover:scale-105"
-                )}
-                style={{ 
-                  width: "clamp(48px, calc((100vw - 120px) / 12), 80px)"
-                }}
-              >
-                <Image
-                  src={image}
-                  alt={`Thumbnail ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="80px"
-                />
-                <div className={cn(
-                  "absolute inset-0 transition-opacity",
-                  current === index ? "bg-transparent" : "bg-black/30"
-                )} />
-              </button>
-            ))}
-          </div>
+        {/* Thumbnail Carousel - Shows 10 thumbnails at a time */}
+        <div className="mt-4 px-2">
+          <Carousel
+            setApi={setThumbnailApi}
+            className="w-full max-w-full"
+            opts={{
+              align: "start",
+              loop: false,
+              slidesToScroll: 1,
+              containScroll: "trimSnaps"
+            }}
+          >
+            <CarouselContent className="-ml-2">
+              {images.map((image, index) => (
+                <CarouselItem 
+                  key={index} 
+                  className="pl-2 basis-1/6 sm:basis-1/8 lg:basis-[10%]"
+                >
+                  <button
+                    onClick={() => api?.scrollTo(index)}
+                    className={cn(
+                      "relative w-full aspect-[4/5] rounded-lg overflow-hidden",
+                      "border-2 transition-all duration-200",
+                      current === index 
+                        ? "border-white/60 scale-105 shadow-lg" 
+                        : "border-white/20 hover:border-white/40 hover:scale-105"
+                    )}
+                  >
+                    <Image
+                      src={image}
+                      alt={`Thumbnail ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 12.5vw, (max-width: 1024px) 12.5vw, 10vw"
+                    />
+                    <div className={cn(
+                      "absolute inset-0 transition-opacity",
+                      current === index ? "bg-transparent" : "bg-black/30"
+                    )} />
+                  </button>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>      </div>
     </div>
   );
