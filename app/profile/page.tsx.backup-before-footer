@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { Footer } from "@/components/ui/Footer";
 import { PhotoGalleryModal } from "@/components/ui/photo-gallery-modal";
 import { currentUserProfile, formatActivityTime, getActivityIcon } from "@/lib/mock-data";
 import { 
@@ -627,9 +626,6 @@ export default function ProfilePage() {
             </div>
               </div>
             </div>        </div>
-
-        {/* Footer */}
-        <Footer />
       </main>
 
       {/* Photo Gallery Modal */}

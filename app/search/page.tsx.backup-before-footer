@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { Search, X, ChevronDown } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { Footer } from "@/components/ui/Footer";
 import { UserCard } from "@/components/ui/UserCard";
 import { FilterPill } from "@/components/ui/FilterPill";
 import { AdvancedFilters } from "@/components/ui/AdvancedFilters";
@@ -286,9 +285,6 @@ export default function SearchPage() {
             )}
           </div>
         </div>
-
-        {/* Footer */}
-        <Footer />
       </main>
     </div>
   );
