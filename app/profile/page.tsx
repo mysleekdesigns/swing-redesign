@@ -248,10 +248,10 @@ export default function ProfilePage() {
             ))}
           </div>
           {/* Tab Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             
             {/* Main Content */}
-            <div className="md:col-span-2 lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               
               {activeTab === 'about' && (
                 <>
@@ -506,10 +506,11 @@ export default function ProfilePage() {
             </div>
 
             {/* Sidebar Content */}
+            {/* Sidebar Content - Improved responsive layout */}
             <div className="space-y-4 sm:space-y-6">
               
-              {/* Stats Cards - Above Quick Actions */}
-              <div className="grid grid-cols-2 gap-3">
+              {/* Stats Cards - Always 2 per row, use full width */}
+              <div className="grid grid-cols-2 gap-3 w-full">
                 <div className="p-3 sm:p-4 rounded-2xl bg-muted/50 border border-border hover-lift cursor-pointer">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-primary/10">
@@ -559,8 +560,8 @@ export default function ProfilePage() {
                 </div>
               </div>
               
-              {/* Quick Actions */}
-              <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
+              {/* Quick Actions - Full width on all sizes */}
+              <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border w-full">
                 <h3 className="text-lg font-bold text-foreground mb-4">Quick Actions</h3>
                 <div className="space-y-3">
                   <button className="w-full flex items-center gap-3 p-3 rounded-2xl bg-muted/50 hover:bg-primary/10 transition-colors">
@@ -578,51 +579,53 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Profile Completion */}
-              <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
-                <h3 className="text-lg font-bold text-foreground mb-4">Profile Completion</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Overall Progress</span>
-                    <span className="text-sm font-bold text-primary">{stats.profileCompleteness}%</span>
-                  </div>
-                  <div className="w-full bg-muted/50 rounded-full h-2">
-                    <div 
-                      className="bg-primary h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${stats.profileCompleteness}%` }}
-                    />
-                  </div>
-                  <div className="space-y-2 text-sm">
+              {/* Profile Completion and Status - Side by side on md+, stacked on mobile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 w-full">
+                {/* Profile Completion */}
+                <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
+                  <h3 className="text-lg font-bold text-foreground mb-4">Profile Completion</h3>
+                  <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Add more photos</span>
-                      <CheckCircle className="w-4 h-4 text-primary" />
+                      <span className="text-sm text-muted-foreground">Overall Progress</span>
+                      <span className="text-sm font-bold text-primary">{stats.profileCompleteness}%</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Complete bio</span>
-                      <CheckCircle className="w-4 h-4 text-primary" />
+                    <div className="w-full bg-muted/50 rounded-full h-2">
+                      <div 
+                        className="bg-primary h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${stats.profileCompleteness}%` }}
+                      />
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Verify account</span>
-                      <CheckCircle className="w-4 h-4 text-primary" />
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Add more photos</span>
+                        <CheckCircle className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Complete bio</span>
+                        <CheckCircle className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Verify account</span>
+                        <CheckCircle className="w-4 h-4 text-primary" />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Online Status */}
-              <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
-                <h3 className="text-lg font-bold text-foreground mb-4">Status</h3>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-sm font-medium text-foreground">Online now</span>
+                {/* Online Status */}
+                <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
+                  <h3 className="text-lg font-bold text-foreground mb-4">Status</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-sm font-medium text-foreground">Online now</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Last seen: {formatActivityTime(currentUserProfile.lastSeen)}
+                  </p>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Last seen: {formatActivityTime(currentUserProfile.lastSeen)}
-                </p>
-              </div>
             </div>
-          </div>
-        </div>
+              </div>
+            </div>        </div>
       </main>
 
       {/* Photo Gallery Modal */}
