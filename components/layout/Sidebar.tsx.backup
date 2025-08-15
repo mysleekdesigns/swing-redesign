@@ -16,7 +16,6 @@ import {
   Settings,
   LogOut,
   X,
-  UserCircle,
   Menu,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -38,7 +37,6 @@ export function Sidebar() {
     { icon: MessageSquare, label: "Messages", href: "/messages" },
     { icon: Heart, label: "Matches", href: "/matches" },
     { icon: User, label: "My Account", href: "/account" },
-        { icon: UserCircle, label: "My Profile", href: "/profile" },
     { icon: Calendar, label: "Events", href: "/events" },
     { icon: MapPin, label: "Hot Date", href: "/hot-date" },
     { icon: Globe, label: "Travel", href: "/travel" },

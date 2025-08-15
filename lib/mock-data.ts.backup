@@ -27,7 +27,66 @@ export interface HotDate {
   price?: string;
 }
 
-// Mock users for "Who's On" section
+export interface Convention {
+  id: string;
+  name: string;
+  description: string;
+  date: string;
+  location: string;
+  imageUrl: string;
+  attendeeCount: number;
+  category: "lifestyle" | "educational" | "social" | "wellness";
+  price?: string;
+  featured?: boolean;
+}
+
+export interface FeaturedCouple {
+  id: string;
+  names: string;
+  age: string;
+  location: string;
+  imageUrl: string;
+  joinDate: string;
+  eventsOrganized: number;
+  communityPoints: number;
+  specialty: string;
+  description: string;
+  achievements: string[];
+  currentEvent?: string;
+}
+// Sample convention data
+export const featuredConvention: Convention = {
+  id: "sc2025",
+  name: "SwingerCon 2025: Connections & Freedom",
+  description: "The premier lifestyle convention featuring workshops, social events, and networking opportunities for the swinging community. Join us for three days of education, connection, and celebration.",
+  date: "2025-09-15",
+  location: "Las Vegas Convention Center",
+  imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+  attendeeCount: 1200,
+  category: "lifestyle",
+  price: "$299",
+  featured: true
+};
+
+// Featured Swinger Couple of the Month
+export const featuredCouple: FeaturedCouple = {
+  id: "fc-august-2025",
+  names: "Alex & Jamie",
+  age: "32 & 29",
+  location: "Beverly Hills, CA",
+  imageUrl: "/images/couple1.jpg",
+  joinDate: "January 2023",
+  eventsOrganized: 15,
+  communityPoints: 2850,
+  specialty: "Newcomer Mentoring",
+  description: "Alex and Jamie have been incredible community builders since joining Swing. They specialize in welcoming new couples and organizing inclusive events that help everyone feel comfortable and connected.",
+  achievements: [
+    "Top Event Organizer 2024",
+    "Community Choice Award",
+    "Newcomer Mentor Champion"
+  ],
+  currentEvent: "Sunset Beach Welcome Party - Aug 15th"
+};// Mock users for "Who's On" section
 export const whoIsOnUsers: User[] = [
   {
     id: '1',
@@ -168,7 +227,7 @@ export const whoViewedMeUsers: User[] = [
     username: 'sexysiren',
     age: 25,
     location: 'Long Beach',
-    imageUrl: 'https://images.unsplash.com/photo-1672527843075-2a7a0ca859ad?w=400&h=600&fit=crop&crop=face',
+    imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face',
     distance: '12 mi',
     photosCount: 10,
     viewedTime: '5 hours ago',
@@ -292,7 +351,7 @@ export const newestMatches: User[] = [
     username: 'badgirl',
     age: 24,
     location: 'Marina del Rey',
-    imageUrl: 'https://images.unsplash.com/photo-1672527843075-2a7a0ca859ad?w=400&h=600&fit=crop&crop=face',
+    imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=600&fit=crop&crop=face',
     distance: '6 mi',
     photosCount: 8,
     isLiked: true,
@@ -514,4 +573,169 @@ export function formatTimeAgo(dateString: string): string {
   if (diffInHours < 24) return `${diffInHours} hours ago`;
   if (diffInDays === 1) return 'Yesterday';
   return `${diffInDays} days ago`;
+}
+
+// Profile page interfaces and data
+export interface ProfileStats {
+  profileViews: number;
+  matches: number;
+  eventsAttended: number;
+  profileCompleteness: number;
+}
+
+export interface ProfileInterest {
+  id: string;
+  name: string;
+  category: 'lifestyle' | 'hobbies' | 'music' | 'travel' | 'food' | 'fitness' | 'arts';
+  emoji: string;
+}
+
+export interface Activity {
+  id: string;
+  type: 'match' | 'event' | 'profile_view' | 'message';
+  title: string;
+  description: string;
+  timestamp: string;
+  imageUrl?: string;
+  user?: string;
+}
+
+export interface UserProfile {
+  id: string;
+  username: string;
+  displayName: string;
+  age: number;
+  location: string;
+  imageUrl: string;
+  bio: string;
+  joinDate: string;
+  lastSeen: string;
+  verified: boolean;
+  stats: ProfileStats;
+  interests: ProfileInterest[];
+  recentActivity: Activity[];
+  additionalImages: string[];
+  preferences: {
+    ageRange: [number, number];
+    distanceRadius: number;
+    lookingFor: string[];
+  };
+}
+
+// Mock current user profile data
+export const currentUserProfile: UserProfile = {
+  id: 'current-user',
+  username: 'alexandra_m',
+  displayName: 'Alexandra',
+  age: 28,
+  location: 'West Hollywood, CA',
+  imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616c90d8fb0?w=400&h=600&fit=crop&crop=face',
+  bio: 'Adventure seeker and yoga enthusiast. Love exploring new places, trying amazing food, and meeting genuine people. Looking for authentic connections and fun experiences. Always up for a spontaneous road trip or a cozy night in with good wine and great conversation.',
+  joinDate: '2024-03-15',
+  lastSeen: '2025-08-15T10:30:00Z',
+  verified: true,
+  stats: {
+    profileViews: 2847,
+    matches: 156,
+    eventsAttended: 23,
+    profileCompleteness: 92
+  },
+  interests: [
+    { id: '1', name: 'Yoga', category: 'fitness', emoji: '🧘‍♀️' },
+    { id: '2', name: 'Photography', category: 'arts', emoji: '📸' },
+    { id: '3', name: 'Wine Tasting', category: 'food', emoji: '🍷' },
+    { id: '4', name: 'Hiking', category: 'fitness', emoji: '🥾' },
+    { id: '5', name: 'Jazz Music', category: 'music', emoji: '🎷' },
+    { id: '6', name: 'Travel', category: 'travel', emoji: '✈️' },
+    { id: '7', name: 'Cooking', category: 'food', emoji: '👩‍🍳' },
+    { id: '8', name: 'Beach Volleyball', category: 'fitness', emoji: '🏐' }
+  ],
+  recentActivity: [
+    {
+      id: '1',
+      type: 'match',
+      title: 'New Match',
+      description: 'You matched with @hotpair',
+      timestamp: '2025-08-15T08:45:00Z',
+      imageUrl: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+      user: 'hotpair'
+    },
+    {
+      id: '2',
+      type: 'event',
+      title: 'Event Attended',
+      description: 'Sunset Rooftop Party in Downtown LA',
+      timestamp: '2025-08-14T19:00:00Z',
+      imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=400&fit=crop'
+    },
+    {
+      id: '3',
+      type: 'profile_view',
+      title: 'Profile Views',
+      description: '12 new profile views today',
+      timestamp: '2025-08-15T06:00:00Z'
+    },
+    {
+      id: '4',
+      type: 'message',
+      title: 'New Message',
+      description: 'From @vixenlife - "Hey! Love your hiking photos..."',
+      timestamp: '2025-08-14T22:15:00Z',
+      imageUrl: 'https://images.unsplash.com/photo-1652471949169-9c587e8898cd?w=400&h=600&fit=crop&crop=face',
+      user: 'vixenlife'
+    },
+    {
+      id: '5',
+      type: 'match',
+      title: 'New Match',
+      description: 'You matched with @dreamvibe',
+      timestamp: '2025-08-13T16:30:00Z',
+      imageUrl: 'https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=400&h=600&fit=crop&crop=face',
+      user: 'dreamvibe'
+    }
+  ],
+  additionalImages: [
+    'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=600&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=400&h=600&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face'
+  ],
+  preferences: {
+    ageRange: [25, 35],
+    distanceRadius: 25,
+    lookingFor: ['Long-term relationship', 'Fun dates', 'New experiences']
+  }
+};
+
+// Helper function to get activity icon
+export function getActivityIcon(type: Activity['type']): string {
+  switch (type) {
+    case 'match':
+      return '💖';
+    case 'event':
+      return '🎉';
+    case 'profile_view':
+      return '👁️';
+    case 'message':
+      return '💬';
+    default:
+      return '📱';
+  }
+}
+
+// Helper function to format activity timestamp
+export function formatActivityTime(timestamp: string): string {
+  const now = new Date();
+  const activityTime = new Date(timestamp);
+  const diffInMs = now.getTime() - activityTime.getTime();
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+  
+  if (diffInMinutes < 1) return 'Just now';
+  if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+  if (diffInHours < 24) return `${diffInHours}h ago`;
+  if (diffInDays === 1) return 'Yesterday';
+  if (diffInDays < 7) return `${diffInDays}d ago`;
+  return activityTime.toLocaleDateString();
 }

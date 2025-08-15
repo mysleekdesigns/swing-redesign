@@ -317,7 +317,7 @@ export const whoViewedMeUsers: User[] = [
     username: 'sexycouple',
     age: 33,
     location: 'Calabasas',
-    imageUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop&crop=face',
+    imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616c90d8fb0?w=400&h=600&fit=crop&crop=face',
     distance: '22 mi',
     photosCount: 16,
     viewedTime: '2 weeks ago',
@@ -599,6 +599,7 @@ export interface Activity {
   imageUrl?: string;
   user?: string;
 }
+
 // New profile section interfaces
 export interface HotDateProfile {
   id: string;
@@ -631,7 +632,6 @@ export interface AdditionalComment {
   timestamp: string;
   category: "personal" | "preferences" | "boundaries" | "other";
 }
-
 export interface UserProfile {
   id: string;
   username: string;
@@ -652,10 +652,6 @@ export interface UserProfile {
     distanceRadius: number;
     lookingFor: string[];
   };
-  hotDate?: HotDateProfile;
-  profileDescription?: ProfileDescription;
-  fantasies: Fantasy[];
-  additionalComments: AdditionalComment[];
 }
 
 // Mock current user profile data
@@ -665,7 +661,7 @@ export const currentUserProfile: UserProfile = {
   displayName: 'Alexandra',
   age: 28,
   location: 'West Hollywood, CA',
-  imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+  imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616c90d8fb0?w=400&h=600&fit=crop&crop=face',
   bio: 'Adventure seeker and yoga enthusiast. Love exploring new places, trying amazing food, and meeting genuine people. Looking for authentic connections and fun experiences. Always up for a spontaneous road trip or a cozy night in with good wine and great conversation.',
   joinDate: '2024-03-15',
   lastSeen: '2025-08-15T10:30:00Z',
@@ -734,70 +730,13 @@ export const currentUserProfile: UserProfile = {
     'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=600&fit=crop&crop=face',
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop&crop=face',
     'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=600&fit=crop&crop=face'
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face'
   ],
   preferences: {
     ageRange: [25, 35],
     distanceRadius: 25,
     lookingFor: ['Long-term relationship', 'Fun dates', 'New experiences']
-  },
-  hotDate: {
-    id: 'hd-1',
-    title: 'Wine Tasting Night',
-    description: 'Join me at this exclusive wine tasting event in Beverly Hills. Perfect opportunity to connect over great wine and conversation.',
-    date: '2025-08-25',
-    location: 'Beverly Hills Wine Bar',
-    isAttending: true,
-    imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=400&fit=crop'
-  },
-  profileDescription: {
-    title: 'About My Lifestyle',
-    content: 'I believe life is meant to be lived to the fullest. I am passionate about authentic connections and meaningful experiences. I value honesty, communication, and respect above all. I enjoy exploring new adventures with like-minded people who share my values of openness and genuine connection. Whether it\'s a quiet evening conversation or an exciting adventure, I bring warmth, intelligence, and curiosity to every interaction.',
-    lastUpdated: '2025-08-10'
-  },
-  fantasies: [
-    {
-      id: 'f-1',
-      title: 'Romantic Getaway',
-      description: 'A spontaneous weekend trip to a cozy mountain cabin with someone special. Fireplace, wine, and deep conversations under the stars.',
-      category: 'romantic',
-      private: false
-    },
-    {
-      id: 'f-2',
-      title: 'Adventure Travel',
-      description: 'Exploring exotic destinations with adventurous companions. Hiking through tropical forests, discovering hidden beaches, and experiencing local cultures.',
-      category: 'travel',
-      private: false
-    },
-    {
-      id: 'f-3',
-      title: 'Cultural Experiences',
-      description: 'Attending exclusive art galleries, wine tastings, and cultural events with sophisticated company who appreciates the finer things in life.',
-      category: 'lifestyle',
-      private: true
-    }
-  ],
-  additionalComments: [
-    {
-      id: 'ac-1',
-      title: 'My Approach to Connections',
-      content: 'I believe in quality over quantity when it comes to connections. I prefer getting to know people on a deeper level rather than surface-level interactions. Communication and mutual respect are essential to me.',
-      timestamp: '2025-08-12T14:30:00Z',
-      category: 'personal'
-    },
-    {
-      id: 'ac-2',
-      title: 'What I\'m Looking For',
-      content: 'I am seeking genuine people who value authenticity and are interested in exploring meaningful connections. I appreciate intelligence, humor, and emotional maturity in potential partners.',
-      timestamp: '2025-08-05T16:45:00Z',
-      category: 'preferences'
-    }
-  ]
+  }
 };
 
 // Helper function to get activity icon

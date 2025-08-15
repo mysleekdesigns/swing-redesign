@@ -84,7 +84,8 @@ export const featuredCouple: FeaturedCouple = {
     "Top Event Organizer 2024",
     "Community Choice Award",
     "Newcomer Mentor Champion"
-  ],
+  ]
+,
   currentEvent: "Sunset Beach Welcome Party - Aug 15th"
 };// Mock users for "Who's On" section
 export const whoIsOnUsers: User[] = [
@@ -317,7 +318,7 @@ export const whoViewedMeUsers: User[] = [
     username: 'sexycouple',
     age: 33,
     location: 'Calabasas',
-    imageUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop&crop=face',
+    imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616c90d8fb0?w=400&h=600&fit=crop&crop=face',
     distance: '22 mi',
     photosCount: 16,
     viewedTime: '2 weeks ago',
@@ -599,6 +600,7 @@ export interface Activity {
   imageUrl?: string;
   user?: string;
 }
+
 // New profile section interfaces
 export interface HotDateProfile {
   id: string;
@@ -631,7 +633,6 @@ export interface AdditionalComment {
   timestamp: string;
   category: "personal" | "preferences" | "boundaries" | "other";
 }
-
 export interface UserProfile {
   id: string;
   username: string;
@@ -665,7 +666,7 @@ export const currentUserProfile: UserProfile = {
   displayName: 'Alexandra',
   age: 28,
   location: 'West Hollywood, CA',
-  imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+  imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616c90d8fb0?w=400&h=600&fit=crop&crop=face',
   bio: 'Adventure seeker and yoga enthusiast. Love exploring new places, trying amazing food, and meeting genuine people. Looking for authentic connections and fun experiences. Always up for a spontaneous road trip or a cozy night in with good wine and great conversation.',
   joinDate: '2024-03-15',
   lastSeen: '2025-08-15T10:30:00Z',
@@ -685,7 +686,8 @@ export const currentUserProfile: UserProfile = {
     { id: '6', name: 'Travel', category: 'travel', emoji: '✈️' },
     { id: '7', name: 'Cooking', category: 'food', emoji: '👩‍🍳' },
     { id: '8', name: 'Beach Volleyball', category: 'fitness', emoji: '🏐' }
-  ],
+  ]
+,
   recentActivity: [
     {
       id: '1',
@@ -729,17 +731,15 @@ export const currentUserProfile: UserProfile = {
       imageUrl: 'https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=400&h=600&fit=crop&crop=face',
       user: 'dreamvibe'
     }
-  ],
+  ]
+,
   additionalImages: [
     'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=600&fit=crop&crop=face',
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop&crop=face',
     'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=600&fit=crop&crop=face'
-  ],
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=600&fit=crop&crop=face'
+  ]
+,
   preferences: {
     ageRange: [25, 35],
     distanceRadius: 25,
@@ -781,7 +781,8 @@ export const currentUserProfile: UserProfile = {
       category: 'lifestyle',
       private: true
     }
-  ],
+  ]
+,
   additionalComments: [
     {
       id: 'ac-1',
@@ -798,6 +799,8 @@ export const currentUserProfile: UserProfile = {
       category: 'preferences'
     }
   ]
+
+  }
 };
 
 // Helper function to get activity icon
