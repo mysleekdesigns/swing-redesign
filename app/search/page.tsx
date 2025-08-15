@@ -79,7 +79,7 @@ export default function SearchPage() {
         <div className="w-full space-y-8">
           
           {/* Enhanced Search Header */}
-          <div className="sticky top-0 z-10">
+          <div>
             <div className={cn(
               "rounded-2xl p-6 transition-all duration-300",
               "backdrop-blur-[20px] bg-white/10 border border-white/20",
@@ -194,7 +194,7 @@ export default function SearchPage() {
                 
                 {showSortDropdown && (
                   <div className={cn(
-                    "absolute right-0 top-full mt-2 w-48 py-2 rounded-lg shadow-lg z-20",
+                    "absolute right-0 top-full mt-2 w-48 py-2 rounded-lg shadow-lg",
                     "backdrop-blur-[20px] bg-white/90 border border-white/20",
                     "dark:bg-card/90 dark:border-white/10"
                   )}>
