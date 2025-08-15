@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Sidebar } from "@/components/layout/Sidebar";
+import { PhotoGalleryModal } from "@/components/ui/photo-gallery-modal";
 import { currentUserProfile, formatActivityTime, getActivityIcon } from "@/lib/mock-data";
 import { 
   MapPin, 
@@ -24,8 +25,15 @@ import {
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<'about' | 'activity' | 'photos'>('about');
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const { stats, interests, recentActivity, additionalImages, hotDate, profileDescription, fantasies, additionalComments } = currentUserProfile;
+
+  const openGallery = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsGalleryOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -427,18 +435,27 @@ export default function ProfilePage() {
                       <span className="font-medium">Add Photo</span>
                     </button>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-5 gap-2 sm:gap-3">
                     {additionalImages.map((image, index) => (
-                      <div key={index} className="group relative aspect-[3/4] rounded-2xl overflow-hidden">
+                      <div 
+                        key={index} 
+                        className="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer"
+                        onClick={() => openGallery(index)}
+                      >
                         <Image
                           src={image}
                           alt={`Photo ${index + 1}`}
                           fill
                           className="object-cover transition-transform duration-300 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                        <button className="absolute top-2 right-2 p-1.5 rounded-lg bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                          <MoreHorizontal className="w-4 h-4" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <button 
+                          className="absolute top-1 right-1 p-1 rounded-lg bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                        >
+                          <MoreHorizontal className="w-3 h-3" />
                         </button>
                       </div>
                     ))}
@@ -515,6 +532,14 @@ export default function ProfilePage() {
           </div>
         </div>
       </main>
+
+      {/* Photo Gallery Modal */}
+      <PhotoGalleryModal
+        images={additionalImages}
+        initialIndex={selectedImageIndex}
+        isOpen={isGalleryOpen}
+        onClose={() => setIsGalleryOpen(false)}
+      />
     </div>
   );
 }
