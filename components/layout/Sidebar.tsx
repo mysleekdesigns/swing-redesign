@@ -64,7 +64,7 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Navigation Bar */}
-      <div className="2xl:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur-[20px] bg-white/10 border-b border-white/20 dark:bg-white/5 dark:border-white/10">
+      <div className="2xl:hidden backdrop-blur-[20px] bg-white/10 border-b border-white/20 dark:bg-white/5 dark:border-white/10">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Left - Menu Button */}
           <button
@@ -79,11 +79,11 @@ export function Sidebar() {
           <div className="flex-1 flex justify-center">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo-swing.svg"
+                src="/images/Swing.png"
                 alt="Swing Dating"
-                width={120}
-                height={32}
-                className="h-8 w-auto"
+                width={180}
+                height={60}
+                className="h-12 w-auto"
                 priority
               />
             </Link>
