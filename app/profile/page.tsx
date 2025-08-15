@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { PhotoGalleryModal } from "@/components/ui/photo-gallery-modal";
@@ -27,8 +27,39 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<'about' | 'activity' | 'photos'>('about');
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
+  
+  // Refs for sliding indicator
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const [tabIndicatorWidth, setTabIndicatorWidth] = useState(0);
+  const [tabIndicatorLeft, setTabIndicatorLeft] = useState(0);
   const { stats, interests, recentActivity, additionalImages, hotDate, profileDescription, fantasies, additionalComments } = currentUserProfile;
+
+  const tabs = useMemo(() => [
+    { id: "about", label: "About" },
+    { id: "activity", label: "Activity" },
+    { id: "photos", label: "Photos" }
+  ] as const, []);
+  // Update indicator position when activeTab changes
+  useEffect(() => {
+    const activeIndex = tabs.findIndex(tab => tab.id === activeTab);
+    if (activeIndex === -1) return;
+    
+    const setTabPosition = () => {
+      const currentTab = tabsRef.current[activeIndex];
+      if (currentTab) {
+        setTabIndicatorLeft(currentTab.offsetLeft);
+        setTabIndicatorWidth(currentTab.clientWidth);
+      }
+    };
+    
+    setTabPosition();
+    
+    // Handle window resize
+    const handleResize = () => setTabPosition();
+    window.addEventListener("resize", handleResize);
+    
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeTab, tabs]);
 
   const openGallery = (index: number) => {
     setSelectedImageIndex(index);
@@ -190,27 +221,32 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="flex gap-1 p-1 rounded-2xl bg-muted/50 border border-border max-w-fit">
-            {[
-              { id: 'about', label: 'About' },
-              { id: 'activity', label: 'Activity' },
-              { id: 'photos', label: 'Photos' }
-            ].map((tab) => (
+          {/* Tab Navigation with Sliding Indicator */}
+          <div className="relative flex p-1 rounded-2xl bg-muted/50 border border-border w-full">
+            {/* Sliding Indicator */}
+            <div 
+              className="absolute top-1 bottom-1 bg-primary rounded-xl shadow-lg transition-all duration-300 ease-out"
+              style={{
+                width: tabIndicatorWidth,
+                transform: `translateX(${tabIndicatorLeft}px)` 
+              }}/>
+            
+            {/* Tab Buttons */}
+            {tabs.map((tab, index) => (
               <button
                 key={tab.id}
+                ref={(el) => { tabsRef.current[index] = el; }}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-6 py-2.5 rounded-xl font-medium transition-all ${
+                className={`relative z-10 flex-1 px-3 py-2 rounded-xl font-medium transition-all duration-300 text-center ${
                   activeTab === tab.id
-                    ? 'bg-primary text-primary-foreground shadow-lg'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-background/50'
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {tab.label}
               </button>
             ))}
           </div>
-
           {/* Tab Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             
