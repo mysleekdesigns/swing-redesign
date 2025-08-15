@@ -239,16 +239,16 @@ export function PhotoGalleryModal({
                     onClick={() => api?.scrollTo(index)}
                     className={cn(
                       "relative w-full aspect-[4/5] rounded-lg",
-                      "border-2 transition-all duration-200 will-change-transform",
-                      "min-w-[44px] min-h-[44px] transform-gpu",
-                      "transform-origin-center",
-                      current === index 
-                        ? "border-white/60 scale-105 shadow-lg z-10" 
-                        : "border-white/20 hover:border-white/40 hover:scale-[1.02]"
+                      "transition-all duration-200",
+                      "min-w-[44px] min-h-[44px]"
                     )}
-                    style={{ transform: current === index ? 'scale(1.05) translateZ(0)' : undefined }}
                   >
-                    <div className="relative w-full h-full rounded-lg overflow-hidden">
+                    <div className={cn(
+                      "relative w-full h-full rounded-lg overflow-hidden",
+                      current === index
+                        ? "border border-white/60 shadow-[inset_0_0_12px_rgba(255,255,255,0.3)]"
+                        : "border-0 hover:opacity-80"
+                    )}>
                       <Image
                         src={image}
                         alt={`Thumbnail ${index + 1}`}
