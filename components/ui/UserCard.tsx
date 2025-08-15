@@ -37,7 +37,7 @@ export function UserCard({
           src={imageUrl}
           alt={`${username}'s profile photo`}
           fill
-          className="object-cover transition-all duration-500 group-hover:scale-110"
+          className="object-cover"
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           priority={variant === 'featured'}
         />        {/* Enhanced gradient overlay with subtle gold accent */}
@@ -59,29 +59,29 @@ export function UserCard({
           </div>
         )}
         
-        {/* Action buttons for interactive cards */}
-        {showActions && (
-          <div className="absolute top-1/2 right-3 transform -translate-y-1/2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button 
-              className={`p-2.5 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform ${
-                isLiked ? 'bg-primary/20 border-primary/30' : ''
-              }`}
-              aria-label={isLiked ? 'Unlike' : 'Like'}
-            >
-              <Heart className={`w-4 h-4 ${isLiked ? 'text-primary fill-primary' : 'text-white'}`} />
-            </button>
-            <button 
-              className="p-2.5 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform"
-              aria-label="Send message"
-            >
-              <MessageCircle className="w-4 h-4 text-white" />
-            </button>
-          </div>
-        )}
-        
         {/* Enhanced content area with better typography */}
         <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
           <div className="space-y-2">
+            {/* Action buttons for interactive cards */}
+            {showActions && (
+              <div className="flex gap-2 mb-2">
+                <button 
+                  className={`p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform ${
+                    isLiked ? 'bg-primary/20 border-primary/30' : ''
+                  }`}
+                  aria-label={isLiked ? 'Unlike' : 'Like'}
+                >
+                  <Heart className={`w-4 h-4 ${isLiked ? 'text-primary fill-primary' : 'text-white'}`} />
+                </button>
+                <button 
+                  className="p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform"
+                  aria-label="Send message"
+                >
+                  <MessageCircle className="w-4 h-4 text-white" />
+                </button>
+              </div>
+            )}
+            
             <h3 className="text-xl font-bold text-white tracking-tight leading-tight">
               {username}, <span className={variant === 'featured' ? 'text-primary' : 'text-white'}>{age}</span>
             </h3>

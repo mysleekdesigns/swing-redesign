@@ -131,7 +131,7 @@ export default function SearchPage() {
                     )}
                   </div>
                   
-                  <div className="flex gap-3 overflow-x-auto pb-2">
+                  <div className="flex flex-wrap gap-3">
                     {quickFilters.map((filter) => (
                       <FilterPill
                         key={filter.value}
