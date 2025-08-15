@@ -118,7 +118,7 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
         isOpen ? "max-h-[800px] opacity-100 mt-4" : "max-h-0 opacity-0"
       )}>
         <div className={cn(
-          "p-6 rounded-xl",
+          "p-6 rounded-xl space-y-6",
           "backdrop-blur-[20px] bg-white/10 border border-white/20",
           "dark:bg-white/5 dark:border-white/10",
           "shadow-lg shadow-black/5",
@@ -127,7 +127,7 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
           
           {/* Clear Filters Button */}
           {activeFilterCount > 0 && (
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">
                 {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active
               </span>
@@ -141,43 +141,31 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
             </div>
           )}
 
-          {/* Responsive Filter Groups Container */}
-          <div className={cn(
-            // Mobile: Single column, stack vertically
-            "grid grid-cols-1 gap-6",
-            // Tablet: Two columns for better space utilization
-            "md:grid-cols-2 md:gap-x-8 md:gap-y-6",
-            // Large screens: Two columns with more spacing
-            "lg:grid-cols-2 lg:gap-x-10 lg:gap-y-6",
-            // Extra large screens: Consider three columns for very wide screens
-            "xl:grid-cols-2 xl:gap-x-12 xl:gap-y-8"
-          )}>
-            {/* Filter Groups */}
-            {filterGroups.map((group) => (
-              <div key={group.title} className="space-y-3">
-                <h3 className="text-sm font-semibold text-foreground">{group.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.options.map((option) => (
-                    <FilterPill
-                      key={option.value}
-                      label={option.label}
-                      isActive={selectedFilters[group.title]?.includes(option.value)}
-                      onClick={() => toggleFilter(group.title, option.value)}
-                    />
-                  ))}
-                </div>
+          {/* Filter Groups */}
+          {filterGroups.map((group) => (
+            <div key={group.title} className="space-y-3">
+              <h3 className="text-sm font-semibold text-foreground">{group.title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {group.options.map((option) => (
+                  <FilterPill
+                    key={option.value}
+                    label={option.label}
+                    isActive={selectedFilters[group.title]?.includes(option.value)}
+                    onClick={() => toggleFilter(group.title, option.value)}
+                  />
+                ))}
               </div>
-            ))}
-
-            {/* Photo Verified Toggle - Always spans full width */}
-            <div className="space-y-3 md:col-span-2">
-              <h3 className="text-sm font-semibold text-foreground">Verification</h3>
-              <FilterPill
-                label="Photo Verified"
-                isActive={isPhotoVerified}
-                onClick={() => setIsPhotoVerified(!isPhotoVerified)}
-              />
             </div>
+          ))}
+
+          {/* Photo Verified Toggle */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-semibold text-foreground">Verification</h3>
+            <FilterPill
+              label="Photo Verified"
+              isActive={isPhotoVerified}
+              onClick={() => setIsPhotoVerified(!isPhotoVerified)}
+            />
           </div>
         </div>
       </div>
