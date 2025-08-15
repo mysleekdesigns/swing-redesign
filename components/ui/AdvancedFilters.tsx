@@ -85,13 +85,15 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
 
   return (
     <div className={cn("w-full", className)}>
-      {/* Toggle Button */}
+      {/* Toggle Button with improved light mode contrast */}
       <button
         onClick={onToggle}
         className={cn(
           "w-full flex items-center justify-between p-4 rounded-xl transition-all duration-300",
-          "glass border border-white/20 hover:border-white/30",
-          "dark:border-white/10 dark:hover:border-white/20",
+          // Light mode: Use muted background for better contrast
+          "bg-muted border border-border/60 hover:bg-muted/80",
+          // Dark mode: Keep existing glass effect
+          "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10 dark:hover:border-white/20",
           "focus:outline-none focus:ring-2 focus:ring-primary/20"
         )}
       >
@@ -119,27 +121,13 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
       )}>
         <div className={cn(
           "p-6 rounded-xl",
-          "backdrop-blur-[20px] bg-white/10 border border-white/20",
-          "dark:bg-white/5 dark:border-white/10",
-          "shadow-lg shadow-black/5",
+          // Light mode: Use card background for better contrast
+          "bg-card border border-border/60 shadow-sm",
+          // Dark mode: Keep existing glass effect
+          "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10",
           "dark:shadow-[0_0_30px_oklch(0.75_0.23_85_/_5%)]"
         )}>
           
-          {/* Clear Filters Button */}
-          {activeFilterCount > 0 && (
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-sm text-muted-foreground">
-                {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active
-              </span>
-              <button
-                onClick={clearAllFilters}
-                className="flex items-center gap-2 px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <X className="w-3 h-3" />
-                Clear all
-              </button>
-            </div>
-          )}
 
           {/* Responsive Filter Groups Container */}
           <div className={cn(

@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Search, X, ChevronDown } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
+import { Footer } from "@/components/ui/Footer";
 import { UserCard } from "@/components/ui/UserCard";
 import { FilterPill } from "@/components/ui/FilterPill";
 import { AdvancedFilters } from "@/components/ui/AdvancedFilters";
@@ -74,23 +75,30 @@ export default function SearchPage() {
     <div className="min-h-screen bg-background">
       <Sidebar />
       
-      {/* Main Content */}
-      <main className="2xl:ml-64 p-4 sm:p-6 lg:p-8">
+      {/* Main Content with Light Gray Background in Light Mode */}
+      <main className={cn(
+        "2xl:ml-64 2xl:pt-4 p-4 sm:p-6 lg:p-8 transition-colors duration-300",
+        // Light mode: Use light gray background similar to input fields
+        "bg-[oklch(0.94_0_0)]",
+        // Dark mode: Keep original background
+        "dark:bg-background"
+      )}>
         <div className="w-full space-y-8">
           
-          {/* Enhanced Search Header */}
-          <div className="sticky top-0 z-50">
+          {/* Enhanced Search Header with improved light mode contrast */}
+          <div>
             <div className={cn(
               "rounded-2xl p-6 transition-all duration-300",
-              "backdrop-blur-[20px] bg-white/10 border border-white/20",
-              "dark:bg-white/5 dark:border-white/10",
-              "shadow-lg shadow-black/5",
+              // Light mode: Use card background with subtle border for better contrast against gray
+              "bg-card border border-border/60 shadow-sm",
+              // Dark mode: Keep the existing glass effect
+              "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10",
               "dark:shadow-[0_0_30px_oklch(0.75_0.23_85_/_5%)]",
               "dark:border-primary/20"
             )}>
               <div className="w-full space-y-6">
                 
-                {/* Search Input */}
+                {/* Search Input with improved contrast */}
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <input
@@ -101,9 +109,11 @@ export default function SearchPage() {
                     className={cn(
                       "w-full pl-12 pr-4 py-4 rounded-xl text-foreground placeholder:text-muted-foreground",
                       "transition-all duration-300 focus:outline-none",
-                      "backdrop-blur-sm bg-card/50 border border-border",
-                      "focus:ring-2 focus:ring-primary/20 focus:border-primary",
-                      "dark:bg-white/5 dark:border-white/10",
+                      // Light mode: Use input background with solid border
+                      "bg-input border border-border/60",
+                      "focus:ring-2 focus:ring-primary/20 focus:border-primary/60",
+                      // Dark mode: Keep the existing glass effect
+                      "dark:backdrop-blur-sm dark:bg-white/5 dark:border-white/10",
                       "dark:focus:border-primary/40 dark:focus:ring-primary/10"
                     )}
                   />
@@ -131,7 +141,7 @@ export default function SearchPage() {
                     )}
                   </div>
                   
-                  <div className="flex gap-3 overflow-x-auto pb-2">
+                  <div className="flex flex-wrap gap-3">
                     {quickFilters.map((filter) => (
                       <FilterPill
                         key={filter.value}
@@ -152,14 +162,16 @@ export default function SearchPage() {
             </div>
           </div>
 
-          {/* Results Section */}
+          {/* Results Section with improved contrast */}
           <div className="w-full space-y-6">
             
             {/* Results Header */}
             <div className={cn(
               "flex items-center justify-between p-4 rounded-xl",
-              "glass border border-white/20",
-              "dark:border-white/10"
+              // Light mode: Use card background for better contrast against gray
+              "bg-card border border-border/60 shadow-sm",
+              // Dark mode: Keep existing glass effect
+              "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10"
             )}>
               <div className="flex items-center gap-4">
                 <h2 className="text-lg font-semibold text-foreground">
@@ -172,13 +184,15 @@ export default function SearchPage() {
                 )}
               </div>
               
-              {/* Sort Dropdown */}
+              {/* Sort Dropdown with improved contrast */}
               <div className="relative">
                 <button
                   onClick={() => setShowSortDropdown(!showSortDropdown)}
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200",
-                    "bg-white/10 border border-white/20 hover:bg-white/20",
+                    // Light mode: Use muted background for better contrast
+                    "bg-muted border border-border/60 hover:bg-muted/80",
+                    // Dark mode: Keep existing glass effect
                     "dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10",
                     "focus:outline-none focus:ring-2 focus:ring-primary/20"
                   )}
@@ -194,9 +208,11 @@ export default function SearchPage() {
                 
                 {showSortDropdown && (
                   <div className={cn(
-                    "absolute right-0 top-full mt-2 w-48 py-2 rounded-lg shadow-lg z-20",
-                    "backdrop-blur-[20px] bg-white/90 border border-white/20",
-                    "dark:bg-card/90 dark:border-white/10"
+                    "absolute right-0 top-full mt-2 w-48 py-2 rounded-lg shadow-lg z-50",
+                    // Light mode: Use popover background
+                    "bg-popover border border-border",
+                    // Dark mode: Keep existing glass effect
+                    "dark:backdrop-blur-[20px] dark:bg-card/90 dark:border-white/10"
                   )}>
                     {sortOptions.map((option) => (
                       <button
@@ -207,7 +223,10 @@ export default function SearchPage() {
                         }}
                         className={cn(
                           "w-full px-4 py-2 text-left text-sm transition-colors",
-                          "hover:bg-white/20 dark:hover:bg-white/10",
+                          // Light mode: Use accent background for hover
+                          "hover:bg-accent text-popover-foreground",
+                          // Dark mode: Keep existing effects
+                          "dark:hover:bg-white/10",
                           sortBy === option.value && "bg-primary/20 text-primary font-medium"
                         )}
                       >
@@ -246,14 +265,15 @@ export default function SearchPage() {
               ))}
             </div>
 
-            {/* Load More Button */}
+            {/* Load More Button with improved contrast */}
             {filteredUsers.length > 0 && (
               <div className="flex justify-center pt-8">
                 <button className={cn(
                   "px-8 py-3 rounded-xl font-medium transition-all duration-300",
-                  "backdrop-blur-[20px] bg-white/10 border border-white/20",
-                  "hover:bg-white/20 hover:scale-105",
-                  "dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10",
+                  // Light mode: Use card background for better contrast against gray
+                  "bg-card border border-border/60 hover:bg-card/80 hover:scale-105 shadow-sm",
+                  // Dark mode: Keep existing glass effect
+                  "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10",
                   "focus:outline-none focus:ring-2 focus:ring-primary/20",
                   "text-foreground hover:text-foreground"
                 )}>
@@ -285,6 +305,9 @@ export default function SearchPage() {
             )}
           </div>
         </div>
+
+        {/* Footer */}
+        <Footer />
       </main>
     </div>
   );

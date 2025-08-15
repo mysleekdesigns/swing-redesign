@@ -19,25 +19,25 @@ export function FilterPill({
     <button
       onClick={onClick}
       className={cn(
-        // Base styles with glass morphism
+        // Base styles with enhanced transitions
         "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ease-out",
-        "backdrop-blur-[20px] border border-white/20",
         "hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/20",
         "whitespace-nowrap cursor-pointer",
         
-        // Inactive state
+        // Inactive state - Maximum contrast for light mode
         !isActive && [
-          "bg-white/10 text-foreground/80",
-          "hover:bg-white/20 hover:text-foreground",
-          "dark:bg-white/5 dark:text-white/70",
+          // Light mode: Pure white background with strong border for maximum contrast
+          "bg-white border-2 border-gray-300 text-gray-900",
+          "hover:border-gray-400 hover:shadow-md hover:text-gray-900",
+          // Dark mode: Keep the existing glass effect
+          "dark:bg-white/5 dark:text-white/70 dark:border-white/10",
           "dark:hover:bg-white/10 dark:hover:text-white/90",
-          "dark:border-white/10"
         ],
         
         // Active state with golden background
         isActive && [
           "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground",
-          "border-primary/30 shadow-lg shadow-primary/20",
+          "border-2 border-primary/50 shadow-lg shadow-primary/20",
           "hover:from-primary/90 hover:to-primary/80",
           "dark:shadow-[0_0_30px_oklch(0.75_0.23_85_/_15%)]",
           "dark:border-primary/40"
