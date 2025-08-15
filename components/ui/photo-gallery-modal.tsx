@@ -198,7 +198,8 @@ export function PhotoGalleryModal({
           
           {/* Custom Navigation Buttons with Glassmorphism */}
           <CarouselPrevious className={cn(
-            "left-2 sm:-left-12",
+            "!left-4 !translate-x-0",
+            "top-1/2 -translate-y-1/2",
             "w-12 h-12",
             "bg-white/20 dark:bg-black/20",
             "backdrop-blur-md",
@@ -207,7 +208,8 @@ export function PhotoGalleryModal({
             "hover:scale-110"
           )} />
           <CarouselNext className={cn(
-            "right-2 sm:-right-12",
+            "!right-4 !translate-x-0",
+            "top-1/2 -translate-y-1/2",
             "w-12 h-12",
             "bg-white/20 dark:bg-black/20",
             "backdrop-blur-md",
