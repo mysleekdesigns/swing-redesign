@@ -218,7 +218,7 @@ export function PhotoGalleryModal({
         </Carousel>
 
         {/* Thumbnail Carousel - Shows 10 thumbnails at a time */}
-        <div className="mt-4 px-2">
+        <div className="mt-4 px-4 py-3 overflow-visible transform-gpu">
           <Carousel
             setApi={setThumbnailApi}
             className="w-full max-w-full"
@@ -229,33 +229,38 @@ export function PhotoGalleryModal({
               containScroll: "trimSnaps"
             }}
           >
-            <CarouselContent className="-ml-2">
+            <CarouselContent className="-ml-1">
               {images.map((image, index) => (
                 <CarouselItem 
                   key={index} 
-                  className="pl-2 basis-1/6 sm:basis-1/8 lg:basis-[10%]"
+                  className="pl-3 basis-1/6 sm:basis-1/8 lg:basis-[10%]"
                 >
                   <button
                     onClick={() => api?.scrollTo(index)}
                     className={cn(
-                      "relative w-full aspect-[4/5] rounded-lg overflow-hidden",
-                      "border-2 transition-all duration-200",
+                      "relative w-full aspect-[4/5] rounded-lg",
+                      "border-2 transition-all duration-200 will-change-transform",
+                      "min-w-[44px] min-h-[44px] transform-gpu",
+                      "transform-origin-center",
                       current === index 
-                        ? "border-white/60 scale-105 shadow-lg" 
-                        : "border-white/20 hover:border-white/40 hover:scale-105"
+                        ? "border-white/60 scale-105 shadow-lg z-10" 
+                        : "border-white/20 hover:border-white/40 hover:scale-[1.02]"
                     )}
+                    style={{ transform: current === index ? 'scale(1.05) translateZ(0)' : undefined }}
                   >
-                    <Image
-                      src={image}
-                      alt={`Thumbnail ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 12.5vw, (max-width: 1024px) 12.5vw, 10vw"
-                    />
-                    <div className={cn(
-                      "absolute inset-0 transition-opacity",
-                      current === index ? "bg-transparent" : "bg-black/30"
-                    )} />
+                    <div className="relative w-full h-full rounded-lg overflow-hidden">
+                      <Image
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 12.5vw, (max-width: 1024px) 12.5vw, 10vw"
+                      />
+                      <div className={cn(
+                        "absolute inset-0 transition-opacity",
+                        current === index ? "bg-transparent" : "bg-black/30"
+                      )} />
+                    </div>
                   </button>
                 </CarouselItem>
               ))}
