@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   Home,
   Users,
@@ -26,14 +27,14 @@ interface NavItem {
   icon: React.ElementType;
   label: string;
   href: string;
-  active?: boolean;
 }
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const navItems: NavItem[] = [
-    { icon: Home, label: "Home", href: "/", active: true },
+    { icon: Home, label: "Home", href: "/" },
     { icon: Users, label: "Who's On", href: "/whos-on" },
     { icon: Eye, label: "Viewed Me", href: "/viewed-me" },
     { icon: MessageSquare, label: "Messages", href: "/messages" },
@@ -51,6 +52,14 @@ export function Sidebar() {
     { icon: LogOut, label: "Logout", href: "/logout" },
   ];
 
+  // Function to check if the current path matches the nav item
+  const isActivePath = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
+
   return (
     <>
       <button
@@ -61,7 +70,9 @@ export function Sidebar() {
       </button>
 
       <aside
-        className="fixed inset-y-0 left-0 z-40 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 2xl:translate-x-0"
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 2xl:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="flex flex-col h-full">
           <div className="p-6 border-b border-sidebar-border">
@@ -78,32 +89,46 @@ export function Sidebar() {
           </div>
 
           <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground"
-                onClick={() => setIsOpen(false)}
-              >
-                <item.icon className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = isActivePath(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all font-medium ${
+                    isActive
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="p-4 border-t border-sidebar-border space-y-1">
             <ThemeToggle variant="sidebar" />
-            {secondaryItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground transition-all hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                onClick={() => setIsOpen(false)}
-              >
-                <item.icon className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            ))}
+            {secondaryItems.map((item) => {
+              const isActive = isActivePath(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
+                    isActive
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </aside>
