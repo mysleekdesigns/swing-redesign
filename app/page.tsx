@@ -58,28 +58,28 @@ export default function Home() {
           
           {/* Convention Section - Full Width */}
           <section>
-              <div className="relative overflow-hidden rounded-3xl section-glass max-[468px]:p-4 min-[469px]:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-                <div className="flex flex-col lg:flex-row gap-6 h-full">
+              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl section-glass p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+                <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 h-full">
                   {/* Text Content - Left Side */}
                   <div className="lg:w-full xl:w-1/2 lg:pr-6">
                     <div className="relative z-10 h-full flex flex-col justify-between">
-                      <div className="min-[469px]:inline-block max-[468px]:hidden w-fit px-3 py-1.5 rounded-full text-sm font-semibold mb-8 bg-primary/20 text-primary border border-primary/30">
+                      <div className="inline-block w-fit px-2.5 py-1 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-8 bg-primary/20 text-primary border border-primary/30">
                         Lifestyle
                       </div>
                       
-                      <div className="max-[468px]:space-y-2 min-[469px]:space-y-4 flex-1 flex flex-col justify-center">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+                      <div className="space-y-3 sm:space-y-4 flex-1 flex flex-col justify-center">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight leading-tight">
                           {featuredConvention.name}
                         </h2>
                         
-                        <p className="max-[468px]:text-base max-[468px]:line-clamp-3 min-[469px]:text-lg text-muted-foreground">
+                        <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
                           {featuredConvention.description}
                         </p>
                         
-                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-primary" />
-                            <span className="font-medium">
+                        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                            <span className="font-medium truncate">
                               {new Date(featuredConvention.date).toLocaleDateString('en-US', { 
                                 weekday: 'short', 
                                 month: 'short', 
@@ -88,28 +88,28 @@ export default function Home() {
                               })}
                             </span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-primary" />
-                            <span className="font-medium">{featuredConvention.location}</span>
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                            <span className="font-medium truncate">{featuredConvention.location}</span>
                           </div>
                           {featuredConvention.price && (
-                            <div className="flex items-center gap-2">
-                              <DollarSign className="w-4 h-4 text-primary" />
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                              <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                               <span className="font-medium">{featuredConvention.price.replace('$', '')}</span>
                             </div>
                           )}
-                          <div className="flex items-center gap-2">
-                            <Users className="w-4 h-4 text-primary" />
-                            <span className="font-medium">{featuredConvention.attendeeCount} people attending</span>
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                            <span className="font-medium truncate">{featuredConvention.attendeeCount} attending</span>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="flex flex-wrap gap-4 mt-8">
-                        <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground hover:text-primary-foreground rounded-xl font-semibold transition-colors">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8">
+                        <button className="flex-1 sm:flex-initial px-5 sm:px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary/90 text-primary-foreground hover:text-primary-foreground rounded-xl font-semibold transition-colors min-h-[44px]">
                           Register Now
                         </button>
-                        <button className="px-6 py-3 border border-border hover:bg-accent text-foreground hover:text-accent-foreground rounded-xl font-semibold transition-colors">
+                        <button className="flex-1 sm:flex-initial px-5 sm:px-6 py-2.5 sm:py-3 border border-border hover:bg-accent text-foreground hover:text-accent-foreground rounded-xl font-semibold transition-colors min-h-[44px]">
                           Event Details
                         </button>
                       </div>
@@ -227,22 +227,22 @@ export default function Home() {
           </section>
 
           {/* Stats Section */}
-          <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="section-glass rounded-2xl p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-              <div className="text-3xl font-bold text-primary mb-2">2.5K+</div>
-              <div className="text-sm text-muted-foreground font-medium">Members Online Now</div>
+          <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">2.5K+</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Members Online Now</div>
             </div>
-            <div className="section-glass rounded-2xl p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-              <div className="text-3xl font-bold text-primary mb-2">150+</div>
-              <div className="text-sm text-muted-foreground font-medium">Events This Month</div>
+            <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">150+</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Events This Month</div>
             </div>
-            <div className="section-glass rounded-2xl p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-              <div className="text-3xl font-bold text-primary mb-2">95%</div>
-              <div className="text-sm text-muted-foreground font-medium">Successful Connections</div>
+            <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">95%</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Successful Connections</div>
             </div>
-            <div className="section-glass rounded-2xl p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-              <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground font-medium">Support Available</div>
+            <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">24/7</div>
+              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Support Available</div>
             </div>
           </section>
         </div>

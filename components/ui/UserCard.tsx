@@ -44,54 +44,53 @@ export function UserCard({
         
         {/* Status indicators with improved glassmorphism */}
         {isOnline && (
-          <div className="absolute top-3 right-3 flex items-center gap-1.5 max-[468px]:px-2 max-[468px]:py-2 px-3 py-1.5 rounded-full glass-dark border border-white/10">
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex items-center justify-center w-fit h-fit p-1.5 sm:p-2 rounded-full glass-dark border border-white/10">
             <div className="status-dot status-online animate-pulse" />
-            <span className="max-[468px]:hidden text-xs font-medium text-white tracking-wide">Online</span>
           </div>
         )}
         
         {photosCount && (
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-dark border border-white/10">
-            <Camera className="w-3.5 h-3.5 text-white" />
-            <span className="text-xs font-medium text-white">{photosCount}</span>
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-white/10">
+            <Camera className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-white" />
+            <span className="text-[10px] sm:text-xs font-medium text-white">{photosCount}</span>
           </div>
         )}
         
         {/* Enhanced content area with better typography */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-          <div className="space-y-2">
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+          <div className="space-y-1.5 sm:space-y-2">
             {/* Action buttons for interactive cards */}
             {showActions && (
-              <div className="flex gap-2 mb-2">
+              <div className="flex gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                 <button 
-                  className={`p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform ${
+                  className={`w-8 h-8 sm:w-9 sm:h-9 p-1.5 sm:p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform ${
                     isLiked ? 'bg-primary/20 border-primary/30' : ''
                   }`}
                   aria-label={isLiked ? 'Unlike' : 'Like'}
                 >
-                  <Heart className={`w-4 h-4 ${isLiked ? 'text-primary fill-primary' : 'text-white'}`} />
+                  <Heart className={`w-full h-full ${isLiked ? 'text-primary fill-primary' : 'text-white'}`} />
                 </button>
                 <button 
-                  className="p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform"
+                  className="w-8 h-8 sm:w-9 sm:h-9 p-1.5 sm:p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform"
                   aria-label="Send message"
                 >
-                  <MessageCircle className="w-4 h-4 text-white" />
+                  <MessageCircle className="w-full h-full text-white" />
                 </button>
               </div>
             )}
             
-            <h3 className="text-xl font-bold text-white tracking-tight leading-tight">
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white tracking-tight leading-tight">
               {username}, <span className={variant === 'featured' ? 'text-primary' : 'text-white'}>{age}</span>
             </h3>
             
-            <div className="flex items-center gap-2 text-white/90">
-              <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-              <span className="text-sm font-medium truncate">{location}</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 text-white/90">
+              <MapPin className="w-3 sm:w-3.5 h-3 sm:h-3.5 flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-medium truncate">{location}</span>
               {distance && (
-                <div className="max-[468px]:hidden flex items-center gap-2">
+                <>
                   <span className="text-white/60">•</span>
-                  <span className="text-sm font-medium text-primary">{distance}</span>
-                </div>
+                  <span className="text-xs sm:text-sm font-medium text-primary">{distance}</span>
+                </>
               )}
             </div>
           </div>
