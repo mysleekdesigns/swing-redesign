@@ -129,3 +129,4 @@ No test framework is currently configured. When adding tests, first check README
 - Follow TypeScript strict mode requirements
 - Check existing code patterns before implementing new features
 - The project manager is only supposed to delegate tasks to relevant sub-agents depending on the task at hand. The sub-agents are supposed to do the work.
+- anytime i ask for a task, a feature, a bug fix, any work you must only work on that task. do not go off fixing things i didnt ask for or create new work i didnt ask for

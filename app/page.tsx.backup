@@ -58,21 +58,21 @@ export default function Home() {
           
           {/* Convention Section - Full Width */}
           <section>
-              <div className="relative overflow-hidden rounded-3xl section-glass max-[468px]:p-4 min-[469px]:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="relative overflow-hidden rounded-3xl section-glass p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
                 <div className="flex flex-col lg:flex-row gap-6 h-full">
                   {/* Text Content - Left Side */}
                   <div className="lg:w-full xl:w-1/2 lg:pr-6">
                     <div className="relative z-10 h-full flex flex-col justify-between">
-                      <div className="min-[469px]:inline-block max-[468px]:hidden w-fit px-3 py-1.5 rounded-full text-sm font-semibold mb-8 bg-primary/20 text-primary border border-primary/30">
+                      <div className="inline-block w-fit px-3 py-1.5 rounded-full text-sm font-semibold mb-8 bg-primary/20 text-primary border border-primary/30">
                         Lifestyle
                       </div>
                       
-                      <div className="max-[468px]:space-y-2 min-[469px]:space-y-4 flex-1 flex flex-col justify-center">
+                      <div className="space-y-4 flex-1 flex flex-col justify-center">
                         <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
                           {featuredConvention.name}
                         </h2>
                         
-                        <p className="max-[468px]:text-base max-[468px]:line-clamp-3 min-[469px]:text-lg text-muted-foreground">
+                        <p className="text-lg text-muted-foreground">
                           {featuredConvention.description}
                         </p>
                         

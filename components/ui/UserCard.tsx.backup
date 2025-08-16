@@ -9,6 +9,7 @@ interface UserCardProps {
   isOnline?: boolean;
   distance?: string;
   photosCount?: number;
+  viewedTime?: string;
   isLiked?: boolean;
   showActions?: boolean;
   variant?: 'default' | 'compact' | 'featured';
@@ -22,6 +23,7 @@ export function UserCard({
   isOnline = false,
   distance,
   photosCount,
+  viewedTime,
   isLiked = false,
   showActions = false,
   variant = 'default',
@@ -94,6 +96,12 @@ export function UserCard({
                 </div>
               )}
             </div>
+            
+            {viewedTime && (
+              <p className="text-xs text-white/70 font-medium bg-black/20 rounded-full px-2 py-1 inline-block">
+                {viewedTime}
+              </p>
+            )}
           </div>
         </div>
       </div>
