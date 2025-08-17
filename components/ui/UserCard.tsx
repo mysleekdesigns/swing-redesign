@@ -88,8 +88,8 @@ export function UserCard({
               <span className="text-xs sm:text-sm font-medium truncate">{location}</span>
               {distance && (
                 <>
-                  <span className="text-white/60">•</span>
-                  <span className="text-xs sm:text-sm font-medium text-primary">{distance}</span>
+                  <span className="hidden min-[400px]:inline text-white/60">•</span>
+                  <span className="hidden min-[400px]:inline text-xs sm:text-sm font-medium text-primary">{distance}</span>
                 </>
               )}
             </div>

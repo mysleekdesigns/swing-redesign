@@ -6,14 +6,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   Home,
-  Users,
-  Eye,
   MessageSquare,
-  Heart,
-  User,
-  Calendar,
-  MapPin,
-  Globe,
   Search,
   Settings,
   LogOut,
@@ -36,15 +29,7 @@ export function Sidebar() {
 
   const navItems: NavItem[] = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Users, label: "Who's On", href: "/whos-on" },
-    { icon: Eye, label: "Viewed Me", href: "/viewed-me" },
-    { icon: MessageSquare, label: "Messages", href: "/messages" },
-    { icon: Heart, label: "Matches", href: "/matches" },
-    { icon: User, label: "My Account", href: "/account" },
     { icon: UserCircle, label: "My Profile", href: "/profile" },
-    { icon: Calendar, label: "Events", href: "/events" },
-    { icon: MapPin, label: "Hot Date", href: "/hot-date" },
-    { icon: Globe, label: "Travel", href: "/travel" },
     { icon: Search, label: "Search", href: "/search" },
   ];
 
