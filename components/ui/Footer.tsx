@@ -249,33 +249,35 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 dark:border-white/10 py-6 max-[468px]:py-4 sm:py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-gray-200 dark:border-white/10 py-6 max-[460px]:py-3 max-[468px]:py-4 sm:py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 max-[460px]:gap-3">
             
             {/* Copyright */}
-            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-1 max-[460px]:gap-x-1 max-[460px]:gap-y-0 text-base max-[460px]:text-sm text-gray-600 dark:text-muted-foreground">
               <span>© {currentYear} Swing Dating.</span>
-              <span>All rights reserved.</span>
-              <Heart className="w-4 h-4 text-primary ml-1" />
+              <span className="max-[460px]:hidden">All rights reserved.</span>
+              <Heart className="w-4 h-4 max-[460px]:w-3.5 max-[460px]:h-3.5 text-primary max-[460px]:ml-0 ml-1" />
             </div>
 
             {/* Additional Links */}
-            <div className="flex items-center gap-6 text-sm">
-              <Link 
-                href="/accessibility" 
-                className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
-              >
-                Accessibility
-              </Link>
-              <Link 
-                href="/sitemap" 
-                className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
-              >
-                Sitemap
-              </Link>
+            <div className="flex flex-col max-[460px]:flex-col sm:flex-row items-center gap-2 max-[460px]:gap-1 sm:gap-6 text-base max-[460px]:text-sm">
+              <div className="flex items-center gap-4 max-[460px]:gap-3">
+                <Link 
+                  href="/accessibility" 
+                  className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
+                >
+                  Accessibility
+                </Link>
+                <Link 
+                  href="/sitemap" 
+                  className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
+                >
+                  Sitemap
+                </Link>
+              </div>
               <div className="flex items-center gap-1 text-gray-600 dark:text-muted-foreground">
                 <span>Made with</span>
-                <Heart className="w-3 h-3 text-primary" />
+                <Heart className="w-3.5 h-3.5 max-[460px]:w-3 max-[460px]:h-3 text-primary" />
                 <span>in San Francisco</span>
               </div>
             </div>
