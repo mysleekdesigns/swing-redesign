@@ -250,7 +250,6 @@ export default function SearchPage() {
                     location={user.location}
                     imageUrl={user.imageUrl}
                     isOnline={user.isOnline}
-                    distance={user.distance}
                     photosCount={user.photosCount}
                     showActions={true}
                     variant="compact"

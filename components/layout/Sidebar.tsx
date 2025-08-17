@@ -16,6 +16,7 @@ import {
   Bell,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useTheme } from "@/lib/theme-context";
 
 interface NavItem {
   icon: React.ElementType;
@@ -26,6 +27,12 @@ interface NavItem {
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { theme } = useTheme();
+  
+  // Determine which logo to use based on theme
+  const logoSrc = theme === 'light' || theme === 'bubble-gum' 
+    ? '/images/logo-swing.svg' 
+    : '/images/Swing.png';
 
   const navItems: NavItem[] = [
     { icon: Home, label: "Home", href: "/" },
@@ -64,7 +71,7 @@ export function Sidebar() {
           <div className="flex-1 flex justify-center">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/Swing.png"
+                src={logoSrc}
                 alt="Swing Dating"
                 width={180}
                 height={60}
@@ -108,7 +115,7 @@ export function Sidebar() {
           <div className="p-6 border-b border-sidebar-border">
             <div className="flex items-center">
               <Image
-                src="/images/Swing.png"
+                src={logoSrc}
                 alt="Swing Dating"
                 width={180}
                 height={60}

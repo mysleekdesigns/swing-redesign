@@ -76,9 +76,6 @@ export default function ProfilePage() {
           
           {/* Profile Header */}
           <div className="relative overflow-hidden rounded-3xl bg-card border border-border">
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
-            
             <div className="relative p-4 sm:p-6 lg:p-8">
               {/* Action Buttons - positioned absolute top right */}
               <div className="flex flex-col md:flex-row gap-2 lg:gap-3 absolute top-4 right-4 sm:top-6 lg:right-8 z-10">
