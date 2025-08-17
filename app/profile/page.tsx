@@ -33,7 +33,7 @@ export default function ProfilePage() {
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const [tabIndicatorWidth, setTabIndicatorWidth] = useState(0);
   const [tabIndicatorLeft, setTabIndicatorLeft] = useState(0);
-  const { stats, interests, recentActivity, additionalImages, hotDate, profileDescription, fantasies, additionalComments } = currentUserProfile;
+  const { stats, lifestylePreferences, recentActivity, additionalImages, hotDate, profileDescription, fantasies, additionalComments } = currentUserProfile;
 
   const tabs = useMemo(() => [
     { id: "about", label: "About" },
@@ -256,24 +256,151 @@ export default function ProfilePage() {
               
               {activeTab === 'about' && (
                 <>
-                  {/* Interests Section */}
+                  {/* Lifestyle Preferences Section */}
                   <div className="p-4 sm:p-6 rounded-3xl bg-card border border-border">
-                    <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-xl font-bold text-foreground">Interests</h2>
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-bold text-foreground">Lifestyle Preferences</h2>
                       <button className="p-2 rounded-lg hover:bg-muted transition-colors">
                         <Edit3 className="w-4 h-4 text-muted-foreground" />
                       </button>
                     </div>
-                    <div className="flex flex-wrap gap-3">
-                      {interests.map((interest) => (
-                        <div
-                          key={interest.id}
-                          className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border hover:bg-primary/10 hover:border-primary/20 transition-colors"
-                        >
-                          <span className="text-lg">{interest.emoji}</span>
-                          <span className="font-medium text-foreground">{interest.name}</span>
+
+                    {/* Progress Bars Section */}
+                    <div className="space-y-4 mb-6">
+                      {/* Row 1: Watch, Soft, Full */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Watch</span>
+                            <span className="text-sm text-muted-foreground">{lifestylePreferences.watch}%</span>
+                          </div>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${lifestylePreferences.watch}%` }}
+                            />
+                          </div>
                         </div>
-                      ))}
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Soft</span>
+                            <span className="text-sm text-muted-foreground">{lifestylePreferences.soft}%</span>
+                          </div>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${lifestylePreferences.soft}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Full</span>
+                            <span className="text-sm text-muted-foreground">{lifestylePreferences.full}%</span>
+                          </div>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${lifestylePreferences.full}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Row 2: Couples, Females, Males */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Couples</span>
+                            <span className="text-sm text-muted-foreground">{lifestylePreferences.couples}%</span>
+                          </div>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-gradient-to-r from-pink-500 to-pink-600 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${lifestylePreferences.couples}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Females</span>
+                            <span className="text-sm text-muted-foreground">{lifestylePreferences.females}%</span>
+                          </div>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${lifestylePreferences.females}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Males</span>
+                            <span className="text-sm text-muted-foreground">{lifestylePreferences.males}%</span>
+                          </div>
+                          <div className="w-full bg-muted rounded-full h-2">
+                            <div 
+                              className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${lifestylePreferences.males}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Color Legend */}
+                    <div className="border-t border-border pt-4 mb-4">
+                      <h3 className="text-sm font-medium text-foreground mb-3">Legend</h3>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-green-500 to-green-600"></div>
+                          <span className="text-muted-foreground">Watch</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                          <span className="text-muted-foreground">Soft</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                          <span className="text-muted-foreground">Full</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-pink-600"></div>
+                          <span className="text-muted-foreground">Couples</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-red-500 to-red-600"></div>
+                          <span className="text-muted-foreground">Females</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600"></div>
+                          <span className="text-muted-foreground">Males</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Additional Preferences */}
+                    <div className="border-t border-border pt-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <span className="text-sm font-medium text-foreground">Smoke</span>
+                          <div className="px-3 py-2 rounded-lg bg-muted/50 border border-border">
+                            <span className="text-sm text-foreground">{lifestylePreferences.smoke}</span>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-sm font-medium text-foreground">Drink</span>
+                          <div className="px-3 py-2 rounded-lg bg-muted/50 border border-border">
+                            <span className="text-sm text-foreground">{lifestylePreferences.drink}</span>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-sm font-medium text-foreground">Age Range</span>
+                          <div className="px-3 py-2 rounded-lg bg-muted/50 border border-border">
+                            <span className="text-sm text-foreground">{lifestylePreferences.age}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 

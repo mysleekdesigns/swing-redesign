@@ -590,6 +590,18 @@ export interface ProfileInterest {
   emoji: string;
 }
 
+export interface LifestylePreferences {
+  watch: number; // 0-100 percentage
+  soft: number; // 0-100 percentage
+  full: number; // 0-100 percentage
+  couples: number; // 0-100 percentage
+  females: number; // 0-100 percentage
+  males: number; // 0-100 percentage
+  smoke: "Definitely" | "Maybe" | "Dont Care" | "No Way";
+  drink: "Definitely" | "Maybe" | "Dont Care" | "No Way";
+  age: string; // Age range like "30 - 45"
+}
+
 export interface Activity {
   id: string;
   type: 'match' | 'event' | 'profile_view' | 'message';
@@ -645,6 +657,7 @@ export interface UserProfile {
   verified: boolean;
   stats: ProfileStats;
   interests: ProfileInterest[];
+  lifestylePreferences: LifestylePreferences;
   recentActivity: Activity[];
   additionalImages: string[];
   preferences: {
@@ -686,6 +699,17 @@ export const currentUserProfile: UserProfile = {
     { id: '7', name: 'Cooking', category: 'food', emoji: '👩‍🍳' },
     { id: '8', name: 'Beach Volleyball', category: 'fitness', emoji: '🏐' }
   ],
+  lifestylePreferences: {
+    watch: 100,
+    soft: 100,
+    full: 100,
+    couples: 100,
+    females: 100,
+    males: 20,
+    smoke: "Dont Care",
+    drink: "Dont Care",
+    age: "30 - 45"
+  },
   recentActivity: [
     {
       id: '1',
