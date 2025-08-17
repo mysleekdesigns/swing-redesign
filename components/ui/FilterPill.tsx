@@ -20,7 +20,7 @@ export function FilterPill({
       onClick={onClick}
       className={cn(
         // Base styles with enhanced transitions
-        "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ease-out",
+        "px-4 py-2 rounded-full text-base font-medium transition-all duration-300 ease-out",
         "hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/20",
         "whitespace-nowrap cursor-pointer",
         

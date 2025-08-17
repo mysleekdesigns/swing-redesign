@@ -63,7 +63,7 @@ export default function Home() {
                   {/* Text Content - Left Side */}
                   <div className="lg:w-full xl:w-1/2 lg:pr-6">
                     <div className="relative z-10 h-full flex flex-col justify-between">
-                      <div className="inline-block w-fit px-2.5 py-1 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-8 bg-primary/20 text-primary border border-primary/30">
+                      <div className="inline-block w-fit px-2.5 py-1 rounded-full text-sm sm:text-base font-semibold mb-4 sm:mb-8 bg-primary/20 text-primary border border-primary/30">
                         Lifestyle
                       </div>
                       
@@ -72,11 +72,11 @@ export default function Home() {
                           {featuredConvention.name}
                         </h2>
                         
-                        <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
+                        <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">
                           {featuredConvention.description}
                         </p>
                         
-                        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+                        <div className="flex flex-wrap gap-3 sm:gap-4 text-sm sm:text-base text-muted-foreground">
                           <div className="flex items-center gap-1.5 sm:gap-2">
                             <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                             <span className="font-medium truncate">
@@ -230,19 +230,19 @@ export default function Home() {
           <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
               <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">2.5K+</div>
-              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Members Online Now</div>
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">Members Online Now</div>
             </div>
             <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
               <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">150+</div>
-              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Events This Month</div>
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">Events This Month</div>
             </div>
             <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
               <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">95%</div>
-              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Successful Connections</div>
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">Successful Connections</div>
             </div>
             <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center ring-2 ring-primary/20 shadow-lg shadow-primary/10">
               <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">24/7</div>
-              <div className="text-xs sm:text-sm text-muted-foreground font-medium">Support Available</div>
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">Support Available</div>
             </div>
           </section>
         </div>

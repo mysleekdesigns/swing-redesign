@@ -85,12 +85,12 @@ export default function ProfilePage() {
                 {currentUserProfile.verified && (
                   <div className="flex items-center gap-1 lg:gap-2 p-2 md:px-3 md:py-2 lg:px-4 rounded-xl bg-primary/10 border border-primary/20">
                     <CheckCircle className="w-4 h-4 text-primary" />
-                    <span className="text-xs lg:text-base font-medium text-primary hidden md:inline">Premium Member</span>
+                    <span className="text-sm lg:text-base font-medium text-primary hidden md:inline">Premium Member</span>
                   </div>
                 )}
                 <button className="flex items-center gap-1 lg:gap-2 p-2 md:px-3 md:py-2 lg:px-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                   <Edit3 className="w-4 h-4" />
-                  <span className="text-xs lg:text-base font-medium hidden md:inline">Edit Profile</span>
+                  <span className="text-sm lg:text-base font-medium hidden md:inline">Edit Profile</span>
                 </button>
                 <button className="p-2 rounded-xl bg-muted hover:bg-muted/80 transition-colors">
                   <Settings className="w-4 h-4 lg:w-5 lg:h-5" />
@@ -131,12 +131,12 @@ export default function ProfilePage() {
                       
                       <div className="flex items-center gap-1 text-muted-foreground">
                         <MapPin className="w-4 h-4" />
-                        <span className="font-medium text-sm">{currentUserProfile.location}</span>
+                        <span className="font-medium text-base">{currentUserProfile.location}</span>
                       </div>
                       
                       <div className="flex items-center gap-1 text-muted-foreground">
                         <Calendar className="w-4 h-4" />
-                        <span className="text-sm">
+                        <span className="text-base">
                           Member since {new Date(currentUserProfile.joinDate).toLocaleDateString('en-US', { 
                             month: 'long', 
                             year: 'numeric' 
@@ -147,7 +147,7 @@ export default function ProfilePage() {
                       {/* About Me Section - Shows inline on screens above md (768px) */}
                       <div className="mt-3 hidden md:block lg:hidden">
                         <h2 className="text-base font-semibold text-foreground mb-1">About Me</h2>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
+                        <p className="text-muted-foreground text-base leading-relaxed">
                           {currentUserProfile.bio}
                         </p>
                       </div>
@@ -200,7 +200,7 @@ export default function ProfilePage() {
                       
                       <div className="flex items-center gap-1 sm:gap-2 text-muted-foreground min-w-0">
                         <Calendar className="w-4 h-4" />
-                        <span className="text-sm">
+                        <span className="text-base">
                           Member since {new Date(currentUserProfile.joinDate).toLocaleDateString('en-US', { 
                             month: 'long', 
                             year: 'numeric' 
@@ -271,8 +271,8 @@ export default function ProfilePage() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-foreground">Watch</span>
-                            <span className="text-sm text-muted-foreground">{lifestylePreferences.watch}%</span>
+                            <span className="text-base font-medium text-foreground">Watch</span>
+                            <span className="text-base text-muted-foreground">{lifestylePreferences.watch}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2">
                             <div 
@@ -283,8 +283,8 @@ export default function ProfilePage() {
                         </div>
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-foreground">Soft</span>
-                            <span className="text-sm text-muted-foreground">{lifestylePreferences.soft}%</span>
+                            <span className="text-base font-medium text-foreground">Soft</span>
+                            <span className="text-base text-muted-foreground">{lifestylePreferences.soft}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2">
                             <div 
@@ -295,8 +295,8 @@ export default function ProfilePage() {
                         </div>
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-foreground">Full</span>
-                            <span className="text-sm text-muted-foreground">{lifestylePreferences.full}%</span>
+                            <span className="text-base font-medium text-foreground">Full</span>
+                            <span className="text-base text-muted-foreground">{lifestylePreferences.full}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2">
                             <div 
@@ -311,8 +311,8 @@ export default function ProfilePage() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-foreground">Couples</span>
-                            <span className="text-sm text-muted-foreground">{lifestylePreferences.couples}%</span>
+                            <span className="text-base font-medium text-foreground">Couples</span>
+                            <span className="text-base text-muted-foreground">{lifestylePreferences.couples}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2">
                             <div 
@@ -323,8 +323,8 @@ export default function ProfilePage() {
                         </div>
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-foreground">Females</span>
-                            <span className="text-sm text-muted-foreground">{lifestylePreferences.females}%</span>
+                            <span className="text-base font-medium text-foreground">Females</span>
+                            <span className="text-base text-muted-foreground">{lifestylePreferences.females}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2">
                             <div 
@@ -335,8 +335,8 @@ export default function ProfilePage() {
                         </div>
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-foreground">Males</span>
-                            <span className="text-sm text-muted-foreground">{lifestylePreferences.males}%</span>
+                            <span className="text-base font-medium text-foreground">Males</span>
+                            <span className="text-base text-muted-foreground">{lifestylePreferences.males}%</span>
                           </div>
                           <div className="w-full bg-muted rounded-full h-2">
                             <div 
@@ -348,33 +348,28 @@ export default function ProfilePage() {
                       </div>
                     </div>
 
-                    {/* Color Legend */}
+                    {/* Preference Level Legend */}
                     <div className="border-t border-border pt-4 mb-4">
-                      <h3 className="text-sm font-medium text-foreground mb-3">Legend</h3>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                      <h3 className="text-base font-medium text-foreground mb-3">Legend:</h3>
+                      <div className="flex flex-wrap gap-4 text-base">
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-green-500 to-green-600"></div>
-                          <span className="text-muted-foreground">Watch</span>
+                          <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                          <span className="text-muted-foreground">Definitely</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-600"></div>
-                          <span className="text-muted-foreground">Soft</span>
+                          <div className="w-4 h-4 bg-teal-500 rounded"></div>
+                          <span className="text-muted-foreground">Yes</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"></div>
-                          <span className="text-muted-foreground">Full</span>
+                          <div className="w-4 h-4 bg-orange-400 rounded"></div>
+                          <span className="text-muted-foreground">A little</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-pink-600"></div>
-                          <span className="text-muted-foreground">Couples</span>
+                          <div className="w-4 h-4 bg-pink-400 rounded"></div>
+                          <span className="text-muted-foreground">Maybe</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-red-500 to-red-600"></div>
-                          <span className="text-muted-foreground">Females</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600"></div>
-                          <span className="text-muted-foreground">Males</span>
+                          <span className="text-muted-foreground">No Interest</span>
                         </div>
                       </div>
                     </div>
@@ -383,21 +378,21 @@ export default function ProfilePage() {
                     <div className="border-t border-border pt-4">
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-2">
-                          <span className="text-sm font-medium text-foreground">Smoke</span>
+                          <span className="text-base font-medium text-foreground">Smoke</span>
                           <div className="px-3 py-2 rounded-lg bg-muted/50 border border-border">
-                            <span className="text-sm text-foreground">{lifestylePreferences.smoke}</span>
+                            <span className="text-base text-foreground">{lifestylePreferences.smoke}</span>
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <span className="text-sm font-medium text-foreground">Drink</span>
+                          <span className="text-base font-medium text-foreground">Drink</span>
                           <div className="px-3 py-2 rounded-lg bg-muted/50 border border-border">
-                            <span className="text-sm text-foreground">{lifestylePreferences.drink}</span>
+                            <span className="text-base text-foreground">{lifestylePreferences.drink}</span>
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <span className="text-sm font-medium text-foreground">Age Range</span>
+                          <span className="text-base font-medium text-foreground">Age Range</span>
                           <div className="px-3 py-2 rounded-lg bg-muted/50 border border-border">
-                            <span className="text-sm text-foreground">{lifestylePreferences.age}</span>
+                            <span className="text-base text-foreground">{lifestylePreferences.age}</span>
                           </div>
                         </div>
                       </div>
@@ -417,13 +412,13 @@ export default function ProfilePage() {
                         {currentUserProfile.preferences.lookingFor.map((item, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-sm"
+                            className="px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-base"
                           >
                             {item}
                           </span>
                         ))}
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-base text-muted-foreground">
                         Ages {currentUserProfile.preferences.ageRange[0]}-{currentUserProfile.preferences.ageRange[1]} • 
                         Within {currentUserProfile.preferences.distanceRadius} miles
                       </div>
@@ -452,9 +447,9 @@ export default function ProfilePage() {
                             </div>
                           )}
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-foreground mb-2 text-sm sm:text-base truncate">{hotDate.title}</h3>
-                            <p className="text-muted-foreground text-xs sm:text-sm mb-3 line-clamp-2">{hotDate.description}</p>
-                            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
+                            <h3 className="font-semibold text-foreground mb-2 text-base truncate">{hotDate.title}</h3>
+                            <p className="text-muted-foreground text-sm sm:text-base mb-3 line-clamp-2">{hotDate.description}</p>
+                            <div className="flex flex-wrap gap-2 sm:gap-4 text-sm sm:text-base">
                               <div className="flex items-center gap-1 sm:gap-2 text-muted-foreground min-w-0">
                                 <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                                 <span className="truncate">{new Date(hotDate.date).toLocaleDateString()}</span>
@@ -645,7 +640,7 @@ export default function ProfilePage() {
                       <Eye className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Profile Views</p>
+                      <p className="text-base text-muted-foreground">Profile Views</p>
                       <p className="text-lg font-bold text-foreground">{stats.profileViews.toLocaleString()}</p>
                     </div>
                   </div>
@@ -657,7 +652,7 @@ export default function ProfilePage() {
                       <Heart className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Matches</p>
+                      <p className="text-base text-muted-foreground">Matches</p>
                       <p className="text-lg font-bold text-foreground">{stats.matches}</p>
                     </div>
                   </div>
@@ -669,7 +664,7 @@ export default function ProfilePage() {
                       <Users className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Events</p>
+                      <p className="text-base text-muted-foreground">Events</p>
                       <p className="text-lg font-bold text-foreground">{stats.eventsAttended}</p>
                     </div>
                   </div>
@@ -681,7 +676,7 @@ export default function ProfilePage() {
                       <Trophy className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Profile</p>
+                      <p className="text-base text-muted-foreground">Profile</p>
                       <p className="text-lg font-bold text-foreground">{stats.profileCompleteness}%</p>
                     </div>
                   </div>
@@ -714,8 +709,8 @@ export default function ProfilePage() {
                   <h3 className="text-lg font-bold text-foreground mb-4">Profile Completion</h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Overall Progress</span>
-                      <span className="text-sm font-bold text-primary">{stats.profileCompleteness}%</span>
+                      <span className="text-base text-muted-foreground">Overall Progress</span>
+                      <span className="text-base font-bold text-primary">{stats.profileCompleteness}%</span>
                     </div>
                     <div className="w-full bg-muted/50 rounded-full h-2">
                       <div 
@@ -723,7 +718,7 @@ export default function ProfilePage() {
                         style={{ width: `${stats.profileCompleteness}%` }}
                       />
                     </div>
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-2 text-base">
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">Add more photos</span>
                         <CheckCircle className="w-4 h-4 text-primary" />
@@ -745,9 +740,9 @@ export default function ProfilePage() {
                   <h3 className="text-lg font-bold text-foreground mb-4">Status</h3>
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-sm font-medium text-foreground">Online now</span>
+                    <span className="text-base font-medium text-foreground">Online now</span>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-sm text-muted-foreground mt-2">
                     Last seen: {formatActivityTime(currentUserProfile.lastSeen)}
                   </p>
                 </div>

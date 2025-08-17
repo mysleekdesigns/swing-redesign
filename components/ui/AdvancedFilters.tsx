@@ -94,9 +94,9 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
       >
         <div className="flex items-center gap-3">
           <SlidersHorizontal className="w-5 h-5 text-foreground/70" />
-          <span className="text-sm font-medium text-foreground">Advanced Filters</span>
+          <span className="text-base font-medium text-foreground">Advanced Filters</span>
           {activeFilterCount > 0 && (
-            <span className="flex items-center justify-center w-6 h-6 text-xs font-bold text-primary-foreground bg-primary rounded-full">
+            <span className="flex items-center justify-center w-6 h-6 text-sm font-bold text-primary-foreground bg-primary rounded-full">
               {activeFilterCount}
             </span>
           )}
@@ -138,7 +138,7 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
             {/* Filter Groups */}
             {filterGroups.map((group) => (
               <div key={group.title} className="space-y-3">
-                <h3 className="text-sm font-semibold text-foreground">{group.title}</h3>
+                <h3 className="text-base font-semibold text-foreground">{group.title}</h3>
                 <div className="flex flex-wrap gap-2">
                   {group.options.map((option) => (
                     <FilterPill
@@ -154,7 +154,7 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
 
             {/* Photo Verified Toggle - Always spans full width */}
             <div className="space-y-3 md:col-span-2">
-              <h3 className="text-sm font-semibold text-foreground">Verification</h3>
+              <h3 className="text-base font-semibold text-foreground">Verification</h3>
               <FilterPill
                 label="Photo Verified"
                 isActive={isPhotoVerified}

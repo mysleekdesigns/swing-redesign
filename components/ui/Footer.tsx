@@ -102,11 +102,11 @@ export function Footer() {
       <div className="px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
         
         {/* Main Footer Content */}
-        <div className="py-8 max-[468px]:py-6 sm:py-12 lg:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 max-[468px]:gap-4 sm:gap-8 lg:gap-12 xl:gap-16">
+        <div className="py-10 sm:py-12 lg:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 sm:gap-8 lg:gap-12 xl:gap-16">
             
             {/* Company Info - Left Columns */}
-            <div className="lg:col-span-2 md:col-span-3 space-y-6 max-[468px]:space-y-4 sm:space-y-8">
+            <div className="lg:col-span-2 md:col-span-3 space-y-6 sm:space-y-8">
               <div>
                 <Link href="/" className="inline-block">
                   {mounted && (
@@ -130,7 +130,7 @@ export function Footer() {
               <div className="space-y-3">
                 {contactInfo.map((contact) => {
                   const Content = (
-                    <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors">
+                    <div className="flex items-center gap-3 text-base text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors">
                       <contact.icon className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>{contact.value}</span>
                     </div>
@@ -168,10 +168,10 @@ export function Footer() {
             {/* Navigation Links - Mobile: side-by-side pairs, Desktop: individual columns */}
             <div className="lg:col-span-4 md:col-span-3">
               {/* Mobile layout: Features + Support side by side */}
-              <div className="max-[468px]:grid max-[468px]:grid-cols-2 max-[468px]:gap-4 max-[468px]:mb-6 sm:hidden lg:hidden">
+              <div className="max-[468px]:grid max-[468px]:grid-cols-2 max-[468px]:gap-6 max-[468px]:mb-6 sm:hidden lg:hidden">
                 {footerSections.slice(0, 2).map((section) => (
                   <div key={section.title} className="space-y-3">
-                    <h3 className="font-semibold text-foreground text-sm tracking-wider uppercase">
+                    <h3 className="font-semibold text-foreground text-base tracking-wider uppercase">
                       {section.title}
                     </h3>
                     <ul className="space-y-2">
@@ -194,10 +194,10 @@ export function Footer() {
               </div>
 
               {/* Mobile layout: Company + Legal side by side */}
-              <div className="max-[468px]:grid max-[468px]:grid-cols-2 max-[468px]:gap-4 sm:hidden lg:hidden">
+              <div className="max-[468px]:grid max-[468px]:grid-cols-2 max-[468px]:gap-6 sm:hidden lg:hidden">
                 {footerSections.slice(2, 4).map((section) => (
                   <div key={section.title} className="space-y-3">
-                    <h3 className="font-semibold text-foreground text-sm tracking-wider uppercase">
+                    <h3 className="font-semibold text-foreground text-base tracking-wider uppercase">
                       {section.title}
                     </h3>
                     <ul className="space-y-2">
@@ -249,18 +249,18 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 dark:border-white/10 py-6 max-[460px]:py-3 max-[468px]:py-4 sm:py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 max-[460px]:gap-3">
+        <div className="border-t border-gray-200 dark:border-white/10 py-6 sm:py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             
             {/* Copyright */}
-            <div className="flex flex-wrap items-center justify-center gap-1 max-[460px]:gap-x-1 max-[460px]:gap-y-0 text-base max-[460px]:text-sm text-gray-600 dark:text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-1 max-[460px]:gap-x-1 max-[460px]:gap-y-0 text-base max-[460px]:text-[15px] text-gray-600 dark:text-muted-foreground">
               <span>© {currentYear} Swing Dating.</span>
               <span className="max-[460px]:hidden">All rights reserved.</span>
               <Heart className="w-4 h-4 max-[460px]:w-3.5 max-[460px]:h-3.5 text-primary max-[460px]:ml-0 ml-1" />
             </div>
 
             {/* Additional Links */}
-            <div className="flex flex-col max-[460px]:flex-col sm:flex-row items-center gap-2 max-[460px]:gap-1 sm:gap-6 text-base max-[460px]:text-sm">
+            <div className="flex flex-col max-[460px]:flex-col sm:flex-row items-center gap-3 sm:gap-6 text-base max-[460px]:text-[15px]">
               <div className="flex items-center gap-4 max-[460px]:gap-3">
                 <Link 
                   href="/accessibility" 

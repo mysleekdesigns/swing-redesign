@@ -52,7 +52,7 @@ export function UserCard({
         {photosCount && (
           <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-white/10">
             <Camera className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-white" />
-            <span className="text-[10px] sm:text-xs font-medium text-white">{photosCount}</span>
+            <span className="text-xs sm:text-sm font-medium text-white">{photosCount}</span>
           </div>
         )}
         
@@ -85,11 +85,11 @@ export function UserCard({
             
             <div className="flex items-center gap-1.5 sm:gap-2 text-white/90">
               <MapPin className="w-3 sm:w-3.5 h-3 sm:h-3.5 flex-shrink-0" />
-              <span className="text-xs sm:text-sm font-medium truncate">{location}</span>
+              <span className="text-sm sm:text-base font-medium truncate">{location}</span>
               {distance && (
                 <>
                   <span className="hidden min-[400px]:inline text-white/60">•</span>
-                  <span className="hidden min-[400px]:inline text-xs sm:text-sm font-medium text-primary">{distance}</span>
+                  <span className="hidden min-[400px]:inline text-sm sm:text-base font-medium text-primary">{distance}</span>
                 </>
               )}
             </div>

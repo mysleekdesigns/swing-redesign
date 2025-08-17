@@ -39,13 +39,13 @@ export function SectionHeader({
               {title}
             </h2>
             {count !== undefined && (
-              <span className="px-3 py-1 text-sm font-semibold text-primary-foreground bg-primary rounded-full">
+              <span className="px-3 py-1 text-base font-semibold text-primary-foreground bg-primary rounded-full">
                 {count}
               </span>
             )}
           </div>
           {subtitle && (
-            <p className="text-sm text-muted-foreground mt-1 font-medium">
+            <p className="text-base text-muted-foreground mt-1 font-medium">
               {subtitle}
             </p>
           )}

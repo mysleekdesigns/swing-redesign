@@ -49,20 +49,20 @@ export function HotDateCard({
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
           
           {/* Category badge - hidden on small mobile screens */}
-          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold border max-[468px]:hidden ${categoryColors[category]}`}>
+          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold border max-[468px]:hidden ${categoryColors[category]}`}>
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </div>
           
           {/* Attendee count */}
           <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full glass-dark border border-white/10">
             <Users className="w-3 h-3 text-white" />
-            <span className="text-xs font-medium text-white">{attendeeCount}</span>
+            <span className="text-sm font-medium text-white">{attendeeCount}</span>
           </div>
           
           {/* Content overlay - reduced padding on small screens */}
           <div className="absolute bottom-0 left-0 right-0 p-4 max-[468px]:p-3">
             <h3 className="text-lg font-bold text-white mb-2 max-[468px]:mb-1 line-clamp-2">{title}</h3>
-            <div className="flex items-center gap-4 text-sm text-white/80">
+            <div className="flex items-center gap-4 text-base text-white/80">
               <div className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 <span>{formatDate(date)}</span>
@@ -91,7 +91,7 @@ export function HotDateCard({
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
         
         {/* Category badge */}
-        <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold border backdrop-blur-sm ${categoryColors[category]}`}>
+        <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm sm:text-base font-semibold border backdrop-blur-sm ${categoryColors[category]}`}>
           {category.charAt(0).toUpperCase() + category.slice(1)}
         </div>
         
@@ -99,7 +99,7 @@ export function HotDateCard({
         {price && (
           <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-white/10">
             <DollarSign className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-primary" />
-            <span className="text-xs sm:text-sm font-semibold text-white">{price.replace('$', '')}</span>
+            <span className="text-sm sm:text-base font-semibold text-white">{price.replace('$', '')}</span>
           </div>
         )}
         
@@ -111,11 +111,11 @@ export function HotDateCard({
             </h3>
             
             {/* Description - visible on larger screens */}
-            <p className="text-xs sm:text-sm text-white/80 line-clamp-2 hidden sm:block">
+            <p className="text-sm sm:text-base text-white/80 line-clamp-2 hidden sm:block">
               {description}
             </p>
             
-            <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm text-white/90">
+            <div className="flex flex-wrap gap-2 sm:gap-3 text-sm sm:text-base text-white/90">
               <div className="flex items-center gap-1 sm:gap-1.5">
                 <Calendar className="w-3 sm:w-4 h-3 sm:h-4 text-primary flex-shrink-0" />
                 <span className="font-medium">{formatDate(date)}</span>
@@ -133,12 +133,12 @@ export function HotDateCard({
             <div className="flex items-center justify-between pt-1 sm:pt-2">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <Users className="w-3 sm:w-4 h-3 sm:h-4 text-white/60 flex-shrink-0" />
-                <span className="text-xs sm:text-sm text-white/80">
+                <span className="text-sm sm:text-base text-white/80">
                   {attendeeCount} {attendeeCount === 1 ? 'person' : 'people'} going
                 </span>
               </div>
               
-              <button className="px-3 sm:px-4 py-2 sm:py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold text-xs sm:text-sm transition-colors min-h-[44px] min-w-[80px] flex items-center justify-center">
+              <button className="px-3 sm:px-4 py-2 sm:py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold text-sm sm:text-base transition-colors min-h-[44px] min-w-[80px] flex items-center justify-center">
                 Join Event
               </button>
             </div>

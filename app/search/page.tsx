@@ -129,11 +129,11 @@ export default function SearchPage() {
                 {/* Quick Filters */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-semibold text-gray-900 dark:text-foreground">Quick Filters</h3>
+                    <h3 className="text-base font-semibold text-gray-900 dark:text-foreground">Quick Filters</h3>
                     {totalActiveFilters > 0 && (
                       <button
                         onClick={clearAllFilters}
-                        className="text-xs text-gray-600 hover:text-gray-900 dark:text-muted-foreground dark:hover:text-foreground transition-colors"
+                        className="text-sm text-gray-600 hover:text-gray-900 dark:text-muted-foreground dark:hover:text-foreground transition-colors"
                       >
                         Clear all ({totalActiveFilters})
                       </button>
@@ -191,7 +191,7 @@ export default function SearchPage() {
                     "focus:outline-none focus:ring-2 focus:ring-primary/20"
                   )}
                 >
-                  <span className="text-sm font-medium text-gray-900 dark:text-foreground">
+                  <span className="text-base font-medium text-gray-900 dark:text-foreground">
                     Sort: {sortOptions.find(opt => opt.value === sortBy)?.label}
                   </span>
                   <ChevronDown className={cn(
@@ -216,7 +216,7 @@ export default function SearchPage() {
                           setShowSortDropdown(false);
                         }}
                         className={cn(
-                          "w-full px-4 py-2 text-left text-sm transition-colors",
+                          "w-full px-4 py-2 text-left text-base transition-colors",
                           // Light mode: Strong hover contrast
                           "hover:bg-gray-100 text-gray-900",
                           // Dark mode: Keep existing effects
@@ -288,7 +288,7 @@ export default function SearchPage() {
                   {(query || totalActiveFilters > 0) && (
                     <button
                       onClick={clearAllFilters}
-                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-base font-medium text-primary hover:text-primary/80 transition-colors"
                     >
                       <X className="w-4 h-4" />
                       Clear all filters

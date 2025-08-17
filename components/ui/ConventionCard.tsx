@@ -48,20 +48,20 @@ export function ConventionCard({
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
           
           {/* Category badge */}
-          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold border ${categoryColors[category]}`}>
+          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-sm font-semibold border ${categoryColors[category]}`}>
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </div>
           
           {/* Attendee count */}
           <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full glass-dark border border-white/10">
             <Users className="w-3 h-3 text-white" />
-            <span className="text-xs font-medium text-white">{attendeeCount}</span>
+            <span className="text-sm font-medium text-white">{attendeeCount}</span>
           </div>
           
           {/* Content overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-4">
             <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{name}</h3>
-            <div className="flex items-center gap-4 text-sm text-white/80">
+            <div className="flex items-center gap-4 text-base text-white/80">
               <div className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 <span>{formatDate(date)}</span>
@@ -86,7 +86,7 @@ export function ConventionCard({
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
         
         {/* Category badge */}
-        <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-sm font-semibold border backdrop-blur-sm ${categoryColors[category]}`}>
+        <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-base font-semibold border backdrop-blur-sm ${categoryColors[category]}`}>
           {category.charAt(0).toUpperCase() + category.slice(1)}
         </div>
         
@@ -94,7 +94,7 @@ export function ConventionCard({
         {price && (
           <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 rounded-full glass-dark border border-white/10">
             <DollarSign className="w-3.5 h-3.5 text-primary" />
-            <span className="text-sm font-semibold text-white">{price.replace('$', '')}</span>
+            <span className="text-base font-semibold text-white">{price.replace('$', '')}</span>
           </div>
         )}
         
@@ -105,11 +105,11 @@ export function ConventionCard({
               {name}
             </h3>
             
-            <p className="text-sm text-white/80 line-clamp-2">
+            <p className="text-base text-white/80 line-clamp-2">
               {description}
             </p>
             
-            <div className="flex flex-wrap gap-3 text-sm text-white/90">
+            <div className="flex flex-wrap gap-3 text-base text-white/90">
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4 text-primary" />
                 <span className="font-medium">{formatDate(date)}</span>
@@ -123,12 +123,12 @@ export function ConventionCard({
             <div className="flex items-center justify-between pt-2">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-white/60" />
-                <span className="text-sm text-white/80">
+                <span className="text-base text-white/80">
                   {attendeeCount} {attendeeCount === 1 ? 'person' : 'people'} attending
                 </span>
               </div>
               
-              <button className="px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold text-sm transition-colors">
+              <button className="px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold text-base transition-colors">
                 Event Details
               </button>
             </div>
