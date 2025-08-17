@@ -179,7 +179,7 @@ export function Footer() {
                         <li key={link.label}>
                           <Link
                             href={link.href}
-                            className="flex items-center gap-2 text-xs text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
+                            className="flex items-center gap-2 text-[15px] text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
                           >
                             {link.icon && (
                               <link.icon className="w-3 h-3 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -205,7 +205,7 @@ export function Footer() {
                         <li key={link.label}>
                           <Link
                             href={link.href}
-                            className="flex items-center gap-2 text-xs text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
+                            className="flex items-center gap-2 text-[15px] text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
                           >
                             {link.icon && (
                               <link.icon className="w-3 h-3 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -231,7 +231,7 @@ export function Footer() {
                         <li key={link.label}>
                           <Link
                             href={link.href}
-                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
+                            className="flex items-center gap-2 text-[15px] text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
                           >
                             {link.icon && (
                               <link.icon className="w-4 h-4 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
