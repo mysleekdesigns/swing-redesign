@@ -85,8 +85,8 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
         onClick={onToggle}
         className={cn(
           "w-full flex items-center justify-between p-4 rounded-xl transition-all duration-300",
-          // Light mode: White background with border matching search input
-          "bg-white border border-border hover:bg-white/95",
+          // Light mode: Use muted background for better contrast
+          "bg-muted border border-border/60 hover:bg-muted/80",
           // Dark mode: Keep existing glass effect
           "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10 dark:hover:border-white/20",
           "focus:outline-none focus:ring-2 focus:ring-primary/20"
@@ -116,12 +116,11 @@ export function AdvancedFilters({ isOpen, onToggle, className }: AdvancedFilters
       )}>
         <div className={cn(
           "p-6 rounded-xl",
-          // Updated to match search input field styling exactly
-          "bg-white border border-border text-foreground",
+          // Light mode: Use card background for better contrast
+          "bg-card border border-border/60 shadow-sm",
           // Dark mode: Keep existing glass effect
           "dark:backdrop-blur-[20px] dark:bg-white/5 dark:border-white/10",
-          "dark:shadow-[0_0_30px_oklch(0.75_0.23_85_/_5%)]",
-          "transition-all duration-200"
+          "dark:shadow-[0_0_30px_oklch(0.75_0.23_85_/_5%)]"
         )}>
           
 
