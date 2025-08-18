@@ -211,8 +211,8 @@ export default function Home() {
               count={hotDates.length}
               variant="glass"
             />
-            {/* Grid layout: responsive from 1 to 4 columns for full-width display */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Grid layout: 1 column on mobile, 2 columns from medium screens (768px) to 1988px, 4 columns above 1989px */}
+            <div className="grid grid-cols-1 md:grid-cols-2 min-[1989px]:grid-cols-4 gap-6">
               {displayedEvents.map((event) => (
                 <HotDateCard key={event.id} {...event} />
               ))}

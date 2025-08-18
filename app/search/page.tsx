@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Search, X, ChevronDown } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/ui/Footer";
@@ -30,6 +30,37 @@ export default function SearchPage() {
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [sortBy, setSortBy] = useState('distance');
   const [showSortDropdown, setShowSortDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
+  
+  const sortButtonRef = useRef<HTMLButtonElement>(null);
+  
+  // Calculate dropdown position when it opens
+  useEffect(() => {
+    if (showSortDropdown && sortButtonRef.current) {
+      const rect = sortButtonRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY + 8, // 8px margin
+        right: window.innerWidth - rect.right // Align to right edge
+      });
+    }
+  }, [showSortDropdown]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortButtonRef.current && !sortButtonRef.current.contains(event.target as Node)) {
+        const dropdown = document.getElementById('sort-dropdown');
+        if (dropdown && !dropdown.contains(event.target as Node)) {
+          setShowSortDropdown(false);
+        }
+      }
+    };
+
+    if (showSortDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showSortDropdown]);
   
   const filteredUsers = useMemo(() => {
     return whoIsOnUsers.filter(user => {
@@ -151,9 +182,10 @@ export default function SearchPage() {
                   </h2>
                 </div>
                 
-                {/* Sort Dropdown - Consistent styling */}
+                {/* Sort Dropdown - FIXED POSITIONING TO ESCAPE STACKING CONTEXTS */}
                 <div className="relative">
                   <button
+                    ref={sortButtonRef}
                     onClick={() => setShowSortDropdown(!showSortDropdown)}
                     className="flex items-center gap-2 px-4 py-4 rounded-xl bg-white border border-border hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
                   >
@@ -165,26 +197,6 @@ export default function SearchPage() {
                       showSortDropdown && "rotate-180"
                     )} />
                   </button>
-                  
-                  {showSortDropdown && (
-                    <div className="absolute right-0 top-full mt-2 w-48 py-2 rounded-xl shadow-xl z-50 bg-white border border-border">
-                      {sortOptions.map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => {
-                            setSortBy(option.value);
-                            setShowSortDropdown(false);
-                          }}
-                          className={cn(
-                            "w-full px-4 py-2 text-left text-base transition-colors hover:bg-accent hover:text-accent-foreground",
-                            sortBy === option.value && "bg-primary/20 text-primary font-medium"
-                          )}
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -251,6 +263,34 @@ export default function SearchPage() {
         {/* Footer */}
         <Footer />
       </main>
+
+      {/* DROPDOWN PORTAL - RENDERS AT DOCUMENT LEVEL TO ESCAPE ALL STACKING CONTEXTS */}
+      {showSortDropdown && (
+        <div
+          id="sort-dropdown"
+          className="fixed w-48 py-2 rounded-xl shadow-xl bg-white border border-border z-[999999]"
+          style={{
+            top: dropdownPosition.top,
+            right: dropdownPosition.right,
+          }}
+        >
+          {sortOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => {
+                setSortBy(option.value);
+                setShowSortDropdown(false);
+              }}
+              className={cn(
+                "w-full px-4 py-2 text-left text-base transition-colors hover:bg-accent hover:text-accent-foreground",
+                sortBy === option.value && "bg-primary/20 text-primary font-medium"
+              )}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
