@@ -597,8 +597,8 @@ export interface LifestylePreferences {
   couples: number; // 0-100 percentage
   females: number; // 0-100 percentage
   males: number; // 0-100 percentage
-  smoke: "Definitely" | "Maybe" | "Don't care" | "No Way";
-  drink: "Definitely" | "Maybe" | "Don't care" | "No Way";
+  smoke: "Definitely" | "Maybe" | "Dont Care" | "No Way";
+  drink: "Definitely" | "Maybe" | "Dont Care" | "No Way";
   age: string; // Age range like "30 - 45"
 }
 
@@ -701,14 +701,14 @@ export const currentUserProfile: UserProfile = {
   ],
   lifestylePreferences: {
     watch: 100,
-    soft: 80,
-    full: 60,
-    couples: 20,
+    soft: 100,
+    full: 100,
+    couples: 100,
     females: 100,
-    males: 0,
-    smoke: "Don't care",
-    drink: "Don't care",
-    age: "3-45"
+    males: 20,
+    smoke: "Dont Care",
+    drink: "Dont Care",
+    age: "30 - 45"
   },
   recentActivity: [
     {
