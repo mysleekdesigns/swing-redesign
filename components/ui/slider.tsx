@@ -111,22 +111,34 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               "[&::-webkit-slider-thumb]:h-5",
               "[&::-webkit-slider-thumb]:w-5",
               "[&::-webkit-slider-thumb]:rounded-full",
-              "[&::-webkit-slider-thumb]:bg-background",
+              "[&::-webkit-slider-thumb]:bg-primary",
               "[&::-webkit-slider-thumb]:border-2",
               "[&::-webkit-slider-thumb]:border-primary",
               "[&::-webkit-slider-thumb]:cursor-pointer",
               "[&::-webkit-slider-thumb]:shadow-md",
               "[&::-webkit-slider-thumb]:mt-1",
+              "[&::-webkit-slider-thumb]:transition-all",
+              "[&::-webkit-slider-thumb]:hover:scale-110",
+              "[&::-webkit-slider-thumb]:focus-visible:outline-none",
+              "[&::-webkit-slider-thumb]:focus-visible:ring-2",
+              "[&::-webkit-slider-thumb]:focus-visible:ring-ring",
+              "[&::-webkit-slider-thumb]:focus-visible:ring-offset-2",
               "[&::-moz-range-thumb]:pointer-events-auto",
               "[&::-moz-range-thumb]:appearance-none",
               "[&::-moz-range-thumb]:h-5",
               "[&::-moz-range-thumb]:w-5",
               "[&::-moz-range-thumb]:rounded-full",
-              "[&::-moz-range-thumb]:bg-background",
+              "[&::-moz-range-thumb]:bg-primary",
               "[&::-moz-range-thumb]:border-2",
               "[&::-moz-range-thumb]:border-primary",
               "[&::-moz-range-thumb]:cursor-pointer",
               "[&::-moz-range-thumb]:shadow-md",
+              "[&::-moz-range-thumb]:transition-all",
+              "[&::-moz-range-thumb]:hover:scale-110",
+              "[&::-moz-range-thumb]:focus-visible:outline-none",
+              "[&::-moz-range-thumb]:focus-visible:ring-2",
+              "[&::-moz-range-thumb]:focus-visible:ring-ring",
+              "[&::-moz-range-thumb]:focus-visible:ring-offset-2",
               "z-[3]",
               minVal > max - 100 && "z-[5]"
             )}
@@ -160,22 +172,34 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               "[&::-webkit-slider-thumb]:h-5",
               "[&::-webkit-slider-thumb]:w-5",
               "[&::-webkit-slider-thumb]:rounded-full",
-              "[&::-webkit-slider-thumb]:bg-background",
+              "[&::-webkit-slider-thumb]:bg-primary",
               "[&::-webkit-slider-thumb]:border-2",
               "[&::-webkit-slider-thumb]:border-primary",
               "[&::-webkit-slider-thumb]:cursor-pointer",
               "[&::-webkit-slider-thumb]:shadow-md",
               "[&::-webkit-slider-thumb]:mt-1",
+              "[&::-webkit-slider-thumb]:transition-all",
+              "[&::-webkit-slider-thumb]:hover:scale-110",
+              "[&::-webkit-slider-thumb]:focus-visible:outline-none",
+              "[&::-webkit-slider-thumb]:focus-visible:ring-2",
+              "[&::-webkit-slider-thumb]:focus-visible:ring-ring",
+              "[&::-webkit-slider-thumb]:focus-visible:ring-offset-2",
               "[&::-moz-range-thumb]:pointer-events-auto",
               "[&::-moz-range-thumb]:appearance-none",
               "[&::-moz-range-thumb]:h-5",
               "[&::-moz-range-thumb]:w-5",
               "[&::-moz-range-thumb]:rounded-full",
-              "[&::-moz-range-thumb]:bg-background",
+              "[&::-moz-range-thumb]:bg-primary",
               "[&::-moz-range-thumb]:border-2",
               "[&::-moz-range-thumb]:border-primary",
               "[&::-moz-range-thumb]:cursor-pointer",
               "[&::-moz-range-thumb]:shadow-md",
+              "[&::-moz-range-thumb]:transition-all",
+              "[&::-moz-range-thumb]:hover:scale-110",
+              "[&::-moz-range-thumb]:focus-visible:outline-none",
+              "[&::-moz-range-thumb]:focus-visible:ring-2",
+              "[&::-moz-range-thumb]:focus-visible:ring-ring",
+              "[&::-moz-range-thumb]:focus-visible:ring-offset-2",
               "z-[4]"
             )}
             disabled={disabled}
@@ -184,12 +208,12 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           {/* Slider track */}
           <div className="relative h-2 mt-2">
             {/* Track background */}
-            <div className="absolute w-full h-2 rounded-full bg-secondary" />
+            <div className="absolute w-full h-2 rounded-full bg-muted" />
             
             {/* Track progress (colored range) */}
             <div
               ref={range}
-              className="absolute h-2 rounded-full bg-primary"
+              className="absolute h-2 rounded-full bg-primary transition-all"
             />
           </div>
         </div>

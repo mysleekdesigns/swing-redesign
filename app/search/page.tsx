@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
+import { useDebouncedCallback } from "use-debounce";
 
 // Filter options
 const orientationOptions = [
@@ -630,14 +631,26 @@ export default function SearchPage() {
   );
 
   // Filter Sections Component (Version 2 - Modern Tabbed Interface)
-  const FilterSectionsV2 = () => (
-    <div className="space-y-6">
-      <Tabs defaultValue="basic" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-6">
-          <TabsTrigger value="basic">Basic</TabsTrigger>
-          <TabsTrigger value="preferences">Preferences</TabsTrigger>
-          <TabsTrigger value="location">Location</TabsTrigger>
-        </TabsList>
+  const FilterSectionsV2 = () => {
+    // Local state for immediate slider feedback
+    const [localAgeRange, setLocalAgeRange] = useState<[number, number]>([parseInt(ageRange.low), parseInt(ageRange.high)]);
+    
+    // Debounced callback to update actual filter state
+    const debouncedAgeUpdate = useDebouncedCallback(
+      (value: [number, number]) => {
+        setAgeRange({ low: value[0].toString(), high: value[1].toString() });
+      },
+      300 // Wait 300ms after user stops sliding
+    );
+    
+    return (
+      <div className="space-y-6">
+        <Tabs defaultValue="basic" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="preferences">Preferences</TabsTrigger>
+            <TabsTrigger value="location">Location</TabsTrigger>
+          </TabsList>
         
         <TabsContent value="basic" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -733,14 +746,17 @@ export default function SearchPage() {
                     min={18}
                     max={100}
                     step={1}
-                    value={[parseInt(ageRange.low), parseInt(ageRange.high)]}
-                    onValueChange={(value) => setAgeRange({ low: value[0].toString(), high: value[1].toString() })}
+                    value={localAgeRange}
+                    onValueChange={(value) => {
+                      setLocalAgeRange(value); // Immediate UI update
+                      debouncedAgeUpdate(value); // Delayed filter update
+                    }}
                     className="w-full"
                   />
                 </div>
                 <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Min: {ageRange.low} years</span>
-                  <span>Max: {ageRange.high} years</span>
+                  <span>Min: {localAgeRange[0]} years</span>
+                  <span>Max: {localAgeRange[1]} years</span>
                 </div>
               </div>
             </div>
@@ -920,23 +936,24 @@ export default function SearchPage() {
       {/* Active Filters Display */}
       <ActiveFilters />
       
-      {/* Action Buttons */}
-      <div className="flex justify-center gap-4 pt-4">
-        <button
-          onClick={clearAllFilters}
-          className="px-6 py-3 border-2 border-border hover:border-primary/50 text-foreground font-semibold rounded-xl transition-all hover:scale-105"
-        >
-          Clear Filters
-        </button>
-        <button
-          onClick={updateResults}
-          className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
-        >
-          Update Results
-        </button>
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-4 pt-4">
+          <button
+            onClick={clearAllFilters}
+            className="px-6 py-3 border-2 border-border hover:border-primary/50 text-foreground font-semibold rounded-xl transition-all hover:scale-105"
+          >
+            Clear Filters
+          </button>
+          <button
+            onClick={updateResults}
+            className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
+          >
+            Update Results
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background">
