@@ -17,6 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Slider } from "@/components/ui/slider";
 
 // Filter options
 const orientationOptions = [
@@ -74,6 +76,7 @@ export default function SearchPage() {
   const [sortBy, setSortBy] = useState('distance');
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
+  const [formVersion, setFormVersion] = useState<'v1' | 'v2'>('v1');
   
   const sortButtonRef = useRef<HTMLButtonElement>(null);
   
@@ -205,7 +208,68 @@ export default function SearchPage() {
     // For now, the filtering happens automatically via useMemo
   };
 
-  // Filter Sections Component
+  // Active Filters Display Component
+  const ActiveFilters = () => {
+    const activeFilters = [];
+    
+    // Collect active filters
+    if (relationshipType.couple) activeFilters.push({ label: "Couple", key: "couple" });
+    if (relationshipType.males) activeFilters.push({ label: "Males", key: "males" });
+    if (relationshipType.females) activeFilters.push({ label: "Females", key: "females" });
+    if (showOnlyFilters.havePics) activeFilters.push({ label: "Have Pics", key: "havePics" });
+    if (showOnlyFilters.certified) activeFilters.push({ label: "Certified", key: "certified" });
+    if (showOnlyFilters.paid) activeFilters.push({ label: "Paid", key: "paid" });
+    if (showOnlyFilters.watch) activeFilters.push({ label: "Watch", key: "watch" });
+    if (showOnlyFilters.soft) activeFilters.push({ label: "Soft", key: "soft" });
+    if (showOnlyFilters.full) activeFilters.push({ label: "Full", key: "full" });
+    if (smoke !== 'any') activeFilters.push({ label: `Smoke: ${smoke}`, key: "smoke" });
+    if (drink !== 'any') activeFilters.push({ label: `Drink: ${drink}`, key: "drink" });
+    if (locationSearch) activeFilters.push({ label: locationSearch, key: "location" });
+    if (memberSearch) activeFilters.push({ label: memberSearch, key: "member" });
+    
+    if (activeFilters.length === 0) return null;
+    
+    return (
+      <div className="flex flex-wrap gap-2 mt-4">
+        {activeFilters.map((filter) => (
+          <button
+            key={filter.key}
+            className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm hover:bg-primary/20 transition-colors"
+            onClick={() => {
+              // Handle removing individual filters
+              switch(filter.key) {
+                case 'couple': setRelationshipType(prev => ({ ...prev, couple: false })); break;
+                case 'males': setRelationshipType(prev => ({ ...prev, males: false })); break;
+                case 'females': setRelationshipType(prev => ({ ...prev, females: false })); break;
+                case 'havePics': setShowOnlyFilters(prev => ({ ...prev, havePics: false })); break;
+                case 'certified': setShowOnlyFilters(prev => ({ ...prev, certified: false })); break;
+                case 'paid': setShowOnlyFilters(prev => ({ ...prev, paid: false })); break;
+                case 'watch': setShowOnlyFilters(prev => ({ ...prev, watch: false })); break;
+                case 'soft': setShowOnlyFilters(prev => ({ ...prev, soft: false })); break;
+                case 'full': setShowOnlyFilters(prev => ({ ...prev, full: false })); break;
+                case 'smoke': setSmoke('any'); break;
+                case 'drink': setDrink('any'); break;
+                case 'location': setLocationSearch(''); break;
+                case 'member': setMemberSearch(''); break;
+              }
+            }}
+          >
+            {filter.label}
+            <X className="w-3 h-3" />
+          </button>
+        ))}
+        <button
+          onClick={clearAllFilters}
+          className="inline-flex items-center gap-1 px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm hover:bg-muted/80 transition-colors"
+        >
+          Clear All
+          <X className="w-3 h-3" />
+        </button>
+      </div>
+    );
+  };
+
+  // Filter Sections Component (Version 1)
   const FilterSections = () => (
     <div className="space-y-6">
       {/* Main Filter Grid - Optimized for cohesive layout */}
@@ -565,6 +629,315 @@ export default function SearchPage() {
     </div>
   );
 
+  // Filter Sections Component (Version 2 - Modern Tabbed Interface)
+  const FilterSectionsV2 = () => (
+    <div className="space-y-6">
+      <Tabs defaultValue="basic" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsTrigger value="basic">Basic</TabsTrigger>
+          <TabsTrigger value="preferences">Preferences</TabsTrigger>
+          <TabsTrigger value="location">Location</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="basic" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Relationship Section */}
+            <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Looking For</h3>
+              <div className="space-y-4">
+                <div className="space-y-3">
+                  <Label className="text-base">Relationship Type</Label>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={() => setRelationshipType(prev => ({ ...prev, couple: !prev.couple }))}
+                      className={cn(
+                        "px-4 py-2 rounded-lg border-2 transition-all",
+                        relationshipType.couple 
+                          ? "border-primary bg-primary/10 text-primary" 
+                          : "border-border hover:border-primary/50"
+                      )}
+                    >
+                      Couples
+                    </button>
+                    <button
+                      onClick={() => setRelationshipType(prev => ({ ...prev, males: !prev.males }))}
+                      className={cn(
+                        "px-4 py-2 rounded-lg border-2 transition-all",
+                        relationshipType.males 
+                          ? "border-primary bg-primary/10 text-primary" 
+                          : "border-border hover:border-primary/50"
+                      )}
+                    >
+                      Males
+                    </button>
+                    <button
+                      onClick={() => setRelationshipType(prev => ({ ...prev, females: !prev.females }))}
+                      className={cn(
+                        "px-4 py-2 rounded-lg border-2 transition-all",
+                        relationshipType.females 
+                          ? "border-primary bg-primary/10 text-primary" 
+                          : "border-border hover:border-primary/50"
+                      )}
+                    >
+                      Females
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Orientation Filters */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Male Orientation</Label>
+                    <Select value={maleOrientation} onValueChange={setMaleOrientation}>
+                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                        <SelectValue>
+                          {orientationOptions.find(opt => opt.value === maleOrientation)?.label}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {orientationOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Female Orientation</Label>
+                    <Select value={femaleOrientation} onValueChange={setFemaleOrientation}>
+                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                        <SelectValue>
+                          {orientationOptions.find(opt => opt.value === femaleOrientation)?.label}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {orientationOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Age Range with Slider */}
+            <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Age Range</h3>
+              <div className="space-y-6">
+                <div className="px-3">
+                  <Slider
+                    min={18}
+                    max={100}
+                    step={1}
+                    value={[parseInt(ageRange.low), parseInt(ageRange.high)]}
+                    onValueChange={(value) => setAgeRange({ low: value[0].toString(), high: value[1].toString() })}
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Min: {ageRange.low} years</span>
+                  <span>Max: {ageRange.high} years</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="preferences" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Show Only Filters */}
+            <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Show Only</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { id: 'havePics', label: 'Have Pictures' },
+                  { id: 'certified', label: 'Certified' },
+                  { id: 'paid', label: 'Paid Members' },
+                  { id: 'watch', label: 'Watch' },
+                  { id: 'soft', label: 'Soft Swap' },
+                  { id: 'full', label: 'Full Swap' }
+                ].map((filter) => (
+                  <button
+                    key={filter.id}
+                    onClick={() => setShowOnlyFilters(prev => ({ 
+                      ...prev, 
+                      [filter.id]: !prev[filter.id as keyof typeof showOnlyFilters] 
+                    }))}
+                    className={cn(
+                      "px-3 py-2 rounded-lg border-2 text-sm transition-all text-left",
+                      showOnlyFilters[filter.id as keyof typeof showOnlyFilters]
+                        ? "border-primary bg-primary/10 text-primary" 
+                        : "border-border hover:border-primary/50"
+                    )}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Lifestyle & Activity */}
+            <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Lifestyle & Activity</h3>
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Smoke</Label>
+                    <Select value={smoke} onValueChange={setSmoke}>
+                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                        <SelectValue>
+                          {smokeOptions.find(opt => opt.value === smoke)?.label}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {smokeOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Drink</Label>
+                    <Select value={drink} onValueChange={setDrink}>
+                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                        <SelectValue>
+                          {drinkOptions.find(opt => opt.value === drink)?.label}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {drinkOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Last Online</Label>
+                    <Select value={lastOnline} onValueChange={setLastOnline}>
+                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                        <SelectValue>
+                          {lastOnlineOptions.find(opt => opt.value === lastOnline)?.label}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {lastOnlineOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">Member Type</Label>
+                    <Select value={memberType} onValueChange={setMemberType}>
+                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                        <SelectValue>
+                          {memberTypeOptions.find(opt => opt.value === memberType)?.label}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {memberTypeOptions.map(option => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="location" className="space-y-6">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+            <h3 className="text-lg font-semibold text-foreground mb-4">Location & Search</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-base">City or Postal Code</Label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Enter location..."
+                      value={locationSearch}
+                      onChange={(e) => setLocationSearch(e.target.value)}
+                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-base">Distance</Label>
+                  <Select value={distance} onValueChange={setDistance}>
+                    <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                      <SelectValue>
+                        {distanceOptions.find(opt => opt.value === distance)?.label}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {distanceOptions.map(option => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-base">Profile Name</Label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Search by username..."
+                      value={memberSearch}
+                      onChange={(e) => setMemberSearch(e.target.value)}
+                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
+      
+      {/* Active Filters Display */}
+      <ActiveFilters />
+      
+      {/* Action Buttons */}
+      <div className="flex justify-center gap-4 pt-4">
+        <button
+          onClick={clearAllFilters}
+          className="px-6 py-3 border-2 border-border hover:border-primary/50 text-foreground font-semibold rounded-xl transition-all hover:scale-105"
+        >
+          Clear Filters
+        </button>
+        <button
+          onClick={updateResults}
+          className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
+        >
+          Update Results
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
@@ -589,17 +962,71 @@ export default function SearchPage() {
             {/* Desktop Filters */}
             <div className="hidden lg:block">
               <div className="section-glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-                <FilterSections />
+                {/* Version Switcher */}
+                <div className="flex justify-center gap-2 mb-6">
+                  <button
+                    onClick={() => setFormVersion('v1')}
+                    className={cn(
+                      "px-6 py-2 rounded-lg font-medium transition-all",
+                      formVersion === 'v1' 
+                        ? "bg-primary text-primary-foreground shadow-lg" 
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    )}
+                  >
+                    Version 1
+                  </button>
+                  <button
+                    onClick={() => setFormVersion('v2')}
+                    className={cn(
+                      "px-6 py-2 rounded-lg font-medium transition-all",
+                      formVersion === 'v2' 
+                        ? "bg-primary text-primary-foreground shadow-lg" 
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    )}
+                  >
+                    Version 2
+                  </button>
+                </div>
+                
+                {/* Render the appropriate form version */}
+                {formVersion === 'v1' ? <FilterSections /> : <FilterSectionsV2 />}
               </div>
             </div>
             
             {/* Mobile Filters - Collapsible */}
             <div className={cn(
               "lg:hidden overflow-hidden transition-all duration-300",
-              showMobileFilters ? "max-h-[2000px]" : "max-h-0"
+              showMobileFilters ? "max-h-[3000px]" : "max-h-0"
             )}>
               <div className="section-glass rounded-2xl p-4 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-                <FilterSections />
+                {/* Version Switcher for Mobile */}
+                <div className="flex justify-center gap-2 mb-4">
+                  <button
+                    onClick={() => setFormVersion('v1')}
+                    className={cn(
+                      "px-4 py-2 rounded-lg font-medium text-sm transition-all",
+                      formVersion === 'v1' 
+                        ? "bg-primary text-primary-foreground shadow-lg" 
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    )}
+                  >
+                    Version 1
+                  </button>
+                  <button
+                    onClick={() => setFormVersion('v2')}
+                    className={cn(
+                      "px-4 py-2 rounded-lg font-medium text-sm transition-all",
+                      formVersion === 'v2' 
+                        ? "bg-primary text-primary-foreground shadow-lg" 
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    )}
+                  >
+                    Version 2
+                  </button>
+                </div>
+                
+                {/* Render the appropriate form version */}
+                {formVersion === 'v1' ? <FilterSections /> : <FilterSectionsV2 />}
               </div>
             </div>
           </section>

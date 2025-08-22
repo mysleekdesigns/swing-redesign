@@ -27,7 +27,7 @@ This is a Next.js 15 application using the App Router with the following key cha
 
 - **Framework**: Next.js 15.4.5 with React 19
 - **Styling**: Tailwind CSS v4 with CSS variables and OKLCH color space
-- **UI Components**: shadcn/ui components (New York style) with Radix UI primitives
+- **UI Components**: shadcn/ui style components (New York style) WITHOUT Radix UI dependencies - custom implementations
 - **Type Safety**: TypeScript with strict mode enabled
 - **Font System**: Geist font family with automatic optimization
 
@@ -37,7 +37,7 @@ This is a Next.js 15 application using the App Router with the following key cha
   - `profile/page.tsx` - User profile page
   - `search/page.tsx` - Search functionality
 - `/components` - Reusable components
-  - `/ui` - shadcn/ui components (button, carousel, dropdown-menu, theme-toggle, ConventionCard, HotDateCard, UserCard, FilterPill, AdvancedFilters, photo-gallery-modal, Footer, SectionHeader)
+  - `/ui` - shadcn/ui style components WITHOUT Radix (button, carousel, dropdown-menu, theme-toggle, ConventionCard, HotDateCard, UserCard, FilterPill, AdvancedFilters, photo-gallery-modal, Footer, SectionHeader, checkbox, input, label, select, separator)
   - `/layout` - Layout components (Sidebar)
   - `providers.tsx` - Context providers wrapper
 - `/lib` - Utility functions and context
@@ -73,15 +73,16 @@ This is a Next.js 15 application using the App Router with the following key cha
 - Extends Next.js core-web-vitals and TypeScript rules
 - Uses FlatCompat for ESLint configuration
 
-### shadcn/ui Config
-- Style: New York
+### UI Components Config
+- shadcn/ui Style: New York
 - Base color: Neutral
 - CSS variables enabled
 - Icon library: Lucide React
+- IMPORTANT: NO Radix UI dependencies - all components are custom implementations following shadcn/ui patterns
 
 ## Key Dependencies
 
-- **UI Libraries**: Radix UI (dropdown-menu, slot), Lucide React (icons), Class Variance Authority (component variants), Embla Carousel
+- **UI Libraries**: Lucide React (icons), Class Variance Authority (component variants), Embla Carousel - NO Radix UI
 - **Styling**: Tailwind Merge, clsx for className utilities, tw-animate-css for animations
 - **Development**: ESLint with Next.js rules, PostCSS with Tailwind
 
