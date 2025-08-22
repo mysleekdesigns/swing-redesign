@@ -551,13 +551,13 @@ export default function SearchPage() {
       
       {/* Main Content */}
       <main className="2xl:ml-64 2xl:pt-4 p-4 sm:p-6 lg:p-8">
-        <div className="w-full space-y-8">
+        <div className="w-full space-y-4 sm:space-y-6 lg:space-y-8">
           
           {/* Mobile Filter Toggle */}
           <div className="lg:hidden">
             <button
               onClick={() => setShowMobileFilters(!showMobileFilters)}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-xl font-medium transition-all"
+              className="w-full flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-semibold transition-all"
             >
               <SlidersHorizontal className="w-5 h-5" />
               <span>Open Search Form</span>
@@ -641,10 +641,10 @@ export default function SearchPage() {
               ))}
             </div>
 
-            {/* Load More Button - Consistent with home page styling */}
+            {/* Load More Button - Full width on mobile */}
             {filteredUsers.length > 0 && (
-              <div className="text-center pt-8">
-                <button className="px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-xl font-semibold transition-all hover:scale-105">
+              <div className="pt-4 sm:pt-6 lg:pt-8">
+                <button className="w-full sm:w-auto sm:mx-auto sm:block px-8 py-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-semibold transition-all hover:scale-105">
                   Load More Members
                 </button>
               </div>
