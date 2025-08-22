@@ -29,147 +29,167 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     disabled = false,
     ...props 
   }, ref) => {
-    const [uncontrolledValue, setUncontrolledValue] = React.useState<[number, number]>(defaultValue);
-    const value = controlledValue ?? uncontrolledValue;
-    const [activeThumb, setActiveThumb] = React.useState<number | null>(null);
-    const trackRef = React.useRef<HTMLDivElement>(null);
+    // Use controlled values directly if provided, otherwise use internal state
+    const isControlled = controlledValue !== undefined;
+    const [internalMinVal, setInternalMinVal] = React.useState(defaultValue[0]);
+    const [internalMaxVal, setInternalMaxVal] = React.useState(defaultValue[1]);
     
-    const handleValueChange = React.useCallback((newValue: [number, number]) => {
-      const clampedValue: [number, number] = [
-        Math.max(min, Math.min(newValue[0], newValue[1])),
-        Math.min(max, Math.max(newValue[0], newValue[1]))
-      ];
-      
-      if (!controlledValue) {
-        setUncontrolledValue(clampedValue);
+    // Use controlled values if provided, otherwise use internal state
+    const minVal = isControlled ? controlledValue[0] : internalMinVal;
+    const maxVal = isControlled ? controlledValue[1] : internalMaxVal;
+    
+    const minValRef = React.useRef<HTMLInputElement>(null);
+    const maxValRef = React.useRef<HTMLInputElement>(null);
+    const range = React.useRef<HTMLDivElement>(null);
+    
+    // Convert value to percentage
+    const getPercent = React.useCallback(
+      (value: number) => Math.round(((value - min) / (max - min)) * 100),
+      [min, max]
+    );
+    
+    // Set width of the range to change from the left side
+    React.useEffect(() => {
+      if (maxValRef.current) {
+        const minPercent = getPercent(minVal);
+        const maxPercent = getPercent(+maxValRef.current.value);
+        
+        if (range.current) {
+          range.current.style.left = `${minPercent}%`;
+          range.current.style.width = `${maxPercent - minPercent}%`;
+        }
       }
-      onValueChange?.(clampedValue);
-    }, [controlledValue, onValueChange, min, max]);
+    }, [minVal, getPercent]);
     
-    const getPercentage = (val: number) => {
-      return ((val - min) / (max - min)) * 100;
-    };
-    
-    const handleMouseDown = (thumbIndex: number) => (e: React.MouseEvent) => {
-      if (disabled) return;
-      e.preventDefault();
-      setActiveThumb(thumbIndex);
-      
-      const handleMouseMove = (e: MouseEvent) => {
-        if (!trackRef.current) return;
+    // Set width of the range to change from the right side
+    React.useEffect(() => {
+      if (minValRef.current) {
+        const minPercent = getPercent(+minValRef.current.value);
+        const maxPercent = getPercent(maxVal);
         
-        const rect = trackRef.current.getBoundingClientRect();
-        const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        const newValue = Math.round((percent * (max - min) + min) / step) * step;
-        
-        const newValues: [number, number] = [...value];
-        newValues[thumbIndex] = newValue;
-        handleValueChange(newValues);
-      };
-      
-      const handleMouseUp = () => {
-        setActiveThumb(null);
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-      
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    };
-    
-    const handleTouchStart = (thumbIndex: number) => (e: React.TouchEvent) => {
-      if (disabled) return;
-      e.preventDefault();
-      setActiveThumb(thumbIndex);
-      
-      const handleTouchMove = (e: TouchEvent) => {
-        if (!trackRef.current) return;
-        
-        const touch = e.touches[0];
-        const rect = trackRef.current.getBoundingClientRect();
-        const percent = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
-        const newValue = Math.round((percent * (max - min) + min) / step) * step;
-        
-        const newValues: [number, number] = [...value];
-        newValues[thumbIndex] = newValue;
-        handleValueChange(newValues);
-      };
-      
-      const handleTouchEnd = () => {
-        setActiveThumb(null);
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchend', handleTouchEnd);
-      };
-      
-      document.addEventListener('touchmove', handleTouchMove, { passive: false });
-      document.addEventListener('touchend', handleTouchEnd);
-    };
-    
-    const leftPercent = getPercentage(value[0]);
-    const rightPercent = getPercentage(value[1]);
+        if (range.current) {
+          range.current.style.width = `${maxPercent - minPercent}%`;
+        }
+      }
+    }, [maxVal, getPercent]);
     
     return (
       <div 
         ref={ref} 
-        className={cn("relative w-full", disabled && "opacity-50 cursor-not-allowed", className)}
+        className={cn("relative w-full", disabled && "opacity-50", className)}
         {...props}
       >
         {showLabels && (
-          <div className="flex justify-between mb-2">
-            <span className="text-sm text-muted-foreground">{formatLabel(value[0])}</span>
-            <span className="text-sm text-muted-foreground">{formatLabel(value[1])}</span>
+          <div className="flex justify-between mb-4">
+            <span className="text-sm text-muted-foreground">{formatLabel(minVal)}</span>
+            <span className="text-sm text-muted-foreground">{formatLabel(maxVal)}</span>
           </div>
         )}
         
-        <div className="relative h-11 flex items-center">
-          <div 
-            ref={trackRef}
-            className="relative h-2 w-full rounded-full bg-secondary"
-          >
-            <div
-              className="absolute h-full rounded-full bg-primary"
-              style={{
-                left: `${leftPercent}%`,
-                right: `${100 - rightPercent}%`
-              }}
-            />
+        <div className="relative">
+          {/* Minimum value input */}
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={minVal}
+            ref={minValRef}
+            onChange={(event) => {
+              const value = Math.min(+event.target.value, maxVal - 1);
+              if (isControlled) {
+                onValueChange?.([value, maxVal]);
+              } else {
+                setInternalMinVal(value);
+                onValueChange?.([value, maxVal]);
+              }
+            }}
+            className={cn(
+              "absolute pointer-events-none w-full h-0 outline-none",
+              "[&::-webkit-slider-thumb]:pointer-events-auto",
+              "[&::-webkit-slider-thumb]:appearance-none",
+              "[&::-webkit-slider-thumb]:h-5",
+              "[&::-webkit-slider-thumb]:w-5",
+              "[&::-webkit-slider-thumb]:rounded-full",
+              "[&::-webkit-slider-thumb]:bg-background",
+              "[&::-webkit-slider-thumb]:border-2",
+              "[&::-webkit-slider-thumb]:border-primary",
+              "[&::-webkit-slider-thumb]:cursor-pointer",
+              "[&::-webkit-slider-thumb]:shadow-md",
+              "[&::-webkit-slider-thumb]:mt-1",
+              "[&::-moz-range-thumb]:pointer-events-auto",
+              "[&::-moz-range-thumb]:appearance-none",
+              "[&::-moz-range-thumb]:h-5",
+              "[&::-moz-range-thumb]:w-5",
+              "[&::-moz-range-thumb]:rounded-full",
+              "[&::-moz-range-thumb]:bg-background",
+              "[&::-moz-range-thumb]:border-2",
+              "[&::-moz-range-thumb]:border-primary",
+              "[&::-moz-range-thumb]:cursor-pointer",
+              "[&::-moz-range-thumb]:shadow-md",
+              "z-[3]",
+              minVal > max - 100 && "z-[5]"
+            )}
+            style={{
+              zIndex: minVal > max - 100 ? 5 : 3
+            }}
+            disabled={disabled}
+          />
+          
+          {/* Maximum value input */}
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={maxVal}
+            ref={maxValRef}
+            onChange={(event) => {
+              const value = Math.max(+event.target.value, minVal + 1);
+              if (isControlled) {
+                onValueChange?.([minVal, value]);
+              } else {
+                setInternalMaxVal(value);
+                onValueChange?.([minVal, value]);
+              }
+            }}
+            className={cn(
+              "absolute pointer-events-none w-full h-0 outline-none",
+              "[&::-webkit-slider-thumb]:pointer-events-auto",
+              "[&::-webkit-slider-thumb]:appearance-none",
+              "[&::-webkit-slider-thumb]:h-5",
+              "[&::-webkit-slider-thumb]:w-5",
+              "[&::-webkit-slider-thumb]:rounded-full",
+              "[&::-webkit-slider-thumb]:bg-background",
+              "[&::-webkit-slider-thumb]:border-2",
+              "[&::-webkit-slider-thumb]:border-primary",
+              "[&::-webkit-slider-thumb]:cursor-pointer",
+              "[&::-webkit-slider-thumb]:shadow-md",
+              "[&::-webkit-slider-thumb]:mt-1",
+              "[&::-moz-range-thumb]:pointer-events-auto",
+              "[&::-moz-range-thumb]:appearance-none",
+              "[&::-moz-range-thumb]:h-5",
+              "[&::-moz-range-thumb]:w-5",
+              "[&::-moz-range-thumb]:rounded-full",
+              "[&::-moz-range-thumb]:bg-background",
+              "[&::-moz-range-thumb]:border-2",
+              "[&::-moz-range-thumb]:border-primary",
+              "[&::-moz-range-thumb]:cursor-pointer",
+              "[&::-moz-range-thumb]:shadow-md",
+              "z-[4]"
+            )}
+            disabled={disabled}
+          />
+          
+          {/* Slider track */}
+          <div className="relative h-2 mt-2">
+            {/* Track background */}
+            <div className="absolute w-full h-2 rounded-full bg-secondary" />
             
+            {/* Track progress (colored range) */}
             <div
-              role="slider"
-              tabIndex={disabled ? -1 : 0}
-              className={cn(
-                "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                !disabled && "hover:scale-110 cursor-grab active:cursor-grabbing",
-                activeThumb === 0 && "ring-2 ring-ring ring-offset-2",
-                disabled && "cursor-not-allowed"
-              )}
-              style={{ left: `${leftPercent}%` }}
-              onMouseDown={handleMouseDown(0)}
-              onTouchStart={handleTouchStart(0)}
-              aria-label={`Minimum value: ${formatLabel(value[0])}`}
-              aria-valuemin={min}
-              aria-valuemax={max}
-              aria-valuenow={value[0]}
-              aria-disabled={disabled}
-            />
-            
-            <div
-              role="slider"
-              tabIndex={disabled ? -1 : 0}
-              className={cn(
-                "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                !disabled && "hover:scale-110 cursor-grab active:cursor-grabbing",
-                activeThumb === 1 && "ring-2 ring-ring ring-offset-2",
-                disabled && "cursor-not-allowed"
-              )}
-              style={{ left: `${rightPercent}%` }}
-              onMouseDown={handleMouseDown(1)}
-              onTouchStart={handleTouchStart(1)}
-              aria-label={`Maximum value: ${formatLabel(value[1])}`}
-              aria-valuemin={min}
-              aria-valuemax={max}
-              aria-valuenow={value[1]}
-              aria-disabled={disabled}
+              ref={range}
+              className="absolute h-2 rounded-full bg-primary"
             />
           </div>
         </div>
