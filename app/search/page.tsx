@@ -552,7 +552,7 @@ export default function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Sidebar />
       
       {/* Main Content */}
@@ -607,7 +607,7 @@ export default function SearchPage() {
                   <button
                     ref={sortButtonRef}
                     onClick={() => setShowSortDropdown(!showSortDropdown)}
-                    className="flex items-center gap-2 px-4 py-4 rounded-xl bg-white border border-border hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                    className="flex items-center gap-2 px-4 py-4 rounded-xl bg-white dark:bg-gray-800 border border-border hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
                   >
                     <span className="text-base font-medium text-foreground">
                       Sort: {sortOptions.find(opt => opt.value === sortBy)?.label}
@@ -688,7 +688,7 @@ export default function SearchPage() {
       {showSortDropdown && (
         <div
           id="sort-dropdown"
-          className="fixed w-48 py-2 rounded-xl shadow-xl bg-white border border-border z-[999999]"
+          className="fixed w-48 py-2 rounded-xl shadow-xl bg-white dark:bg-gray-800 border border-border z-[999999]"
           style={{
             top: dropdownPosition.top,
             right: dropdownPosition.right,
