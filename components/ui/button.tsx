@@ -45,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = cn(buttonVariants({ variant, size, className }))
     
     if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children as React.ReactElement<any>, {
+      return React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement> & { [key: string]: unknown }>, {
         className: classes,
         "data-slot": "button",
         ref,
