@@ -1,21 +1,66 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
-import { Search, X, ChevronDown } from "lucide-react";
+import { Search, X, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/ui/Footer";
 import { UserCard } from "@/components/ui/UserCard";
-import { FilterPill } from "@/components/ui/FilterPill";
-import { AdvancedFilters } from "@/components/ui/AdvancedFilters";
 import { whoIsOnUsers } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const quickFilters = [
-  { label: "Online Now", value: "online" },
-  { label: "Nearby", value: "nearby" },
-  { label: "New Members", value: "new" },
-  { label: "Age: 18-35", value: "age-18-35" },
-  { label: "Verified", value: "verified" }
+// Filter options
+const orientationOptions = [
+  { label: "Straight or Bi", value: "straight_or_bi" },
+  { label: "Straight", value: "straight" },
+  { label: "Bisexual", value: "bisexual" },
+  { label: "Gay", value: "gay" },
+];
+
+const smokeOptions = [
+  { label: "Any", value: "any" },
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+];
+
+const drinkOptions = [
+  { label: "Any", value: "any" },
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+  { label: "Socially", value: "socially" },
+];
+
+const lastOnlineOptions = [
+  { label: "1 Hour", value: "1_hour" },
+  { label: "1 Day", value: "1_day" },
+  { label: "1 Week", value: "1_week" },
+  { label: "1 Month", value: "1_month" },
+  { label: "3 Months", value: "3_months" },
+  { label: "6 Months", value: "6_months" },
+  { label: "1 Year", value: "1_year" },
+];
+
+const memberTypeOptions = [
+  { label: "Show All Members", value: "all" },
+  { label: "New Members Only", value: "new" },
+];
+
+const distanceOptions = [
+  { label: "10 Miles", value: "10" },
+  { label: "25 Miles", value: "25" },
+  { label: "50 Miles", value: "50" },
+  { label: "100 Miles", value: "100" },
+  { label: "250 Miles", value: "250" },
+  { label: "500 Miles", value: "500" },
 ];
 
 const sortOptions = [
@@ -25,14 +70,51 @@ const sortOptions = [
 ];
 
 export default function SearchPage() {
-  const [query, setQuery] = useState('');
-  const [activeQuickFilters, setActiveQuickFilters] = useState<string[]>([]);
-  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [sortBy, setSortBy] = useState('distance');
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
   
   const sortButtonRef = useRef<HTMLButtonElement>(null);
+  
+  // Filter states - Relationship
+  const [relationshipType, setRelationshipType] = useState({
+    couple: true,
+    males: false,
+    females: true,
+  });
+  const [maleOrientation, setMaleOrientation] = useState('straight_or_bi');
+  const [femaleOrientation, setFemaleOrientation] = useState('straight_or_bi');
+  
+  // Filter states - Age
+  const [ageRange, setAgeRange] = useState({
+    low: '30',
+    high: '45',
+  });
+  
+  // Filter states - Show Only
+  const [showOnlyFilters, setShowOnlyFilters] = useState({
+    havePics: false,
+    certified: false,
+    paid: false,
+    watch: true,
+    soft: true,
+    full: true,
+  });
+  
+  // Filter states - Lifestyle
+  const [smoke, setSmoke] = useState('any');
+  const [drink, setDrink] = useState('any');
+  const [lastOnline, setLastOnline] = useState('1_month');
+  const [memberType, setMemberType] = useState('all');
+  
+  // Filter states - Search
+  const [locationSearch, setLocationSearch] = useState('');
+  const [distance, setDistance] = useState('50');
+  const [memberSearch, setMemberSearch] = useState('');
+  
+  // Generate age options
+  const ageOptions = Array.from({ length: 83 }, (_, i) => (i + 18).toString());
   
   // Calculate dropdown position when it opens
   useEffect(() => {
@@ -64,108 +146,440 @@ export default function SearchPage() {
   
   const filteredUsers = useMemo(() => {
     return whoIsOnUsers.filter(user => {
-      const matchesQuery = !query || 
-        user.username.toLowerCase().includes(query.toLowerCase()) ||
-        user.location.toLowerCase().includes(query.toLowerCase());
+      // Member search filtering
+      if (memberSearch && !user.username.toLowerCase().includes(memberSearch.toLowerCase())) {
+        return false;
+      }
       
-      // Basic filter logic for demonstration
-      const matchesFilters = activeQuickFilters.length === 0 || 
-        activeQuickFilters.some(filter => {
-          switch (filter) {
-            case 'online':
-              return user.isOnline;
-            case 'nearby':
-              return user.distance && parseInt(user.distance) <= 10;
-            case 'age-18-35':
-              return user.age >= 18 && user.age <= 35;
-            default:
-              return true;
-          }
-        });
+      // Location search filtering
+      if (locationSearch && !user.location.toLowerCase().includes(locationSearch.toLowerCase())) {
+        return false;
+      }
       
-      return matchesQuery && matchesFilters;
+      // Age filtering
+      const lowAge = parseInt(ageRange.low);
+      const highAge = parseInt(ageRange.high);
+      if (user.age < lowAge || user.age > highAge) {
+        return false;
+      }
+      
+      // Show only filters
+      if (showOnlyFilters.havePics && (!user.photosCount || user.photosCount === 0)) {
+        return false;
+      }
+      
+      // Member type filtering
+      if (memberType === 'new') {
+        // Filter for new members (example: joined within last 30 days)
+        // This would normally check against a joinDate field
+      }
+      
+      return true;
     });
-  }, [query, activeQuickFilters]);
-
-  const toggleQuickFilter = (value: string) => {
-    setActiveQuickFilters(prev => 
-      prev.includes(value) 
-        ? prev.filter(f => f !== value)
-        : [...prev, value]
-    );
-  };
+  }, [memberSearch, locationSearch, ageRange, showOnlyFilters, memberType]);
 
   const clearAllFilters = () => {
-    setActiveQuickFilters([]);
-    setQuery('');
+    setRelationshipType({ couple: false, males: false, females: false });
+    setMaleOrientation('straight_or_bi');
+    setFemaleOrientation('straight_or_bi');
+    setAgeRange({ low: '18', high: '100' });
+    setShowOnlyFilters({
+      havePics: false,
+      certified: false,
+      paid: false,
+      watch: false,
+      soft: false,
+      full: false,
+    });
+    setSmoke('any');
+    setDrink('any');
+    setLastOnline('1_month');
+    setMemberType('all');
+    setLocationSearch('');
+    setDistance('50');
+    setMemberSearch('');
   };
 
-  const totalActiveFilters = activeQuickFilters.length;
+  const updateResults = () => {
+    // This would trigger a search with current filters
+    // For now, the filtering happens automatically via useMemo
+  };
+
+  // Filter Sections Component
+  const FilterSections = () => (
+    <div className="space-y-6">
+      {/* Main Filter Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        {/* Relationship Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Relationship</h3>
+          <div className="space-y-3">
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="couple"
+                checked={relationshipType.couple}
+                onCheckedChange={(checked) =>
+                  setRelationshipType(prev => ({ ...prev, couple: !!checked }))
+                }
+              />
+              <Label htmlFor="couple" className="text-sm font-medium cursor-pointer">
+                Couple
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="males"
+                checked={relationshipType.males}
+                onCheckedChange={(checked) =>
+                  setRelationshipType(prev => ({ ...prev, males: !!checked }))
+                }
+              />
+              <Label htmlFor="males" className="text-sm font-medium cursor-pointer">
+                Males
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="females"
+                checked={relationshipType.females}
+                onCheckedChange={(checked) =>
+                  setRelationshipType(prev => ({ ...prev, females: !!checked }))
+                }
+              />
+              <Label htmlFor="females" className="text-sm font-medium cursor-pointer">
+                Females
+              </Label>
+            </div>
+            
+            {/* Orientation Dropdowns */}
+            <div className="space-y-3 mt-4">
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Male</Label>
+                <Select value={maleOrientation} onValueChange={setMaleOrientation}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {orientationOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Female</Label>
+                <Select value={femaleOrientation} onValueChange={setFemaleOrientation}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {orientationOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Age Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Age</h3>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Low</Label>
+              <Select value={ageRange.low} onValueChange={(value) => setAgeRange(prev => ({ ...prev, low: value }))}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {ageOptions.map(age => (
+                    <SelectItem key={age} value={age}>
+                      {age}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">High</Label>
+              <Select value={ageRange.high} onValueChange={(value) => setAgeRange(prev => ({ ...prev, high: value }))}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {ageOptions.map(age => (
+                    <SelectItem key={age} value={age}>
+                      {age}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        {/* Show Only Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Show Only</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="havePics"
+                checked={showOnlyFilters.havePics}
+                onCheckedChange={(checked) =>
+                  setShowOnlyFilters(prev => ({ ...prev, havePics: !!checked }))
+                }
+              />
+              <Label htmlFor="havePics" className="text-sm font-medium cursor-pointer">
+                Have Pics
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="certified"
+                checked={showOnlyFilters.certified}
+                onCheckedChange={(checked) =>
+                  setShowOnlyFilters(prev => ({ ...prev, certified: !!checked }))
+                }
+              />
+              <Label htmlFor="certified" className="text-sm font-medium cursor-pointer">
+                Certified
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="paid"
+                checked={showOnlyFilters.paid}
+                onCheckedChange={(checked) =>
+                  setShowOnlyFilters(prev => ({ ...prev, paid: !!checked }))
+                }
+              />
+              <Label htmlFor="paid" className="text-sm font-medium cursor-pointer">
+                Paid
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="watch"
+                checked={showOnlyFilters.watch}
+                onCheckedChange={(checked) =>
+                  setShowOnlyFilters(prev => ({ ...prev, watch: !!checked }))
+                }
+              />
+              <Label htmlFor="watch" className="text-sm font-medium cursor-pointer">
+                Watch
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="soft"
+                checked={showOnlyFilters.soft}
+                onCheckedChange={(checked) =>
+                  setShowOnlyFilters(prev => ({ ...prev, soft: !!checked }))
+                }
+              />
+              <Label htmlFor="soft" className="text-sm font-medium cursor-pointer">
+                Soft
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="full"
+                checked={showOnlyFilters.full}
+                onCheckedChange={(checked) =>
+                  setShowOnlyFilters(prev => ({ ...prev, full: !!checked }))
+                }
+              />
+              <Label htmlFor="full" className="text-sm font-medium cursor-pointer">
+                Full
+              </Label>
+            </div>
+          </div>
+        </div>
+
+        {/* Lifestyle Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Lifestyle</h3>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Smoke</Label>
+              <Select value={smoke} onValueChange={setSmoke}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {smokeOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Drink</Label>
+              <Select value={drink} onValueChange={setDrink}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {drinkOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        {/* Activity Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Activity</h3>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Last On</Label>
+              <Select value={lastOnline} onValueChange={setLastOnline}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {lastOnlineOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">New</Label>
+              <Select value={memberType} onValueChange={setMemberType}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {memberTypeOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        {/* Location Search Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Location Search</h3>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">City Name or Postal Code</Label>
+              <Input
+                type="text"
+                placeholder="Enter the city name or postal code..."
+                value={locationSearch}
+                onChange={(e) => setLocationSearch(e.target.value)}
+                className="w-full"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Distance</Label>
+              <Select value={distance} onValueChange={setDistance}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {distanceOptions.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        {/* Member Search Section */}
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold text-foreground">Member Search</h3>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label className="text-sm text-muted-foreground">Profile Name</Label>
+              <Input
+                type="text"
+                placeholder="Enter the profile name..."
+                value={memberSearch}
+                onChange={(e) => setMemberSearch(e.target.value)}
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-3 pt-4">
+        <button
+          onClick={updateResults}
+          className="flex-1 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
+        >
+          Update Results
+        </button>
+        <button
+          onClick={clearAllFilters}
+          className="px-6 py-3 border border-border hover:bg-accent hover:text-accent-foreground rounded-xl font-medium transition-all"
+        >
+          Clear All Filters
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-white">
       <Sidebar />
       
-      {/* Main Content - Now matches home page background */}
+      {/* Main Content */}
       <main className="2xl:ml-64 2xl:pt-4 p-4 sm:p-6 lg:p-8">
         <div className="w-full space-y-8">
           
-          {/* Search Header - Now using section-glass like home page */}
+          {/* Mobile Filter Toggle */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setShowMobileFilters(!showMobileFilters)}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-xl font-medium transition-all"
+            >
+              <SlidersHorizontal className="w-5 h-5" />
+              <span>Open Search Form</span>
+            </button>
+          </div>
+          
+          {/* Search Filters Section */}
           <section>
-            <div className="section-glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-              <div className="w-full space-y-6">
-                
-                {/* Search Input - Now using consistent theming */}
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <input
-                    type="text"
-                    placeholder="Search by username, location..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                  />
-                  {query && (
-                    <button
-                      onClick={() => setQuery('')}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-
-                {/* Quick Filters - Now using consistent text colors */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-base font-semibold text-foreground">Quick Filters</h3>
-                    {totalActiveFilters > 0 && (
-                      <button
-                        onClick={clearAllFilters}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Clear all ({totalActiveFilters})
-                      </button>
-                    )}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-3">
-                    {quickFilters.map((filter) => (
-                      <FilterPill
-                        key={filter.value}
-                        label={filter.label}
-                        isActive={activeQuickFilters.includes(filter.value)}
-                        onClick={() => toggleQuickFilter(filter.value)}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Advanced Filters */}
-                <AdvancedFilters
-                  isOpen={showAdvancedFilters}
-                  onToggle={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                />
+            {/* Desktop Filters */}
+            <div className="hidden lg:block">
+              <div className="section-glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+                <FilterSections />
+              </div>
+            </div>
+            
+            {/* Mobile Filters - Collapsible */}
+            <div className={cn(
+              "lg:hidden overflow-hidden transition-all duration-300",
+              showMobileFilters ? "max-h-[2000px]" : "max-h-0"
+            )}>
+              <div className="section-glass rounded-2xl p-4 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+                <FilterSections />
               </div>
             </div>
           </section>
@@ -245,7 +659,7 @@ export default function SearchPage() {
                   <p className="text-muted-foreground max-w-md mx-auto">
                     Try adjusting your search criteria or filters to find more members.
                   </p>
-                  {(query || totalActiveFilters > 0) && (
+                  {(locationSearch || memberSearch) && (
                     <button
                       onClick={clearAllFilters}
                       className="inline-flex items-center gap-2 px-4 py-2 text-base font-medium text-primary hover:text-primary/80 transition-colors"
