@@ -293,7 +293,7 @@ export default function SearchPage() {
 
         {/* Show Only Section (moved to middle of first row) */}
         <div className="flex flex-col h-full">
-          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[240px] flex flex-col h-full hover:shadow-md transition-shadow">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] md:min-h-[240px] flex flex-col h-full hover:shadow-md transition-shadow">
             <h3 className="text-base font-semibold text-foreground mb-4">Show Only</h3>
             <div className="flex-1">
               <div className="grid grid-cols-2 gap-3">
@@ -543,7 +543,7 @@ export default function SearchPage() {
       <div className="flex justify-center pt-4">
         <button
           onClick={updateResults}
-          className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
+          className="w-full sm:w-auto px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
         >
           Update Results
         </button>
