@@ -260,7 +260,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Male</Label>
                 <Select value={maleOrientation} onValueChange={setMaleOrientation}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {orientationOptions.find(opt => opt.value === maleOrientation)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {orientationOptions.map(option => (
@@ -275,7 +277,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Female</Label>
                 <Select value={femaleOrientation} onValueChange={setFemaleOrientation}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {orientationOptions.find(opt => opt.value === femaleOrientation)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {orientationOptions.map(option => (
@@ -394,7 +398,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Distance</Label>
                 <Select value={distance} onValueChange={setDistance}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {distanceOptions.find(opt => opt.value === distance)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {distanceOptions.map(option => (
@@ -430,7 +436,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Last On</Label>
                 <Select value={lastOnline} onValueChange={setLastOnline}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {lastOnlineOptions.find(opt => opt.value === lastOnline)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {lastOnlineOptions.map(option => (
@@ -445,7 +453,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">New</Label>
                 <Select value={memberType} onValueChange={setMemberType}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {memberTypeOptions.find(opt => opt.value === memberType)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {memberTypeOptions.map(option => (
@@ -469,7 +479,7 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Low</Label>
                 <Select value={ageRange.low} onValueChange={(value) => setAgeRange(prev => ({ ...prev, low: value }))}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>{ageRange.low}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {ageOptions.map(age => (
@@ -484,7 +494,7 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">High</Label>
                 <Select value={ageRange.high} onValueChange={(value) => setAgeRange(prev => ({ ...prev, high: value }))}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>{ageRange.high}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {ageOptions.map(age => (
@@ -508,7 +518,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Smoke</Label>
                 <Select value={smoke} onValueChange={setSmoke}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {smokeOptions.find(opt => opt.value === smoke)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {smokeOptions.map(option => (
@@ -523,7 +535,9 @@ export default function SearchPage() {
                 <Label className="text-sm text-muted-foreground">Drink</Label>
                 <Select value={drink} onValueChange={setDrink}>
                   <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue />
+                    <SelectValue>
+                      {drinkOptions.find(opt => opt.value === drink)?.label}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {drinkOptions.map(option => (
