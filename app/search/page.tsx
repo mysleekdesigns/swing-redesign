@@ -208,12 +208,15 @@ export default function SearchPage() {
   // Filter Sections Component
   const FilterSections = () => (
     <div className="space-y-6">
-      {/* Main Filter Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      {/* Main Filter Grid - Optimized for cohesive layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        
+        {/* FIRST ROW */}
         {/* Relationship Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Relationship</h3>
-          <div className="space-y-3">
+        <div className="flex flex-col h-full">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[240px] flex flex-col h-full hover:shadow-md transition-shadow">
+            <h3 className="text-base font-semibold text-foreground mb-4">Relationship</h3>
+            <div className="flex-1 space-y-3">
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="couple"
@@ -256,7 +259,7 @@ export default function SearchPage() {
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">Male</Label>
                 <Select value={maleOrientation} onValueChange={setMaleOrientation}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -271,7 +274,7 @@ export default function SearchPage() {
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">Female</Label>
                 <Select value={femaleOrientation} onValueChange={setFemaleOrientation}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -284,50 +287,16 @@ export default function SearchPage() {
                 </Select>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Age Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Age</h3>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">Low</Label>
-              <Select value={ageRange.low} onValueChange={(value) => setAgeRange(prev => ({ ...prev, low: value }))}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {ageOptions.map(age => (
-                    <SelectItem key={age} value={age}>
-                      {age}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">High</Label>
-              <Select value={ageRange.high} onValueChange={(value) => setAgeRange(prev => ({ ...prev, high: value }))}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {ageOptions.map(age => (
-                    <SelectItem key={age} value={age}>
-                      {age}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
           </div>
         </div>
 
-        {/* Show Only Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Show Only</h3>
-          <div className="grid grid-cols-2 gap-3">
+        {/* Show Only Section (moved to middle of first row) */}
+        <div className="flex flex-col h-full">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[240px] flex flex-col h-full hover:shadow-md transition-shadow">
+            <h3 className="text-base font-semibold text-foreground mb-4">Show Only</h3>
+            <div className="flex-1">
+              <div className="grid grid-cols-2 gap-3">
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="havePics"
@@ -401,145 +370,182 @@ export default function SearchPage() {
               </Label>
             </div>
           </div>
-        </div>
-
-        {/* Lifestyle Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Lifestyle</h3>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">Smoke</Label>
-              <Select value={smoke} onValueChange={setSmoke}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {smokeOptions.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">Drink</Label>
-              <Select value={drink} onValueChange={setDrink}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {drinkOptions.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
           </div>
         </div>
 
-        {/* Activity Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Activity</h3>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">Last On</Label>
-              <Select value={lastOnline} onValueChange={setLastOnline}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {lastOnlineOptions.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">New</Label>
-              <Select value={memberType} onValueChange={setMemberType}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {memberTypeOptions.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </div>
-
-        {/* Location Search Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Location Search</h3>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">City Name or Postal Code</Label>
-              <Input
-                type="text"
-                placeholder="Enter the city name or postal code..."
-                value={locationSearch}
-                onChange={(e) => setLocationSearch(e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">Distance</Label>
-              <Select value={distance} onValueChange={setDistance}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {distanceOptions.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+        {/* Search Section (moved to third in first row) */}
+        <div className="flex flex-col h-full">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[240px] flex flex-col h-full hover:shadow-md transition-shadow">
+            <h3 className="text-base font-semibold text-foreground mb-4">Search</h3>
+            <div className="flex-1 space-y-3">
+              {/* Location Search */}
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">City or Postal Code</Label>
+                <Input
+                  type="text"
+                  placeholder="Enter location..."
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                  className="w-full bg-white dark:bg-white/10 border-border/50"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Distance</Label>
+                <Select value={distance} onValueChange={setDistance}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {distanceOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              {/* Member Search */}
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Profile Name</Label>
+                <Input
+                  type="text"
+                  placeholder="Enter profile name..."
+                  value={memberSearch}
+                  onChange={(e) => setMemberSearch(e.target.value)}
+                  className="w-full bg-white dark:bg-white/10 border-border/50"
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Member Search Section */}
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">Member Search</h3>
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label className="text-sm text-muted-foreground">Profile Name</Label>
-              <Input
-                type="text"
-                placeholder="Enter the profile name..."
-                value={memberSearch}
-                onChange={(e) => setMemberSearch(e.target.value)}
-                className="w-full"
-              />
+        {/* SECOND ROW */}
+        {/* Activity Section (first in second row) */}
+        <div>
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] hover:shadow-md transition-shadow">
+            <h3 className="text-base font-semibold text-foreground mb-4">Activity</h3>
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Last On</Label>
+                <Select value={lastOnline} onValueChange={setLastOnline}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {lastOnlineOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">New</Label>
+                <Select value={memberType} onValueChange={setMemberType}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {memberTypeOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Age Range Section (moved to second in second row) */}
+        <div>
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] hover:shadow-md transition-shadow">
+            <h3 className="text-base font-semibold text-foreground mb-4">Age Range</h3>
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Low</Label>
+                <Select value={ageRange.low} onValueChange={(value) => setAgeRange(prev => ({ ...prev, low: value }))}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ageOptions.map(age => (
+                      <SelectItem key={age} value={age}>
+                        {age}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">High</Label>
+                <Select value={ageRange.high} onValueChange={(value) => setAgeRange(prev => ({ ...prev, high: value }))}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ageOptions.map(age => (
+                      <SelectItem key={age} value={age}>
+                        {age}
+                    </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Lifestyle Section (moved to third in second row) */}
+        <div>
+          <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] hover:shadow-md transition-shadow">
+            <h3 className="text-base font-semibold text-foreground mb-4">Lifestyle</h3>
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Smoke</Label>
+                <Select value={smoke} onValueChange={setSmoke}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {smokeOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm text-muted-foreground">Drink</Label>
+                <Select value={drink} onValueChange={setDrink}>
+                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {drinkOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 pt-4">
+      <div className="flex justify-center pt-4">
         <button
           onClick={updateResults}
-          className="flex-1 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
+          className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
         >
           Update Results
-        </button>
-        <button
-          onClick={clearAllFilters}
-          className="px-6 py-3 border border-border hover:bg-accent hover:text-accent-foreground rounded-xl font-medium transition-all"
-        >
-          Clear All Filters
         </button>
       </div>
     </div>
