@@ -78,6 +78,7 @@ export default function SearchPage() {
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
   const [formVersion, setFormVersion] = useState<'v1' | 'v2'>('v1');
+  const [activeTabV2, setActiveTabV2] = useState("basic");
   
   const sortButtonRef = useRef<HTMLButtonElement>(null);
   
@@ -631,7 +632,7 @@ export default function SearchPage() {
   );
 
   // Filter Sections Component (Version 2 - Modern Tabbed Interface)
-  const FilterSectionsV2 = () => {
+  const FilterSectionsV2 = ({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (value: string) => void }) => {
     // Local state for immediate slider feedback
     const [localAgeRange, setLocalAgeRange] = useState<[number, number]>([parseInt(ageRange.low), parseInt(ageRange.high)]);
     
@@ -645,7 +646,7 @@ export default function SearchPage() {
     
     return (
       <div className="space-y-6">
-        <Tabs defaultValue="basic" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="preferences">Preferences</TabsTrigger>
@@ -1006,7 +1007,7 @@ export default function SearchPage() {
                 </div>
                 
                 {/* Render the appropriate form version */}
-                {formVersion === 'v1' ? <FilterSections /> : <FilterSectionsV2 />}
+                {formVersion === 'v1' ? <FilterSections /> : <FilterSectionsV2 activeTab={activeTabV2} setActiveTab={setActiveTabV2} />}
               </div>
             </div>
             
@@ -1043,7 +1044,7 @@ export default function SearchPage() {
                 </div>
                 
                 {/* Render the appropriate form version */}
-                {formVersion === 'v1' ? <FilterSections /> : <FilterSectionsV2 />}
+                {formVersion === 'v1' ? <FilterSections /> : <FilterSectionsV2 activeTab={activeTabV2} setActiveTab={setActiveTabV2} />}
               </div>
             </div>
           </section>
