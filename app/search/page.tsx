@@ -622,7 +622,7 @@ export default function SearchPage() {
             </div>
 
             {/* Enhanced Grid with Entrance Animations - Same as home page */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
               {filteredUsers.map((user, index) => (
                 <div
                   key={user.id}
@@ -650,7 +650,7 @@ export default function SearchPage() {
             {/* Load More Button - Full width on mobile */}
             {filteredUsers.length > 0 && (
               <div className="pt-4 sm:pt-6 lg:pt-8">
-                <button className="w-full sm:w-auto sm:mx-auto sm:block px-8 py-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-semibold transition-all hover:scale-105">
+                <button className="w-full lg:w-auto lg:mx-auto lg:block px-8 py-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-semibold transition-all hover:scale-105">
                   Load More Members
                 </button>
               </div>
