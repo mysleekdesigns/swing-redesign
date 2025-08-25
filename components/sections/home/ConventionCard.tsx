@@ -18,7 +18,7 @@ interface ConventionCardProps {
 export function ConventionCard({ convention }: ConventionCardProps) {
   return (
     <section>
-      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl section-glass p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+      <div className="relative overflow-hidden rounded-3xl bg-card p-4 sm:p-6 lg:p-8 border border-border">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 h-full">
           {/* Text Content - Left Side */}
           <div className="lg:w-full xl:w-1/2 lg:pr-6">

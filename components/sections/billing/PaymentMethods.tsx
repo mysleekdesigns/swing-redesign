@@ -6,7 +6,7 @@ export default function PaymentMethods() {
   return (
     <div className="mt-12 sm:mt-16 space-y-8">
       {/* Payment Methods */}
-      <div className="bg-background rounded-2xl border p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg">
+      <div className="bg-background rounded-2xl border p-6 sm:p-8">
         <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <div className="p-2 rounded-lg bg-primary/10">
             <CreditCardIcon className="size-6 text-primary" />
@@ -16,35 +16,35 @@ export default function PaymentMethods() {
         
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Card Payment */}
-          <div className="bg-background rounded-xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+          <div className="bg-background rounded-xl border p-6">
             <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-6">
               Secure Online Payment
             </h4>
             
             {/* Payment Provider Logos */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-muted/30 rounded-lg mb-6">
-              <div className="flex items-center justify-center p-3 bg-background rounded-lg transition-all duration-300 hover:shadow-sm">
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg">
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" 
                   alt="Visa" 
                   className="h-8 object-contain dark:invert"
                 />
               </div>
-              <div className="flex items-center justify-center p-3 bg-background rounded-lg transition-all duration-300 hover:shadow-sm">
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg">
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" 
                   alt="Mastercard" 
                   className="h-8 object-contain"
                 />
               </div>
-              <div className="flex items-center justify-center p-3 bg-background rounded-lg transition-all duration-300 hover:shadow-sm">
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg">
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" 
                   alt="American Express" 
                   className="h-8 object-contain"
                 />
               </div>
-              <div className="flex items-center justify-center p-3 bg-background rounded-lg transition-all duration-300 hover:shadow-sm">
+              <div className="flex items-center justify-center p-3 bg-background rounded-lg">
                 <img 
                   src="https://upload.wikimedia.org/wikipedia/commons/5/57/Discover_Card_logo.svg" 
                   alt="Discover" 
@@ -75,7 +75,7 @@ export default function PaymentMethods() {
           </div>
 
           {/* Check Payment */}
-          <div className="bg-background rounded-xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+          <div className="bg-background rounded-xl border p-6">
             <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-6">
               Pay by Check
             </h4>

@@ -111,11 +111,12 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               "[&::-webkit-slider-thumb]:h-5",
               "[&::-webkit-slider-thumb]:w-5",
               "[&::-webkit-slider-thumb]:rounded-full",
-              "[&::-webkit-slider-thumb]:bg-primary",
+              "[&::-webkit-slider-thumb]:bg-gradient-to-br",
+              "[&::-webkit-slider-thumb]:from-primary",
+              "[&::-webkit-slider-thumb]:to-accent",
               "[&::-webkit-slider-thumb]:border-2",
-              "[&::-webkit-slider-thumb]:border-primary",
+              "[&::-webkit-slider-thumb]:border-background",
               "[&::-webkit-slider-thumb]:cursor-pointer",
-              "[&::-webkit-slider-thumb]:shadow-md",
               "[&::-webkit-slider-thumb]:mt-1",
               "[&::-webkit-slider-thumb]:transition-all",
               "[&::-webkit-slider-thumb]:hover:scale-110",
@@ -128,11 +129,12 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               "[&::-moz-range-thumb]:h-5",
               "[&::-moz-range-thumb]:w-5",
               "[&::-moz-range-thumb]:rounded-full",
-              "[&::-moz-range-thumb]:bg-primary",
+              "[&::-moz-range-thumb]:bg-gradient-to-br",
+              "[&::-moz-range-thumb]:from-primary",
+              "[&::-moz-range-thumb]:to-accent",
               "[&::-moz-range-thumb]:border-2",
-              "[&::-moz-range-thumb]:border-primary",
+              "[&::-moz-range-thumb]:border-background",
               "[&::-moz-range-thumb]:cursor-pointer",
-              "[&::-moz-range-thumb]:shadow-md",
               "[&::-moz-range-thumb]:transition-all",
               "[&::-moz-range-thumb]:hover:scale-110",
               "[&::-moz-range-thumb]:focus-visible:outline-none",
@@ -172,11 +174,12 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               "[&::-webkit-slider-thumb]:h-5",
               "[&::-webkit-slider-thumb]:w-5",
               "[&::-webkit-slider-thumb]:rounded-full",
-              "[&::-webkit-slider-thumb]:bg-primary",
+              "[&::-webkit-slider-thumb]:bg-gradient-to-br",
+              "[&::-webkit-slider-thumb]:from-primary",
+              "[&::-webkit-slider-thumb]:to-accent",
               "[&::-webkit-slider-thumb]:border-2",
-              "[&::-webkit-slider-thumb]:border-primary",
+              "[&::-webkit-slider-thumb]:border-background",
               "[&::-webkit-slider-thumb]:cursor-pointer",
-              "[&::-webkit-slider-thumb]:shadow-md",
               "[&::-webkit-slider-thumb]:mt-1",
               "[&::-webkit-slider-thumb]:transition-all",
               "[&::-webkit-slider-thumb]:hover:scale-110",
@@ -189,11 +192,12 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               "[&::-moz-range-thumb]:h-5",
               "[&::-moz-range-thumb]:w-5",
               "[&::-moz-range-thumb]:rounded-full",
-              "[&::-moz-range-thumb]:bg-primary",
+              "[&::-moz-range-thumb]:bg-gradient-to-br",
+              "[&::-moz-range-thumb]:from-primary",
+              "[&::-moz-range-thumb]:to-accent",
               "[&::-moz-range-thumb]:border-2",
-              "[&::-moz-range-thumb]:border-primary",
+              "[&::-moz-range-thumb]:border-background",
               "[&::-moz-range-thumb]:cursor-pointer",
-              "[&::-moz-range-thumb]:shadow-md",
               "[&::-moz-range-thumb]:transition-all",
               "[&::-moz-range-thumb]:hover:scale-110",
               "[&::-moz-range-thumb]:focus-visible:outline-none",
@@ -208,12 +212,12 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           {/* Slider track */}
           <div className="relative h-2 mt-2">
             {/* Track background */}
-            <div className="absolute w-full h-2 rounded-full bg-muted" />
+            <div className="absolute w-full h-2 rounded-full bg-muted/50 border border-border/20" />
             
             {/* Track progress (colored range) */}
             <div
               ref={range}
-              className="absolute h-2 rounded-full bg-primary transition-all"
+              className="absolute h-2 rounded-full bg-gradient-to-r from-primary via-accent to-primary transition-all"
             />
           </div>
         </div>

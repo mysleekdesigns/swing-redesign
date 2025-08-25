@@ -27,7 +27,7 @@ export function UserCard({
   const aspectRatio = variant === 'compact' ? 'aspect-[4/5]' : 'aspect-[3/4]';
   
   return (
-    <div className="group relative overflow-hidden rounded-2xl bg-card hover-lift cursor-pointer transition-all duration-300 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+    <div className="group relative overflow-hidden rounded-2xl bg-card cursor-pointer transition-all duration-300 border border-border">
       <div className={`${aspectRatio} relative overflow-hidden`}>
         <Image
           src={imageUrl}

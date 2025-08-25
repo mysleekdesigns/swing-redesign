@@ -71,7 +71,7 @@ export default function MessagesPage() {
         <div className="w-full space-y-6">
           
           {/* Messages Container */}
-          <div className="section-glass rounded-2xl overflow-hidden">
+          <div className="bg-card rounded-2xl overflow-hidden border border-border">
             <div className="flex h-[calc(100vh-16rem)]">
               
               {/* Conversations List */}

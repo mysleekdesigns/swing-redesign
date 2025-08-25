@@ -191,7 +191,7 @@ export default function SearchPage() {
           <section>
             {/* Desktop Filters */}
             <div className="hidden lg:block">
-              <div className="section-glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="bg-card rounded-3xl p-4 sm:p-6 lg:p-8 border border-border">
                 <SearchFiltersV2
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
@@ -245,7 +245,7 @@ export default function SearchPage() {
               "lg:hidden overflow-hidden transition-all duration-300",
               showMobileFilters ? "max-h-[3000px]" : "max-h-0"
             )}>
-              <div className="section-glass rounded-2xl p-4 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+              <div className="bg-card rounded-2xl p-4 border border-border">
                 <SearchFiltersV2
                   activeTab={activeTab}
                   setActiveTab={setActiveTab}
@@ -278,7 +278,7 @@ export default function SearchPage() {
             </div>
           </section>
 
-          {/* Results Section - Now using section-glass like home page */}
+          {/* Results Section - Now using bg-card like home page */}
           <section className="w-full space-y-6">
             
             {/* Results Header - Consistent glass morphism */}

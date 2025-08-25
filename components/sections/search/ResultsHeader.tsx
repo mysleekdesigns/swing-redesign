@@ -21,7 +21,7 @@ export function ResultsHeader({
   sortOptions,
 }: ResultsHeaderProps) {
   return (
-    <div className="section-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+    <div className="bg-card rounded-2xl p-4 sm:p-6 border border-border">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-semibold text-foreground">

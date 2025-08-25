@@ -154,7 +154,7 @@ export function SearchFiltersV2({
       <TabsContent value="basic" className="space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Relationship Section */}
-          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border">
             <h3 className="text-lg font-semibold text-foreground mb-4">Looking For</h3>
             <div className="space-y-4">
               <div className="space-y-3">
@@ -241,7 +241,7 @@ export function SearchFiltersV2({
           </div>
           
           {/* Age Range with Slider */}
-          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border">
             <h3 className="text-lg font-semibold text-foreground mb-4">Age Range</h3>
             <div className="space-y-6">
               <div className="px-3">
@@ -268,7 +268,7 @@ export function SearchFiltersV2({
         {/* Location, Show Only, and Lifestyle Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Location Section */}
-          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border">
             <h3 className="text-lg font-semibold text-foreground mb-4">Location</h3>
             <div className="space-y-4">
               <div className="space-y-2">
@@ -307,7 +307,7 @@ export function SearchFiltersV2({
           </div>
 
           {/* Show Only Filters */}
-          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border">
             <h3 className="text-lg font-semibold text-foreground mb-4">Show Only</h3>
             <div className="grid grid-cols-2 gap-4">
               {[
@@ -338,7 +338,7 @@ export function SearchFiltersV2({
           </div>
           
           {/* Lifestyle & Activity */}
-          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border">
             <h3 className="text-lg font-semibold text-foreground mb-4">Lifestyle & Activity</h3>
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -423,7 +423,7 @@ export function SearchFiltersV2({
       </TabsContent>
       
       <TabsContent value="profile" className="space-y-6">
-        <div className="bg-background rounded-lg p-6 md:p-8 border border-border/50 hover:shadow-md transition-shadow">
+        <div className="bg-background rounded-lg p-6 md:p-8 border border-border">
           <div className="max-w-2xl">
             <h3 className="text-lg font-semibold text-foreground mb-6">Profile Search</h3>
             <div className="space-y-4">

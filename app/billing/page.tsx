@@ -16,7 +16,7 @@ export default function BillingPage() {
       <main className="2xl:ml-64 2xl:pt-4 p-4 sm:p-6 lg:p-8">
         <div className="w-full space-y-6">
           {/* Billing Container */}
-          <div className="section-glass rounded-2xl p-6 sm:p-8">
+          <div className="bg-card rounded-2xl p-6 sm:p-8 border border-border">
             {/* Header Section */}
             <div className="mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-primary">

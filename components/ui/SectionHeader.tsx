@@ -20,8 +20,8 @@ export function SectionHeader({
   const baseClasses = "flex items-center justify-between mb-6";
   
   const variantClasses = {
-    default: "bg-card rounded-xl p-4 border border-border/50",
-    glass: "section-glass rounded-2xl p-6",
+    default: "bg-card rounded-xl p-4 border border-border",
+    glass: "bg-card rounded-2xl p-6 border border-border",
     minimal: "border-b border-border/30 pb-4"
   };
 
@@ -52,11 +52,6 @@ export function SectionHeader({
         </div>
       </div>
       
-      {variant === 'glass' && (
-        <div className="hidden md:block">
-          <div className="w-20 h-px bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0" />
-        </div>
-      )}
     </div>
   );
 }

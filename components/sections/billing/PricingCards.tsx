@@ -102,7 +102,7 @@ export default function PricingCards() {
         <div
           key={plan.id}
           className={cn(
-            "relative flex flex-col rounded-2xl border bg-background p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg"
+            "relative flex flex-col rounded-2xl border bg-background p-6 sm:p-8"
           )}
         >
           {/* Badges */}

@@ -37,7 +37,7 @@ export function HotDateCard({
 
   if (variant === 'compact') {
     return (
-      <div className="group relative overflow-hidden rounded-xl bg-card hover-lift cursor-pointer ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+      <div className="group relative overflow-hidden rounded-xl bg-card cursor-pointer border border-border">
         <div className="aspect-[16/9] relative overflow-hidden">
           <Image
             src={imageUrl}
@@ -79,7 +79,7 @@ export function HotDateCard({
   }
 
   return (
-    <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-card hover-lift cursor-pointer ring-2 ring-primary/20 shadow-lg shadow-primary/10">
+    <div className="group relative overflow-hidden rounded-2xl bg-card cursor-pointer border border-border">
       <div className="aspect-[4/3] relative overflow-hidden">
         <Image
           src={imageUrl}
