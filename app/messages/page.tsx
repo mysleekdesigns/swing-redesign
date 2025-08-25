@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/ui/Footer";
 import { Input } from "@/components/ui/input";
@@ -11,8 +11,7 @@ import {
   mockMessages, 
   formatMessageTime,
   getOnlineStatus,
-  type Conversation,
-  type Message 
+  type Conversation
 } from "@/lib/mock-data";
 import { 
   Search, 
@@ -20,16 +19,13 @@ import {
   Video,
   Pin,
   VolumeX,
-  Bell,
-  Archive,
-  Trash2,
   ChevronLeft,
   MessageSquare,
   Image as ImageIcon
 } from "lucide-react";
 
 export default function MessagesPage() {
-  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(mockConversations[0]);
+  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [messageInput, setMessageInput] = useState("");
 
@@ -38,6 +34,20 @@ export default function MessagesPage() {
     return participant.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
            participant.username.toLowerCase().includes(searchQuery.toLowerCase());
   });
+
+  // Auto-select first conversation ONLY on desktop initial load
+  useEffect(() => {
+    // Check if we're in browser and on desktop
+    if (typeof window !== 'undefined') {
+      const isDesktop = window.innerWidth >= 1024; // lg breakpoint
+      
+      // Only auto-select on desktop, and only if nothing is selected
+      if (isDesktop && !selectedConversation && mockConversations.length > 0) {
+        setSelectedConversation(mockConversations[0]);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array - only run once on mount
 
   const handleSendMessage = () => {
     if (messageInput.trim() && selectedConversation) {
@@ -83,7 +93,7 @@ export default function MessagesPage() {
                 </div>
 
                 {/* Conversations List */}
-                <div className="h-[calc(100%-5rem)] overflow-y-auto">
+                <div className="h-[calc(100%-5rem)] overflow-y-auto p-3 space-y-2">
                   {filteredConversations.map((conversation) => {
                     const participant = conversation.participants[0];
                     const isSelected = selectedConversation?.id === conversation.id;
@@ -93,9 +103,10 @@ export default function MessagesPage() {
                         key={conversation.id}
                         onClick={() => setSelectedConversation(conversation)}
                         className={cn(
-                          "flex w-full items-start gap-3 p-4 text-left transition-all hover:bg-muted/20",
-                          isSelected && "bg-primary/10 border-l-4 border-primary",
-                          "border-b border-border/20"
+                          "flex w-full items-start gap-3 p-4 text-left transition-all",
+                          "bg-white rounded-lg shadow-sm border border-border/20",
+                          "hover:shadow-md hover:border-primary/20",
+                          isSelected && "border-primary"
                         )}
                       >
                         <div className="relative flex-shrink-0">
