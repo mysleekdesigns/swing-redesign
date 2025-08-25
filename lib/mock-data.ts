@@ -902,7 +902,7 @@ export const mockConversations: Conversation[] = [
         id: '2',
         username: 'hotpair',
         displayName: 'Mike & Sarah',
-        avatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=400&h=600&fit=crop',
         isOnline: true
       }
     ],
@@ -957,7 +957,7 @@ export const mockConversations: Conversation[] = [
         id: '7',
         username: 'beachlife',
         displayName: 'Lisa & James',
-        avatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=600&fit=crop',
         isOnline: true
       }
     ],
@@ -984,7 +984,7 @@ export const mockConversations: Conversation[] = [
         id: '8',
         username: 'travelers',
         displayName: 'Emma & David',
-        avatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?w=400&h=600&fit=crop',
         isOnline: false,
         lastSeen: '2025-08-24T22:00:00Z'
       }
@@ -1012,7 +1012,7 @@ export const mockConversations: Conversation[] = [
         id: '9',
         username: 'partylovers',
         displayName: 'Alex & Chris',
-        avatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1498387727476-b30055b2ef21?w=400&h=600&fit=crop',
         isOnline: true
       }
     ],
@@ -1132,7 +1132,7 @@ export const mockMessages: Message[] = [
     conversationId: 'conv-3',
     senderId: '7',
     senderName: 'Lisa & James',
-    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    senderAvatar: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=600&fit=crop',
     content: 'Hi Alexandra! 👋',
     timestamp: '2025-08-23T09:00:00Z',
     read: true,
@@ -1154,7 +1154,7 @@ export const mockMessages: Message[] = [
     conversationId: 'conv-3',
     senderId: '7',
     senderName: 'Lisa & James',
-    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    senderAvatar: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=600&fit=crop',
     content: 'It was incredible! We made it to the semi-finals and the energy was amazing. The sunset afterwards was absolutely stunning.',
     timestamp: '2025-08-23T10:15:00Z',
     read: true,
@@ -1165,7 +1165,7 @@ export const mockMessages: Message[] = [
     conversationId: 'conv-3',
     senderId: '7',
     senderName: 'Lisa & James',
-    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    senderAvatar: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=600&fit=crop',
     content: 'Look at this sunset from Saturday!',
     timestamp: '2025-08-23T10:16:00Z',
     read: true,
@@ -1188,7 +1188,7 @@ export const mockMessages: Message[] = [
     conversationId: 'conv-3',
     senderId: '7',
     senderName: 'Lisa & James',
-    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    senderAvatar: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=600&fit=crop',
     content: 'Perfect! There\'s a beach bonfire party this Saturday at 6pm. Want to join?',
     timestamp: '2025-08-23T22:45:00Z',
     read: true,
