@@ -14,6 +14,7 @@ import {
   UserCircle,
   Menu,
   Bell,
+  CreditCard,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useTheme } from "@/lib/theme-context";
@@ -39,6 +40,7 @@ export function Sidebar() {
     { icon: UserCircle, label: "My Profile", href: "/profile" },
     { icon: Search, label: "Search", href: "/search" },
     { icon: MessageSquare, label: "Messages", href: "/messages" },
+    { icon: CreditCard, label: "Billing", href: "/billing" },
   ];
 
   const secondaryItems: NavItem[] = [

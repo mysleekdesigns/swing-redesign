@@ -43,7 +43,7 @@ This is a Next.js 15 application using the App Router with the following key cha
   - `/sections` - Page-specific sections
     - `/home` - Home page components (ConventionCard)
     - `/profile` - Profile page components (ProfileHeader, PhotoGrid, QuickActions, etc.)
-    - `/search` - Search page components (SearchFiltersV1, SearchFiltersV2, ActiveFilters, ResultsHeader, SortDropdown)
+    - `/search` - Search page components (SearchFiltersV2, ActiveFilters, ResultsHeader, SortDropdown)
   - `/shared` - Shared components across pages (StatsGrid, TabNavigation)
   - `providers.tsx` - Context providers wrapper
 - `/lib` - Utility functions and context

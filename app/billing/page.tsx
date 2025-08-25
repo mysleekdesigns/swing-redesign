@@ -1,20 +1,25 @@
-import { Metadata } from "next"
+"use client";
+
 import PricingCards from "@/components/sections/billing/PricingCards"
 import FeatureComparison from "@/components/sections/billing/FeatureComparison"
 import PaymentMethods from "@/components/sections/billing/PaymentMethods"
 import BillingToggle from "@/components/sections/billing/BillingToggle"
+import { Sidebar } from "@/components/layout/Sidebar";
+import { Footer } from "@/components/ui/Footer";
 
-export const metadata: Metadata = {
-  title: "Membership Subscription - Swing",
-  description: "Upgrade your SwingLifeStyle membership for unlimited access to all features",
-}
 
 export default function BillingPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Header Section */}
-        <div className="text-center mb-8 sm:mb-12">
+      <Sidebar />
+      
+      {/* Main Content */}
+      <main className="2xl:ml-64 2xl:pt-4 p-4 sm:p-6 lg:p-8">
+        <div className="w-full space-y-6">
+          {/* Billing Container */}
+          <div className="section-glass rounded-2xl p-6 sm:p-8">
+            {/* Header Section */}
+            <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Membership Subscription
           </h1>
@@ -30,25 +35,30 @@ export default function BillingPage() {
               <span className="font-semibold text-foreground">SwingLifeStyle Team</span>
             </p>
           </div>
+            </div>
+
+            {/* Billing Toggle */}
+            <BillingToggle />
+
+            {/* Pricing Cards */}
+            <PricingCards />
+
+            {/* Feature Comparison */}
+            <div className="mt-12 sm:mt-16">
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
+                Compare SwingLifeStyle Subscriptions
+              </h2>
+              <FeatureComparison />
+            </div>
+
+            {/* Payment Methods */}
+            <PaymentMethods />
+          </div>
         </div>
 
-        {/* Billing Toggle */}
-        <BillingToggle />
-
-        {/* Pricing Cards */}
-        <PricingCards />
-
-        {/* Feature Comparison */}
-        <div className="mt-12 sm:mt-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
-            Compare SwingLifeStyle Subscriptions
-          </h2>
-          <FeatureComparison />
-        </div>
-
-        {/* Payment Methods */}
-        <PaymentMethods />
-      </div>
+        {/* Footer */}
+        <Footer />
+      </main>
     </div>
   )
 }

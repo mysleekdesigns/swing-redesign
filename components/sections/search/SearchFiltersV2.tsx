@@ -286,20 +286,22 @@ export function SearchFiltersV2({
               </div>
               <div className="space-y-2">
                 <Label className="text-base">Distance</Label>
-                <Select value={distance} onValueChange={setDistance}>
-                  <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                    <SelectValue>
-                      {distanceOptions.find(opt => opt.value === distance)?.label}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    {distanceOptions.map(option => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="flex flex-wrap gap-2">
+                  {distanceOptions.map(option => (
+                    <button
+                      key={option.value}
+                      onClick={() => setDistance(option.value)}
+                      className={cn(
+                        "px-3 py-1.5 rounded-full text-sm transition-all",
+                        distance === option.value
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted hover:bg-muted/80 text-muted-foreground"
+                      )}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

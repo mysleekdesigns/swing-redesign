@@ -92,7 +92,7 @@ export function ActiveFilters({
       ))}
       <button
         onClick={clearAllFilters}
-        className="inline-flex items-center gap-1 px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm hover:bg-muted/80 transition-colors"
+        className="inline-flex items-center gap-1 px-3 py-1 bg-white dark:bg-white/10 text-foreground border border-border rounded-full text-sm hover:bg-gray-100 dark:hover:bg-white/20 transition-colors"
       >
         Clear All
         <X className="w-3 h-3" />

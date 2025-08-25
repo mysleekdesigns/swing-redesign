@@ -1,3 +1,6 @@
+"use client"
+
+import * as ReactDOM from "react-dom"
 import { cn } from "@/lib/utils";
 
 interface SortDropdownProps {
@@ -15,10 +18,10 @@ export function SortDropdown({
   setShowSortDropdown,
   dropdownPosition,
 }: SortDropdownProps) {
-  return (
+  const dropdownContent = (
     <div
       id="sort-dropdown"
-      className="fixed w-48 py-2 rounded-xl shadow-xl bg-white dark:bg-gray-800 border border-border z-[999999]"
+      className="fixed w-48 py-2 rounded-xl shadow-xl bg-popover border border-border z-[9999]"
       style={{
         top: dropdownPosition.top,
         right: dropdownPosition.right,
@@ -41,4 +44,6 @@ export function SortDropdown({
       ))}
     </div>
   );
+
+  return ReactDOM.createPortal(dropdownContent, document.body);
 }

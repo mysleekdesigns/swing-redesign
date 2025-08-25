@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import * as ReactDOM from "react-dom"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -12,6 +13,7 @@ interface SelectContextValue {
   setOpen: (open: boolean) => void
   selected?: string
   setSelected: (value: string) => void
+  triggerId: string
 }
 
 const SelectContext = React.createContext<SelectContextValue | undefined>(undefined)
@@ -34,6 +36,7 @@ interface SelectProps {
 function Select({ value, onValueChange, defaultValue, children }: SelectProps) {
   const [open, setOpen] = React.useState(false)
   const [selected, setSelected] = React.useState(value || defaultValue || "")
+  const triggerId = React.useId()
 
   React.useEffect(() => {
     if (value !== undefined) {
@@ -57,7 +60,8 @@ function Select({ value, onValueChange, defaultValue, children }: SelectProps) {
         open,
         setOpen,
         selected: value || selected,
-        setSelected: handleValueChange
+        setSelected: handleValueChange,
+        triggerId
       }}
     >
       <div data-slot="select" className="relative">
@@ -93,11 +97,12 @@ interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
   ({ className, size = "default", children, ...props }, ref) => {
-    const { open, setOpen } = useSelectContext()
+    const { open, setOpen, triggerId } = useSelectContext()
 
     return (
       <button
         ref={ref}
+        id={triggerId}
         data-slot="select-trigger"
         data-size={size}
         data-state={open ? "open" : "closed"}
@@ -128,55 +133,94 @@ interface SelectContentProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
-  ({ className, children, position = "popper", ...props }, ref) => {
-    const { open, setOpen } = useSelectContext()
+  ({ className, children, ...props }, ref) => {
+    const { open, setOpen, triggerId } = useSelectContext()
     const contentRef = React.useRef<HTMLDivElement>(null)
+    const [dropdownPosition, setDropdownPosition] = React.useState({ top: 0, left: 0, width: 0 })
     
     // Combine refs
     React.useImperativeHandle(ref, () => contentRef.current as HTMLDivElement)
 
     React.useEffect(() => {
+      if (open) {
+        // Find the trigger element by its unique ID and calculate position
+        const trigger = document.getElementById(triggerId) as HTMLElement
+        
+        if (trigger) {
+          const rect = trigger.getBoundingClientRect()
+          setDropdownPosition({
+            top: rect.bottom + window.scrollY + 4, // 4px gap
+            left: rect.left + window.scrollX,
+            width: rect.width
+          })
+        }
+      }
+    }, [open, triggerId])
+
+    React.useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
-          const trigger = contentRef.current.parentElement?.querySelector('[data-slot="select-trigger"]')
+          const trigger = document.getElementById(triggerId)
           if (trigger && !trigger.contains(event.target as Node)) {
             setOpen(false)
           }
         }
       }
 
+      const handleScroll = () => {
+        // Update position on scroll
+        const trigger = document.getElementById(triggerId) as HTMLElement
+        
+        if (trigger && open) {
+          const rect = trigger.getBoundingClientRect()
+          setDropdownPosition({
+            top: rect.bottom + window.scrollY + 4,
+            left: rect.left + window.scrollX,
+            width: rect.width
+          })
+        }
+      }
+
       if (open) {
         document.addEventListener("mousedown", handleClickOutside)
-        return () => document.removeEventListener("mousedown", handleClickOutside)
+        document.addEventListener("scroll", handleScroll, true)
+        window.addEventListener("resize", handleScroll)
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside)
+          document.removeEventListener("scroll", handleScroll, true)
+          window.removeEventListener("resize", handleScroll)
+        }
       }
-    }, [open, setOpen])
+    }, [open, setOpen, triggerId])
 
     if (!open) return null
 
-    return (
+    const dropdownContent = (
       <div
         ref={contentRef}
         id="select-listbox"
         data-slot="select-content"
         data-state={open ? "open" : "closed"}
+        style={{
+          position: 'fixed',
+          top: `${dropdownPosition.top}px`,
+          left: `${dropdownPosition.left}px`,
+          minWidth: `${dropdownPosition.width}px`,
+        }}
         className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 absolute z-50 max-h-96 min-w-[8rem] origin-top overflow-x-hidden overflow-y-auto rounded-md border shadow-md mt-1",
-          position === "popper" &&
-            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 z-[9999] max-h-96 origin-top overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
           className
         )}
         {...props}
       >
-        <div 
-          className={cn(
-            "p-1",
-            position === "popper" && "min-w-[var(--radix-select-trigger-width)] scroll-my-1"
-          )}
-        >
+        <div className="p-1">
           {children}
         </div>
       </div>
     )
+
+    // Portal to body
+    return ReactDOM.createPortal(dropdownContent, document.body)
   }
 )
 SelectContent.displayName = "SelectContent"

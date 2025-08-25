@@ -7,7 +7,6 @@ import { Footer } from "@/components/ui/Footer";
 import { UserCard } from "@/components/ui/UserCard";
 import { whoIsOnUsers } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
-import { SearchFiltersV1 } from "@/components/sections/search/SearchFiltersV1";
 import { SearchFiltersV2 } from "@/components/sections/search/SearchFiltersV2";
 import { ActiveFilters } from "@/components/sections/search/ActiveFilters";
 import { ResultsHeader } from "@/components/sections/search/ResultsHeader";
@@ -25,9 +24,7 @@ export default function SearchPage() {
   const [sortBy, setSortBy] = useState('distance');
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
-  const [formVersion, setFormVersion] = useState<'v1' | 'v2'>('v1');
-  const [activeTabV1, setActiveTabV1] = useState("filtered");
-  const [activeTabV2, setActiveTabV2] = useState("basic");
+  const [activeTab, setActiveTab] = useState("basic");
   
   const sortButtonRef = useRef<HTMLButtonElement>(null!);
   
@@ -79,7 +76,7 @@ export default function SearchPage() {
     }
   }, [showSortDropdown]);
 
-  // Close dropdown when clicking outside
+  // Handle dropdown position updates and close on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sortButtonRef.current && !sortButtonRef.current.contains(event.target as Node)) {
@@ -90,9 +87,26 @@ export default function SearchPage() {
       }
     };
 
+    const handleScroll = () => {
+      // Update position on scroll
+      if (sortButtonRef.current && showSortDropdown) {
+        const rect = sortButtonRef.current.getBoundingClientRect();
+        setDropdownPosition({
+          top: rect.bottom + window.scrollY + 8,
+          right: window.innerWidth - rect.right
+        });
+      }
+    };
+
     if (showSortDropdown) {
       document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handleScroll);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener('resize', handleScroll);
+      };
     }
   }, [showSortDropdown]);
   
@@ -178,93 +192,34 @@ export default function SearchPage() {
             {/* Desktop Filters */}
             <div className="hidden lg:block">
               <div className="section-glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-                {/* Version Switcher */}
-                <div className="flex justify-center gap-2 mb-6">
-                  <button
-                    onClick={() => setFormVersion('v1')}
-                    className={cn(
-                      "px-6 py-2 rounded-lg font-medium transition-all",
-                      formVersion === 'v1' 
-                        ? "bg-primary text-primary-foreground shadow-lg" 
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    )}
-                  >
-                    Version 1
-                  </button>
-                  <button
-                    onClick={() => setFormVersion('v2')}
-                    className={cn(
-                      "px-6 py-2 rounded-lg font-medium transition-all",
-                      formVersion === 'v2' 
-                        ? "bg-primary text-primary-foreground shadow-lg" 
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    )}
-                  >
-                    Version 2
-                  </button>
-                </div>
-                
-                {/* Render the appropriate form version */}
-                {formVersion === 'v1' ? (
-                  <SearchFiltersV1
-                    activeTab={activeTabV1}
-                    setActiveTab={setActiveTabV1}
-                    relationshipType={relationshipType}
-                    setRelationshipType={setRelationshipType}
-                    maleOrientation={maleOrientation}
-                    setMaleOrientation={setMaleOrientation}
-                    femaleOrientation={femaleOrientation}
-                    setFemaleOrientation={setFemaleOrientation}
-                    ageRange={ageRange}
-                    setAgeRange={setAgeRange}
-                    locationSearch={locationSearch}
-                    setLocationSearch={setLocationSearch}
-                    memberSearch={memberSearch}
-                    setMemberSearch={setMemberSearch}
-                    lastOnline={lastOnline}
-                    setLastOnline={setLastOnline}
-                    memberType={memberType}
-                    setMemberType={setMemberType}
-                    distance={distance}
-                    setDistance={setDistance}
-                    showOnlyFilters={showOnlyFilters}
-                    setShowOnlyFilters={setShowOnlyFilters}
-                    smoke={smoke}
-                    setSmoke={setSmoke}
-                    drink={drink}
-                    setDrink={setDrink}
-                    updateResults={() => {}}
-                  />
-                ) : (
-                  <SearchFiltersV2
-                    activeTab={activeTabV2}
-                    setActiveTab={setActiveTabV2}
-                    relationshipType={relationshipType}
-                    setRelationshipType={setRelationshipType}
-                    maleOrientation={maleOrientation}
-                    setMaleOrientation={setMaleOrientation}
-                    femaleOrientation={femaleOrientation}
-                    setFemaleOrientation={setFemaleOrientation}
-                    ageRange={ageRange}
-                    setAgeRange={setAgeRange}
-                    locationSearch={locationSearch}
-                    setLocationSearch={setLocationSearch}
-                    memberSearch={memberSearch}
-                    setMemberSearch={setMemberSearch}
-                    lastOnline={lastOnline}
-                    setLastOnline={setLastOnline}
-                    memberType={memberType}
-                    setMemberType={setMemberType}
-                    distance={distance}
-                    setDistance={setDistance}
-                    showOnlyFilters={showOnlyFilters}
-                    setShowOnlyFilters={setShowOnlyFilters}
-                    smoke={smoke}
-                    setSmoke={setSmoke}
-                    drink={drink}
-                    setDrink={setDrink}
-                  />
-                )}
+                <SearchFiltersV2
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  relationshipType={relationshipType}
+                  setRelationshipType={setRelationshipType}
+                  maleOrientation={maleOrientation}
+                  setMaleOrientation={setMaleOrientation}
+                  femaleOrientation={femaleOrientation}
+                  setFemaleOrientation={setFemaleOrientation}
+                  ageRange={ageRange}
+                  setAgeRange={setAgeRange}
+                  locationSearch={locationSearch}
+                  setLocationSearch={setLocationSearch}
+                  memberSearch={memberSearch}
+                  setMemberSearch={setMemberSearch}
+                  lastOnline={lastOnline}
+                  setLastOnline={setLastOnline}
+                  memberType={memberType}
+                  setMemberType={setMemberType}
+                  distance={distance}
+                  setDistance={setDistance}
+                  showOnlyFilters={showOnlyFilters}
+                  setShowOnlyFilters={setShowOnlyFilters}
+                  smoke={smoke}
+                  setSmoke={setSmoke}
+                  drink={drink}
+                  setDrink={setDrink}
+                />
                 
                 {/* Active Filters Display */}
                 <ActiveFilters
@@ -291,93 +246,34 @@ export default function SearchPage() {
               showMobileFilters ? "max-h-[3000px]" : "max-h-0"
             )}>
               <div className="section-glass rounded-2xl p-4 ring-2 ring-primary/20 shadow-lg shadow-primary/10">
-                {/* Version Switcher for Mobile */}
-                <div className="flex justify-center gap-2 mb-4">
-                  <button
-                    onClick={() => setFormVersion('v1')}
-                    className={cn(
-                      "px-4 py-2 rounded-lg font-medium text-sm transition-all",
-                      formVersion === 'v1' 
-                        ? "bg-primary text-primary-foreground shadow-lg" 
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    )}
-                  >
-                    Version 1
-                  </button>
-                  <button
-                    onClick={() => setFormVersion('v2')}
-                    className={cn(
-                      "px-4 py-2 rounded-lg font-medium text-sm transition-all",
-                      formVersion === 'v2' 
-                        ? "bg-primary text-primary-foreground shadow-lg" 
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    )}
-                  >
-                    Version 2
-                  </button>
-                </div>
-                
-                {/* Render the appropriate form version */}
-                {formVersion === 'v1' ? (
-                  <SearchFiltersV1
-                    activeTab={activeTabV1}
-                    setActiveTab={setActiveTabV1}
-                    relationshipType={relationshipType}
-                    setRelationshipType={setRelationshipType}
-                    maleOrientation={maleOrientation}
-                    setMaleOrientation={setMaleOrientation}
-                    femaleOrientation={femaleOrientation}
-                    setFemaleOrientation={setFemaleOrientation}
-                    ageRange={ageRange}
-                    setAgeRange={setAgeRange}
-                    locationSearch={locationSearch}
-                    setLocationSearch={setLocationSearch}
-                    memberSearch={memberSearch}
-                    setMemberSearch={setMemberSearch}
-                    lastOnline={lastOnline}
-                    setLastOnline={setLastOnline}
-                    memberType={memberType}
-                    setMemberType={setMemberType}
-                    distance={distance}
-                    setDistance={setDistance}
-                    showOnlyFilters={showOnlyFilters}
-                    setShowOnlyFilters={setShowOnlyFilters}
-                    smoke={smoke}
-                    setSmoke={setSmoke}
-                    drink={drink}
-                    setDrink={setDrink}
-                    updateResults={() => {}}
-                  />
-                ) : (
-                  <SearchFiltersV2
-                    activeTab={activeTabV2}
-                    setActiveTab={setActiveTabV2}
-                    relationshipType={relationshipType}
-                    setRelationshipType={setRelationshipType}
-                    maleOrientation={maleOrientation}
-                    setMaleOrientation={setMaleOrientation}
-                    femaleOrientation={femaleOrientation}
-                    setFemaleOrientation={setFemaleOrientation}
-                    ageRange={ageRange}
-                    setAgeRange={setAgeRange}
-                    locationSearch={locationSearch}
-                    setLocationSearch={setLocationSearch}
-                    memberSearch={memberSearch}
-                    setMemberSearch={setMemberSearch}
-                    lastOnline={lastOnline}
-                    setLastOnline={setLastOnline}
-                    memberType={memberType}
-                    setMemberType={setMemberType}
-                    distance={distance}
-                    setDistance={setDistance}
-                    showOnlyFilters={showOnlyFilters}
-                    setShowOnlyFilters={setShowOnlyFilters}
-                    smoke={smoke}
-                    setSmoke={setSmoke}
-                    drink={drink}
-                    setDrink={setDrink}
-                  />
-                )}
+                <SearchFiltersV2
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  relationshipType={relationshipType}
+                  setRelationshipType={setRelationshipType}
+                  maleOrientation={maleOrientation}
+                  setMaleOrientation={setMaleOrientation}
+                  femaleOrientation={femaleOrientation}
+                  setFemaleOrientation={setFemaleOrientation}
+                  ageRange={ageRange}
+                  setAgeRange={setAgeRange}
+                  locationSearch={locationSearch}
+                  setLocationSearch={setLocationSearch}
+                  memberSearch={memberSearch}
+                  setMemberSearch={setMemberSearch}
+                  lastOnline={lastOnline}
+                  setLastOnline={setLastOnline}
+                  memberType={memberType}
+                  setMemberType={setMemberType}
+                  distance={distance}
+                  setDistance={setDistance}
+                  showOnlyFilters={showOnlyFilters}
+                  setShowOnlyFilters={setShowOnlyFilters}
+                  smoke={smoke}
+                  setSmoke={setSmoke}
+                  drink={drink}
+                  setDrink={setDrink}
+                />
               </div>
             </div>
           </section>
