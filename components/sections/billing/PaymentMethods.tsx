@@ -6,7 +6,7 @@ export default function PaymentMethods() {
   return (
     <div className="mt-12 sm:mt-16 space-y-8">
       {/* Payment Methods */}
-      <div className="bg-white rounded-2xl border p-6 sm:p-8">
+      <div className="bg-card rounded-2xl border p-6 sm:p-8">
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
           <CreditCardIcon className="size-5 text-primary" />
           Payment Methods
@@ -43,6 +43,20 @@ export default function PaymentMethods() {
             <p className="text-sm text-muted-foreground">
               All major credit and debit cards accepted. Your payment information is encrypted and secure.
             </p>
+            <div className="flex flex-wrap gap-4 mt-3">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <ShieldCheckIcon className="size-4 text-primary" />
+                <span>SSL Secured</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <LockIcon className="size-4 text-primary" />
+                <span>256-bit Encryption</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CreditCardIcon className="size-4 text-primary" />
+                <span>PCI Compliant</span>
+              </div>
+            </div>
           </div>
 
           {/* Check Payment */}
@@ -50,37 +64,24 @@ export default function PaymentMethods() {
             <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
               Pay by Check
             </h4>
-            <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-              <p className="text-sm font-medium">We accept money orders, cash, or gift/prepaid cards.</p>
-              <p className="text-xs text-muted-foreground">
-                Payments in the form of a check may be mailed to the address below:
+            <div className="bg-muted rounded-lg p-4 space-y-3">
+              <p className="text-sm font-medium text-destructive">
+                We cannot accept money orders, cash, or gift/prepaid cards.
               </p>
-              <div className="mt-3 p-3 bg-white rounded border text-xs space-y-1">
-                <p className="font-medium">DashBoard Hosting LLC</p>
-                <p>PO Box 216</p>
-                <p>Coral Springs, FL 33067</p>
+              <p className="text-sm text-foreground">
+                Payments in the form of a check may be mailed to the address below.
+              </p>
+              <p className="text-sm text-foreground">
+                Please ensure that your profile name is clearly written on your check and that it is made payable to <span className="font-semibold">Dashboardhosting LLC</span> and <span className="font-semibold text-destructive">NOT</span> <span className="font-semibold">SwingLifeStyle</span>.
+              </p>
+              <div className="mt-4 p-4 bg-card rounded-lg border border-border space-y-1">
+                <p className="text-sm font-semibold text-foreground mb-2">Mailing address:</p>
+                <p className="text-sm text-foreground">DashBoard Hosting, LLC</p>
+                <p className="text-sm text-foreground">4613 N. University Drive #239</p>
+                <p className="text-sm text-foreground">Coral Springs, FL. 33067</p>
               </div>
-              <p className="text-xs text-muted-foreground italic">
-                Please ensure that your profile name is clearly written on your check and that it is made payable to DashBoardHosting LLC and NOT SwingLifeStyle
-              </p>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Trust Badges */}
-      <div className="flex flex-wrap items-center justify-center gap-6 py-6">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <ShieldCheckIcon className="size-5 text-primary" />
-          <span>SSL Secured</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <LockIcon className="size-5 text-primary" />
-          <span>256-bit Encryption</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <CreditCardIcon className="size-5 text-primary" />
-          <span>PCI Compliant</span>
         </div>
       </div>
     </div>

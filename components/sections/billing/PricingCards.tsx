@@ -102,7 +102,7 @@ export default function PricingCards() {
         <div
           key={plan.id}
           className={cn(
-            "relative flex flex-col rounded-2xl border bg-white p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg",
+            "relative flex flex-col rounded-2xl border bg-card p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg",
             plan.popular && "border-primary shadow-primary/20 ring-2 ring-primary/20",
             plan.bestValue && "border-accent shadow-accent/20 ring-2 ring-accent/20"
           )}

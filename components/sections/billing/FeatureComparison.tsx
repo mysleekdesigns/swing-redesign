@@ -101,7 +101,7 @@ export default function FeatureComparison() {
             {featureGroups.map((group) => (
               <div
                 key={group.title}
-                className="border rounded-lg overflow-hidden bg-white"
+                className="border rounded-lg overflow-hidden bg-card"
               >
                 <button
                   type="button"
@@ -110,7 +110,7 @@ export default function FeatureComparison() {
                     e.stopPropagation()
                     toggleGroup(group.title)
                   }}
-                  className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
+                  className="w-full flex items-center justify-between p-4 bg-muted hover:bg-muted/80 transition-colors"
                 >
                   <span className="font-semibold">{group.title}</span>
                   <ChevronDownIcon
@@ -121,7 +121,7 @@ export default function FeatureComparison() {
                   />
                 </button>
                 {expandedGroups.includes(group.title) && (
-                  <div className="p-4 space-y-3 animate-in slide-in-from-top-2 duration-200 bg-white">
+                  <div className="p-4 space-y-3 animate-in slide-in-from-top-2 duration-200 bg-card">
                     {group.features.map((feature) => (
                       <div
                         key={feature.name}
@@ -151,7 +151,7 @@ export default function FeatureComparison() {
 
   // Desktop table view
   const DesktopView = () => (
-    <div className="hidden lg:block overflow-x-auto bg-white rounded-lg border">
+    <div className="hidden lg:block overflow-x-auto bg-card rounded-lg border">
       <table className="w-full">
         <thead>
           <tr className="border-b">
@@ -185,7 +185,7 @@ export default function FeatureComparison() {
         <tbody>
           {featureGroups.map((group) => (
             <React.Fragment key={group.title}>
-              <tr className="bg-gray-50">
+              <tr className="bg-muted">
                 <td
                   colSpan={4}
                   className="py-3 px-4 font-semibold text-sm uppercase tracking-wider"
@@ -197,7 +197,7 @@ export default function FeatureComparison() {
                 <tr
                   key={`${group.title}-${feature.name}`}
                   className={cn(
-                    "border-b hover:bg-gray-50 transition-colors bg-white",
+                    "border-b hover:bg-muted/50 transition-colors bg-card",
                     index === group.features.length - 1 && "border-b-2"
                   )}
                 >
