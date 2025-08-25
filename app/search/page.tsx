@@ -656,10 +656,9 @@ export default function SearchPage() {
     return (
       <div className="space-y-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
-            <TabsTrigger value="basic">Basic</TabsTrigger>
-            <TabsTrigger value="preferences">Preferences</TabsTrigger>
-            <TabsTrigger value="location">Search</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsTrigger value="basic">Filtered Search</TabsTrigger>
+            <TabsTrigger value="profile">Profile Search</TabsTrigger>
           </TabsList>
         
         <TabsContent value="basic" className="space-y-6">
@@ -775,10 +774,45 @@ export default function SearchPage() {
               </div>
             </div>
           </div>
-        </TabsContent>
-        
-        <TabsContent value="preferences" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          {/* Location, Show Only, and Lifestyle Sections */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Location Section */}
+            <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Location</h3>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-base">City or Postal Code</Label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Enter location..."
+                      value={locationSearch}
+                      onChange={(e) => setLocationSearch(e.target.value)}
+                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-base">Distance</Label>
+                  <Select value={distance} onValueChange={setDistance}>
+                    <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                      <SelectValue>
+                        {distanceOptions.find(opt => opt.value === distance)?.label}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {distanceOptions.map(option => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
             {/* Show Only Filters */}
             <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-foreground mb-4">Show Only</h3>
@@ -895,66 +929,29 @@ export default function SearchPage() {
           </div>
         </TabsContent>
         
-        <TabsContent value="location" className="space-y-6">
-          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Location</h3>
-            <div className="max-w-md">
+        <TabsContent value="profile" className="space-y-6">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-6 md:p-8 border border-border/50 hover:shadow-md transition-shadow">
+            <div className="max-w-2xl">
+              <h3 className="text-lg font-semibold text-foreground mb-6">Profile Search</h3>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label className="text-base">City or Postal Code</Label>
-                  <div className="relative">
+                  <Label className="text-base font-medium">Search by Profile Name</Label>
+                  <div className="relative max-w-md">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       type="text"
-                      placeholder="Enter location..."
-                      value={locationSearch}
-                      onChange={(e) => setLocationSearch(e.target.value)}
-                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+                      placeholder="Enter username to search..."
+                      value={memberSearch}
+                      onChange={(e) => setMemberSearch(e.target.value)}
+                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50 h-11 text-base"
                     />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-base">Distance</Label>
-                  <Select value={distance} onValueChange={setDistance}>
-                    <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                      <SelectValue>
-                        {distanceOptions.find(opt => opt.value === distance)?.label}
-                      </SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      {distanceOptions.map(option => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
                 </div>
               </div>
             </div>
           </div>
         </TabsContent>
       </Tabs>
-      
-      {/* Profile Search Section - Separate from other filters */}
-      <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
-        <h3 className="text-lg font-semibold text-foreground mb-4">Profile Search</h3>
-        <div className="max-w-md mx-auto">
-          <div className="space-y-2">
-            <Label className="text-base">Search by Profile Name</Label>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search by username..."
-                value={memberSearch}
-                onChange={(e) => setMemberSearch(e.target.value)}
-                className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
       
       {/* Active Filters Display */}
       <ActiveFilters />
