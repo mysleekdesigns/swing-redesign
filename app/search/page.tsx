@@ -78,6 +78,7 @@ export default function SearchPage() {
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
   const [formVersion, setFormVersion] = useState<'v1' | 'v2'>('v1');
+  const [activeTabV1, setActiveTabV1] = useState("filtered");
   const [activeTabV2, setActiveTabV2] = useState("basic");
   
   const sortButtonRef = useRef<HTMLButtonElement>(null);
@@ -274,6 +275,13 @@ export default function SearchPage() {
   // Filter Sections Component (Version 1)
   const FilterSections = () => (
     <div className="space-y-6">
+      <Tabs value={activeTabV1} onValueChange={setActiveTabV1} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="filtered">Filtered Search</TabsTrigger>
+          <TabsTrigger value="profile">Profile Search</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="filtered" className="space-y-6">
       {/* Main Filter Grid - Optimized for cohesive layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         
@@ -608,35 +616,40 @@ export default function SearchPage() {
         </div>
       </div>
 
-      {/* Profile Search Section - Separate from other filters */}
-      <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 hover:shadow-md transition-shadow">
-        <h3 className="text-base font-semibold text-foreground mb-4">Profile Search</h3>
-        <div className="max-w-md mx-auto">
-          <div className="space-y-2">
-            <Label className="text-sm text-muted-foreground">Search by Profile Name</Label>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Enter profile name..."
-                value={memberSearch}
-                onChange={(e) => setMemberSearch(e.target.value)}
-                className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
-              />
+          {/* Action Buttons */}
+          <div className="flex justify-center pt-4">
+            <button
+              onClick={updateResults}
+              className="w-full sm:w-auto px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
+            >
+              Update Results
+            </button>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="profile" className="space-y-6">
+          <div className="bg-white dark:bg-white/5 rounded-lg p-6 md:p-8 border border-border/50 hover:shadow-md transition-shadow">
+            <div className="max-w-2xl">
+              <h3 className="text-lg font-semibold text-foreground mb-6">Profile Search</h3>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label className="text-base font-medium">Search by Profile Name</Label>
+                  <div className="relative max-w-md">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Enter username to search..."
+                      value={memberSearch}
+                      onChange={(e) => setMemberSearch(e.target.value)}
+                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50 h-11 text-base"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex justify-center pt-4">
-        <button
-          onClick={updateResults}
-          className="w-full sm:w-auto px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all hover:scale-105 shadow-lg"
-        >
-          Update Results
-        </button>
-      </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 
@@ -990,7 +1003,7 @@ export default function SearchPage() {
               className="w-full flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-semibold transition-all"
             >
               <SlidersHorizontal className="w-5 h-5" />
-              <span>Open Search Form</span>
+              <span>{showMobileFilters ? 'Close Search Form' : 'Open Search Form'}</span>
             </button>
           </div>
           
