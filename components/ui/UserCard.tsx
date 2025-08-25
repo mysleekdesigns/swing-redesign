@@ -42,13 +42,13 @@ export function UserCard({
         
         {/* Status indicators with improved glassmorphism */}
         {isOnline && (
-          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex items-center justify-center w-fit h-fit p-1.5 sm:p-2 rounded-full glass-dark border border-white/10">
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex items-center justify-center w-fit h-fit p-1.5 sm:p-2 rounded-full glass-dark border border-border/10">
             <div className="status-dot status-online animate-pulse" />
           </div>
         )}
         
         {photosCount && (
-          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-white/10">
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-border/10">
             <Camera className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-white" />
             <span className="text-xs sm:text-sm font-medium text-white">{photosCount}</span>
           </div>
@@ -61,7 +61,7 @@ export function UserCard({
             {showActions && (
               <div className="flex gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                 <button 
-                  className={`w-8 h-8 sm:w-9 sm:h-9 p-1.5 sm:p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform ${
+                  className={`w-8 h-8 sm:w-9 sm:h-9 p-1.5 sm:p-2 rounded-full glass-dark border border-border/10 hover:scale-110 transition-transform ${
                     isLiked ? 'bg-primary/20 border-primary/30' : ''
                   }`}
                   aria-label={isLiked ? 'Unlike' : 'Like'}
@@ -69,7 +69,7 @@ export function UserCard({
                   <Heart className={`w-full h-full ${isLiked ? 'text-primary fill-primary' : 'text-white'}`} />
                 </button>
                 <button 
-                  className="w-8 h-8 sm:w-9 sm:h-9 p-1.5 sm:p-2 rounded-full glass-dark border border-white/10 hover:scale-110 transition-transform"
+                  className="w-8 h-8 sm:w-9 sm:h-9 p-1.5 sm:p-2 rounded-full glass-dark border border-border/10 hover:scale-110 transition-transform"
                   aria-label="Send message"
                 >
                   <MessageCircle className="w-full h-full text-white" />

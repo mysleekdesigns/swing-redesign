@@ -8,9 +8,9 @@ interface ConventionCardProps extends Convention {
 
 const categoryColors = {
   lifestyle: 'bg-primary/20 text-primary border-primary/30',
-  educational: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  social: 'bg-green-500/20 text-green-300 border-green-500/30',
-  wellness: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+  educational: 'bg-accent/20 text-accent-foreground border-accent/30',
+  social: 'bg-chart-1/20 text-chart-1 border-chart-1/30',
+  wellness: 'bg-secondary/20 text-secondary-foreground border-secondary/30',
 };
 
 export function ConventionCard({
@@ -53,15 +53,15 @@ export function ConventionCard({
           </div>
           
           {/* Attendee count */}
-          <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full glass-dark border border-white/10">
-            <Users className="w-3 h-3 text-white" />
-            <span className="text-sm font-medium text-white">{attendeeCount}</span>
+          <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full glass-dark border border-border/10">
+            <Users className="w-3 h-3 text-primary-foreground" />
+            <span className="text-sm font-medium text-primary-foreground">{attendeeCount}</span>
           </div>
           
           {/* Content overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-4">
-            <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{name}</h3>
-            <div className="flex items-center gap-4 text-base text-white/80">
+            <h3 className="text-lg font-bold text-primary-foreground mb-2 line-clamp-2">{name}</h3>
+            <div className="flex items-center gap-4 text-base text-primary-foreground/80">
               <div className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 <span>{formatDate(date)}</span>
@@ -92,24 +92,24 @@ export function ConventionCard({
         
         {/* Price tag */}
         {price && (
-          <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 rounded-full glass-dark border border-white/10">
+          <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 rounded-full glass-dark border border-border/10">
             <DollarSign className="w-3.5 h-3.5 text-primary" />
-            <span className="text-base font-semibold text-white">{price.replace('$', '')}</span>
+            <span className="text-base font-semibold text-primary-foreground">{price.replace('$', '')}</span>
           </div>
         )}
         
         {/* Content overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
           <div className="space-y-3">
-            <h3 className="text-xl font-bold text-white leading-tight line-clamp-2">
+            <h3 className="text-xl font-bold text-primary-foreground leading-tight line-clamp-2">
               {name}
             </h3>
             
-            <p className="text-base text-white/80 line-clamp-2">
+            <p className="text-base text-primary-foreground/80 line-clamp-2">
               {description}
             </p>
             
-            <div className="flex flex-wrap gap-3 text-base text-white/90">
+            <div className="flex flex-wrap gap-3 text-base text-primary-foreground/90">
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4 text-primary" />
                 <span className="font-medium">{formatDate(date)}</span>
@@ -122,8 +122,8 @@ export function ConventionCard({
             
             <div className="flex items-center justify-between pt-2">
               <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-white/60" />
-                <span className="text-base text-white/80">
+                <Users className="w-4 h-4 text-primary-foreground/60" />
+                <span className="text-base text-primary-foreground/80">
                   {attendeeCount} {attendeeCount === 1 ? 'person' : 'people'} attending
                 </span>
               </div>

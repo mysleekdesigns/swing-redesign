@@ -27,11 +27,11 @@ export function FilterPill({
         // Inactive state - Maximum contrast for light mode
         !isActive && [
           // Light mode: Pure white background with strong border for maximum contrast
-          "bg-white border-2 border-gray-300 text-gray-900",
-          "hover:border-gray-400 hover:shadow-md hover:text-gray-900",
+          "bg-background border-2 border-border text-foreground",
+          "hover:border-border/80 hover:shadow-md hover:text-foreground",
           // Dark mode: Keep the existing glass effect
-          "dark:bg-white/5 dark:text-white/70 dark:border-white/10",
-          "dark:hover:bg-white/10 dark:hover:text-white/90",
+          "dark:bg-card/5 dark:text-foreground/70 dark:border-border/10",
+          "dark:hover:bg-card/10 dark:hover:text-foreground/90",
         ],
         
         // Active state with golden background

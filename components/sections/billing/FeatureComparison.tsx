@@ -63,7 +63,7 @@ function FeatureIcon({ value }: { value: boolean | "limited" }) {
     return <CheckIcon className="size-5 text-primary" />
   }
   if (value === "limited") {
-    return <MinusIcon className="size-5 text-yellow-500" />
+    return <MinusIcon className="size-5 text-warning" />
   }
   return <XIcon className="size-5 text-muted-foreground/50" />
 }
@@ -235,7 +235,7 @@ export default function FeatureComparison() {
           <span className="text-muted-foreground">Included</span>
         </div>
         <div className="flex items-center gap-2">
-          <MinusIcon className="size-4 text-yellow-500" />
+          <MinusIcon className="size-4 text-warning" />
           <span className="text-muted-foreground">Limited</span>
         </div>
         <div className="flex items-center gap-2">

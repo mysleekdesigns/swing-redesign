@@ -87,12 +87,12 @@ function PreferenceBar({
 }) {
   const getColorClasses = () => {
     switch (color) {
-      case 'green': return 'bg-gradient-to-r from-green-500 to-green-600';
-      case 'blue': return 'bg-gradient-to-r from-blue-500 to-blue-600';
-      case 'purple': return 'bg-gradient-to-r from-purple-500 to-purple-600';
-      case 'pink': return 'bg-gradient-to-r from-pink-500 to-pink-600';
-      case 'orange': return 'bg-gradient-to-r from-orange-500 to-orange-600';
-      default: return 'bg-gradient-to-r from-gray-500 to-gray-600';
+      case 'green': return 'bg-gradient-to-r from-chart-1 to-chart-1/80';
+      case 'blue': return 'bg-gradient-to-r from-accent to-accent/80';
+      case 'purple': return 'bg-gradient-to-r from-secondary to-secondary/80';
+      case 'pink': return 'bg-gradient-to-r from-primary to-primary/80';
+      case 'orange': return 'bg-gradient-to-r from-chart-4 to-chart-4/80';
+      default: return 'bg-gradient-to-r from-muted to-muted-foreground';
     }
   };
 
@@ -123,12 +123,12 @@ function LegendItem({
 }) {
   const getColorClass = () => {
     switch (color) {
-      case 'green': return 'bg-green-500';
-      case 'blue': return 'bg-blue-500';
-      case 'purple': return 'bg-purple-500';
-      case 'pink': return 'bg-pink-500';
+      case 'green': return 'bg-chart-1';
+      case 'blue': return 'bg-accent';
+      case 'purple': return 'bg-secondary';
+      case 'pink': return 'bg-primary';
       case 'muted': return 'bg-muted';
-      default: return 'bg-gray-500';
+      default: return 'bg-muted-foreground';
     }
   };
 

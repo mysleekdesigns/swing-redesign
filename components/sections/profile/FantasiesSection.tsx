@@ -36,7 +36,7 @@ export function FantasiesSection({ fantasies }: FantasiesSectionProps) {
                   {fantasy.category}
                 </span>
                 {fantasy.private && (
-                  <div className="w-2 h-2 rounded-full bg-orange-500" title="Private fantasy" />
+                  <div className="w-2 h-2 rounded-full bg-warning" title="Private fantasy" />
                 )}
               </div>
             </div>

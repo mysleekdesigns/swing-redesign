@@ -7,10 +7,10 @@ interface HotDateCardProps extends HotDate {
 }
 
 const categoryColors = {
-  party: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-  outdoor: 'bg-green-500/20 text-green-300 border-green-500/30',
-  cultural: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  sports: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+  party: 'bg-secondary/20 text-secondary-foreground border-secondary/30',
+  outdoor: 'bg-chart-1/20 text-chart-1 border-chart-1/30',
+  cultural: 'bg-accent/20 text-accent-foreground border-accent/30',
+  sports: 'bg-chart-4/20 text-chart-4 border-chart-4/30',
   dining: 'bg-primary/20 text-primary border-primary/30',
 };
 
@@ -54,7 +54,7 @@ export function HotDateCard({
           </div>
           
           {/* Attendee count */}
-          <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full glass-dark border border-white/10">
+          <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full glass-dark border border-border/10">
             <Users className="w-3 h-3 text-white" />
             <span className="text-sm font-medium text-white">{attendeeCount}</span>
           </div>
@@ -97,7 +97,7 @@ export function HotDateCard({
         
         {/* Price tag */}
         {price && (
-          <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-white/10">
+          <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-dark border border-border/10">
             <DollarSign className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-primary" />
             <span className="text-sm sm:text-base font-semibold text-white">{price.replace('$', '')}</span>
           </div>

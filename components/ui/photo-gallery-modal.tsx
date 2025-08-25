@@ -124,15 +124,15 @@ export function PhotoGalleryModal({
       onClick={onClose}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
       
       {/* Modal Container with Glassmorphism */}
       <div 
         className={cn(
           "relative z-10 w-full max-w-5xl mx-4 sm:mx-8",
-          "bg-white/10 dark:bg-black/20",
+          "bg-card/10 dark:bg-background/20",
           "backdrop-blur-xl",
-          "border border-white/20 dark:border-white/10",
+          "border border-border/20 dark:border-border/10",
           "rounded-3xl",
           "shadow-2xl shadow-black/20",
           "p-4 sm:p-6"
@@ -145,11 +145,11 @@ export function PhotoGalleryModal({
           className={cn(
             "absolute top-4 right-4 z-20",
             "w-10 h-10 rounded-full",
-            "bg-white/20 dark:bg-black/20",
+            "bg-card/20 dark:bg-background/20",
             "backdrop-blur-md",
-            "border border-white/30 dark:border-white/10",
+            "border border-border/30 dark:border-border/10",
             "flex items-center justify-center",
-            "text-white hover:bg-white/30 dark:hover:bg-black/30",
+            "text-foreground hover:bg-card/30 dark:hover:bg-background/30",
             "transition-all duration-200",
             "hover:scale-110"
           )}
@@ -162,10 +162,10 @@ export function PhotoGalleryModal({
         <div className={cn(
           "absolute top-4 left-4 z-20",
           "px-3 py-1.5 rounded-full",
-          "bg-white/20 dark:bg-black/20",
+          "bg-card/20 dark:bg-background/20",
           "backdrop-blur-md",
-          "border border-white/30 dark:border-white/10",
-          "text-white text-sm font-medium"
+          "border border-border/30 dark:border-border/10",
+          "text-foreground text-sm font-medium"
         )}>
           {current + 1} / {images.length}
         </div>
@@ -201,20 +201,20 @@ export function PhotoGalleryModal({
             "!left-4 !translate-x-0",
             "top-1/2 -translate-y-1/2",
             "w-12 h-12",
-            "bg-white/20 dark:bg-black/20",
+            "bg-card/20 dark:bg-background/20",
             "backdrop-blur-md",
-            "border-white/30 dark:border-white/10",
-            "text-white hover:bg-white/30 dark:hover:bg-black/30",
+            "border-border/30 dark:border-border/10",
+            "text-foreground hover:bg-card/30 dark:hover:bg-background/30",
             "hover:scale-110"
           )} />
           <CarouselNext className={cn(
             "!right-4 !translate-x-0",
             "top-1/2 -translate-y-1/2",
             "w-12 h-12",
-            "bg-white/20 dark:bg-black/20",
+            "bg-card/20 dark:bg-background/20",
             "backdrop-blur-md",
-            "border-white/30 dark:border-white/10",
-            "text-white hover:bg-white/30 dark:hover:bg-black/30",
+            "border-border/30 dark:border-border/10",
+            "text-foreground hover:bg-card/30 dark:hover:bg-background/30",
             "hover:scale-110"
           )} />
         </Carousel>
@@ -248,7 +248,7 @@ export function PhotoGalleryModal({
                     <div className={cn(
                       "relative w-full h-full rounded-lg overflow-hidden",
                       current === index
-                        ? "border border-white/60 shadow-[inset_0_0_12px_rgba(255,255,255,0.3)]"
+                        ? "border border-border/60 shadow-[inset_0_0_12px_rgba(255,255,255,0.3)]"
                         : "border-0 hover:opacity-80"
                     )}>
                       <Image
@@ -260,7 +260,7 @@ export function PhotoGalleryModal({
                       />
                       <div className={cn(
                         "absolute inset-0 transition-opacity",
-                        current === index ? "bg-transparent" : "bg-black/30"
+                        current === index ? "bg-transparent" : "bg-background/30"
                       )} />
                     </div>
                   </button>

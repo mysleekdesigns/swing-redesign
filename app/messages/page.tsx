@@ -119,7 +119,7 @@ export default function MessagesPage() {
                             className="h-12 w-12 rounded-full object-cover ring-2 ring-background"
                           />
                           {participant.isOnline && (
-                            <div className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-background bg-green-500" />
+                            <div className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-background bg-online" />
                           )}
                         </div>
                         <div className="flex-1 overflow-hidden">
@@ -187,7 +187,7 @@ export default function MessagesPage() {
                           className="h-10 w-10 rounded-full object-cover ring-2 ring-background"
                         />
                         {selectedConversation.participants[0].isOnline && (
-                          <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-background bg-green-500" />
+                          <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-background bg-online" />
                         )}
                       </div>
                       <div>

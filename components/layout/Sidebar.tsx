@@ -59,12 +59,12 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Navigation Bar */}
-      <div className="2xl:hidden backdrop-blur-[20px] bg-white/10 border-b border-sidebar-border dark:bg-white/5">
+      <div className="2xl:hidden backdrop-blur-[20px] bg-card/10 border-b border-sidebar-border dark:bg-card/5">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Left - Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-colors"
+            className="p-2 rounded-lg hover:bg-card/20 dark:hover:bg-card/10 transition-colors"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -87,22 +87,22 @@ export function Sidebar() {
           {/* Right - Action Icons */}
           <div className="flex items-center gap-2">
             <button
-              className="relative p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-colors"
+              className="relative p-2 rounded-lg hover:bg-card/20 dark:hover:bg-card/10 transition-colors"
               aria-label="Notifications"
             >
               <Bell className="w-6 h-6" />
               {/* Notification Badge */}
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-white dark:border-background" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background" />
             </button>
             
             <Link
               href="/messages"
-              className="relative p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-colors"
+              className="relative p-2 rounded-lg hover:bg-card/20 dark:hover:bg-card/10 transition-colors"
               aria-label="Messages"
             >
               <MessageSquare className="w-6 h-6" />
               {/* Message Badge */}
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-white dark:border-background" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background" />
             </Link>
           </div>
         </div>
@@ -176,7 +176,7 @@ export function Sidebar() {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 2xl:hidden"
+          className="fixed inset-0 bg-background/50 z-30 2xl:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
