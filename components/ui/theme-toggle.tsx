@@ -157,7 +157,7 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
 
   if (variant === 'sidebar') {
     return (
-      <DropdownMenu>
+      <DropdownMenu className="w-full">
         <DropdownMenuTrigger asChild>
           <button
             className={cn(
@@ -167,6 +167,7 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
               "focus:outline-none",
               "w-full",
               "theme-toggle-no-border",
+              "font-medium",
               className
             )}
             aria-label={`Theme selector: ${getThemeLabel()}`}
@@ -174,12 +175,12 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
             <div className="relative w-5 h-5 flex-shrink-0 transition-all duration-300">
               {getThemeIcon()}
             </div>
-            <span className="font-medium">
+            <span>
               {getThemeLabel()}
             </span>
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent side="right" align="start" className="w-40">
+        <DropdownMenuContent side="top" align="start" className="w-40">
           <DropdownMenuItem 
             onClick={() => handleThemeChange('light')}
             className={cn(

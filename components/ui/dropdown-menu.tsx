@@ -23,9 +23,10 @@ interface DropdownMenuProps {
   open?: boolean
   onOpenChange?: (open: boolean) => void
   children?: React.ReactNode
+  className?: string
 }
 
-function DropdownMenu({ open: controlledOpen, onOpenChange, children }: DropdownMenuProps) {
+function DropdownMenu({ open: controlledOpen, onOpenChange, children, className }: DropdownMenuProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false)
   const [activeSubmenu, setActiveSubmenu] = React.useState<string>()
   
@@ -42,7 +43,7 @@ function DropdownMenu({ open: controlledOpen, onOpenChange, children }: Dropdown
 
   return (
     <DropdownMenuContext.Provider value={{ open, setOpen, activeSubmenu, setActiveSubmenu }}>
-      <div data-slot="dropdown-menu" className="relative inline-block">
+      <div data-slot="dropdown-menu" className={cn("relative inline-block", className)}>
         {children}
       </div>
     </DropdownMenuContext.Provider>
