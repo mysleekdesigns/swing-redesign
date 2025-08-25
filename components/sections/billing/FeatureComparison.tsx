@@ -94,11 +94,11 @@ export default function FeatureComparison() {
             {featureGroups.map((group) => (
               <div
                 key={group.title}
-                className="border rounded-lg overflow-hidden"
+                className="border rounded-lg overflow-hidden bg-white"
               >
                 <button
                   onClick={() => toggleGroup(group.title)}
-                  className="w-full flex items-center justify-between p-4 bg-muted/50 hover:bg-muted transition-colors"
+                  className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
                 >
                   <span className="font-semibold">{group.title}</span>
                   <ChevronDownIcon
@@ -109,7 +109,7 @@ export default function FeatureComparison() {
                   />
                 </button>
                 {expandedGroups.includes(group.title) && (
-                  <div className="p-4 space-y-3 animate-in slide-in-from-top-2 duration-200">
+                  <div className="p-4 space-y-3 animate-in slide-in-from-top-2 duration-200 bg-white">
                     {group.features.map((feature) => (
                       <div
                         key={feature.name}
@@ -139,7 +139,7 @@ export default function FeatureComparison() {
 
   // Desktop table view
   const DesktopView = () => (
-    <div className="hidden lg:block overflow-x-auto">
+    <div className="hidden lg:block overflow-x-auto bg-white rounded-lg border">
       <table className="w-full">
         <thead>
           <tr className="border-b">
@@ -160,7 +160,7 @@ export default function FeatureComparison() {
                 </span>
               </div>
             </th>
-            <th className="text-center py-4 px-4 font-semibold bg-primary/5">
+            <th className="text-center py-4 px-4 font-semibold bg-primary/10">
               <div className="flex flex-col items-center">
                 <span>Unlimited</span>
                 <span className="text-xs font-normal text-muted-foreground mt-1">
@@ -173,7 +173,7 @@ export default function FeatureComparison() {
         <tbody>
           {featureGroups.map((group) => (
             <React.Fragment key={group.title}>
-              <tr className="bg-muted/30">
+              <tr className="bg-gray-50">
                 <td
                   colSpan={4}
                   className="py-3 px-4 font-semibold text-sm uppercase tracking-wider"
@@ -185,7 +185,7 @@ export default function FeatureComparison() {
                 <tr
                   key={`${group.title}-${feature.name}`}
                   className={cn(
-                    "border-b hover:bg-muted/20 transition-colors",
+                    "border-b hover:bg-gray-50 transition-colors bg-white",
                     index === group.features.length - 1 && "border-b-2"
                   )}
                 >
@@ -200,7 +200,7 @@ export default function FeatureComparison() {
                       <FeatureIcon value={feature.paid} />
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-center bg-primary/5">
+                  <td className="py-3 px-4 text-center bg-primary/10">
                     <div className="flex justify-center">
                       <FeatureIcon value={feature.unlimited} />
                     </div>
@@ -220,7 +220,7 @@ export default function FeatureComparison() {
       <DesktopView />
       
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm">
+      <div className="mt-6 flex flex-wrap items-center gap-6 text-sm">
         <div className="flex items-center gap-2">
           <CheckIcon className="size-4 text-primary" />
           <span className="text-muted-foreground">Included</span>

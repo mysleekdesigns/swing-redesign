@@ -102,7 +102,7 @@ export default function PricingCards() {
         <div
           key={plan.id}
           className={cn(
-            "relative flex flex-col rounded-2xl border bg-card p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]",
+            "relative flex flex-col rounded-2xl border bg-white p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg",
             plan.popular && "border-primary shadow-primary/20 ring-2 ring-primary/20",
             plan.bestValue && "border-accent shadow-accent/20 ring-2 ring-accent/20"
           )}
@@ -126,44 +126,44 @@ export default function PricingCards() {
           )}
 
           {/* Header */}
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="mb-6">
+            <div className="flex items-center gap-3 mb-3">
               <div className={cn(
-                "p-2 rounded-lg",
+                "p-2.5 rounded-lg",
                 plan.popular ? "bg-primary/10 text-primary" : 
                 plan.bestValue ? "bg-accent/10 text-accent" :
                 "bg-muted text-muted-foreground"
               )}>
                 {plan.icon}
               </div>
-              <h3 className="text-lg font-bold">{plan.name}</h3>
+              <h3 className="text-xl font-bold">{plan.name}</h3>
             </div>
             <p className="text-sm text-muted-foreground">{plan.duration}</p>
           </div>
 
           {/* Pricing */}
-          <div className="mb-6">
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold">{plan.price}</span>
+          <div className="mb-8">
+            <div className="flex items-baseline gap-3">
+              <span className="text-4xl font-bold">{plan.price}</span>
               {plan.originalPrice && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="text-base text-muted-foreground line-through">
                   {plan.originalPrice}
                 </span>
               )}
             </div>
             {plan.savings && (
-              <span className="inline-block mt-1 text-sm font-medium text-primary">
+              <span className="inline-block mt-2 text-sm font-medium text-primary">
                 {plan.savings}
               </span>
             )}
           </div>
 
           {/* Features */}
-          <ul className="space-y-3 mb-6 flex-grow">
+          <ul className="space-y-4 mb-8 flex-grow">
             {plan.features.map((feature, index) => (
-              <li key={index} className="flex items-start gap-2 text-sm">
-                <CheckIcon className="size-4 text-primary mt-0.5 shrink-0" />
-                <span className="text-muted-foreground">{feature}</span>
+              <li key={index} className="flex items-start gap-3">
+                <CheckIcon className="size-5 text-primary mt-0.5 shrink-0" />
+                <span className="text-sm leading-relaxed">{feature}</span>
               </li>
             ))}
           </ul>

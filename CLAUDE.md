@@ -21,6 +21,11 @@ npm run lint         # Run ESLint with Next.js rules
 npx tsc --noEmit     # Run TypeScript type checking (strict mode)
 ```
 
+### Process Management
+```bash
+pkill -f "next dev"  # Kill Next.js dev servers after completing tasks
+```
+
 ## Architecture
 
 This is a Next.js 15 application using the App Router with the following key characteristics:
@@ -35,12 +40,15 @@ This is a Next.js 15 application using the App Router with the following key cha
 ### Project Structure
 - `/app` - Next.js App Router pages and layouts
   - `page.tsx` - Main landing page
+  - `billing/page.tsx` - Billing and subscription management
+  - `messages/page.tsx` - Messaging functionality
   - `profile/page.tsx` - User profile page
   - `search/page.tsx` - Search functionality
 - `/components` - Reusable components
   - `/ui` - shadcn/ui style components WITHOUT Radix (button, carousel, dropdown-menu, theme-toggle, checkbox, input, label, select, separator, slider, tabs, etc.)
   - `/layout` - Layout components (Sidebar)
   - `/sections` - Page-specific sections
+    - `/billing` - Billing components (BillingToggle, FeatureComparison, PaymentMethods, PricingCards)
     - `/home` - Home page components (ConventionCard)
     - `/profile` - Profile page components (ProfileHeader, PhotoGrid, QuickActions, etc.)
     - `/search` - Search page components (SearchFiltersV2, ActiveFilters, ResultsHeader, SortDropdown)
