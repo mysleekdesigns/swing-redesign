@@ -321,7 +321,7 @@ export default function SearchPage() {
             </div>
             
             {/* Orientation Dropdowns */}
-            <div className="space-y-3 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">Male</Label>
                 <Select value={maleOrientation} onValueChange={setMaleOrientation}>
@@ -444,10 +444,10 @@ export default function SearchPage() {
           </div>
         </div>
 
-        {/* Search Section (moved to third in first row) */}
+        {/* Location Section (moved to third in first row) */}
         <div className="flex flex-col h-full">
           <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[240px] flex flex-col h-full hover:shadow-md transition-shadow">
-            <h3 className="text-base font-semibold text-foreground mb-4">Search</h3>
+            <h3 className="text-base font-semibold text-foreground mb-4">Location</h3>
             <div className="flex-1 space-y-3">
               {/* Location Search */}
               <div className="space-y-2">
@@ -477,17 +477,6 @@ export default function SearchPage() {
                   </SelectContent>
                 </Select>
               </div>
-              {/* Member Search */}
-              <div className="space-y-2">
-                <Label className="text-sm text-muted-foreground">Profile Name</Label>
-                <Input
-                  type="text"
-                  placeholder="Enter profile name..."
-                  value={memberSearch}
-                  onChange={(e) => setMemberSearch(e.target.value)}
-                  className="w-full bg-white dark:bg-white/10 border-border/50"
-                />
-              </div>
             </div>
           </div>
         </div>
@@ -497,7 +486,7 @@ export default function SearchPage() {
         <div>
           <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] hover:shadow-md transition-shadow">
             <h3 className="text-base font-semibold text-foreground mb-4">Activity</h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">Last On</Label>
                 <Select value={lastOnline} onValueChange={setLastOnline}>
@@ -540,7 +529,7 @@ export default function SearchPage() {
         <div>
           <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] hover:shadow-md transition-shadow">
             <h3 className="text-base font-semibold text-foreground mb-4">Age Range</h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">Low</Label>
                 <Select value={ageRange.low} onValueChange={(value) => setAgeRange(prev => ({ ...prev, low: value }))}>
@@ -579,7 +568,7 @@ export default function SearchPage() {
         <div>
           <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 min-h-[180px] hover:shadow-md transition-shadow">
             <h3 className="text-base font-semibold text-foreground mb-4">Lifestyle</h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <Label className="text-sm text-muted-foreground">Smoke</Label>
                 <Select value={smoke} onValueChange={setSmoke}>
@@ -614,6 +603,26 @@ export default function SearchPage() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Profile Search Section - Separate from other filters */}
+      <div className="bg-white dark:bg-white/5 rounded-lg p-4 border border-border/50 hover:shadow-md transition-shadow">
+        <h3 className="text-base font-semibold text-foreground mb-4">Profile Search</h3>
+        <div className="max-w-md mx-auto">
+          <div className="space-y-2">
+            <Label className="text-sm text-muted-foreground">Search by Profile Name</Label>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Enter profile name..."
+                value={memberSearch}
+                onChange={(e) => setMemberSearch(e.target.value)}
+                className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+              />
             </div>
           </div>
         </div>
@@ -888,8 +897,8 @@ export default function SearchPage() {
         
         <TabsContent value="location" className="space-y-6">
           <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Location & Search</h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <h3 className="text-lg font-semibold text-foreground mb-4">Location</h3>
+            <div className="max-w-md">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label className="text-base">City or Postal Code</Label>
@@ -922,25 +931,30 @@ export default function SearchPage() {
                   </Select>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label className="text-base">Profile Name</Label>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      type="text"
-                      placeholder="Search by username..."
-                      value={memberSearch}
-                      onChange={(e) => setMemberSearch(e.target.value)}
-                      className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </TabsContent>
       </Tabs>
+      
+      {/* Profile Search Section - Separate from other filters */}
+      <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+        <h3 className="text-lg font-semibold text-foreground mb-4">Profile Search</h3>
+        <div className="max-w-md mx-auto">
+          <div className="space-y-2">
+            <Label className="text-base">Search by Profile Name</Label>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search by username..."
+                value={memberSearch}
+                onChange={(e) => setMemberSearch(e.target.value)}
+                className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       
       {/* Active Filters Display */}
       <ActiveFilters />
