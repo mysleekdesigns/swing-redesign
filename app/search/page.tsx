@@ -13,51 +13,7 @@ import { ActiveFilters } from "@/components/sections/search/ActiveFilters";
 import { ResultsHeader } from "@/components/sections/search/ResultsHeader";
 import { SortDropdown } from "@/components/sections/search/SortDropdown";
 
-// Filter options
-const orientationOptions = [
-  { label: "Straight or Bi", value: "straight_or_bi" },
-  { label: "Straight", value: "straight" },
-  { label: "Bisexual", value: "bisexual" },
-  { label: "Gay", value: "gay" },
-];
-
-const smokeOptions = [
-  { label: "Any", value: "any" },
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
-];
-
-const drinkOptions = [
-  { label: "Any", value: "any" },
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
-  { label: "Socially", value: "socially" },
-];
-
-const lastOnlineOptions = [
-  { label: "1 Hour", value: "1_hour" },
-  { label: "1 Day", value: "1_day" },
-  { label: "1 Week", value: "1_week" },
-  { label: "1 Month", value: "1_month" },
-  { label: "3 Months", value: "3_months" },
-  { label: "6 Months", value: "6_months" },
-  { label: "1 Year", value: "1_year" },
-];
-
-const memberTypeOptions = [
-  { label: "Show All Members", value: "all" },
-  { label: "New Members Only", value: "new" },
-];
-
-const distanceOptions = [
-  { label: "10 Miles", value: "10" },
-  { label: "25 Miles", value: "25" },
-  { label: "50 Miles", value: "50" },
-  { label: "100 Miles", value: "100" },
-  { label: "250 Miles", value: "250" },
-  { label: "500 Miles", value: "500" },
-];
-
+// Sort options
 const sortOptions = [
   { label: "Distance", value: "distance" },
   { label: "Recently Active", value: "recent" },
@@ -73,7 +29,7 @@ export default function SearchPage() {
   const [activeTabV1, setActiveTabV1] = useState("filtered");
   const [activeTabV2, setActiveTabV2] = useState("basic");
   
-  const sortButtonRef = useRef<HTMLButtonElement>(null);
+  const sortButtonRef = useRef<HTMLButtonElement>(null!);
   
   // Filter states - Relationship
   const [relationshipType, setRelationshipType] = useState({
@@ -277,12 +233,7 @@ export default function SearchPage() {
                     setSmoke={setSmoke}
                     drink={drink}
                     setDrink={setDrink}
-                    orientationOptions={orientationOptions}
-                    smokeOptions={smokeOptions}
-                    drinkOptions={drinkOptions}
-                    lastOnlineOptions={lastOnlineOptions}
-                    memberTypeOptions={memberTypeOptions}
-                    distanceOptions={distanceOptions}
+                    updateResults={() => {}}
                   />
                 ) : (
                   <SearchFiltersV2
@@ -312,12 +263,6 @@ export default function SearchPage() {
                     setSmoke={setSmoke}
                     drink={drink}
                     setDrink={setDrink}
-                    orientationOptions={orientationOptions}
-                    smokeOptions={smokeOptions}
-                    drinkOptions={drinkOptions}
-                    lastOnlineOptions={lastOnlineOptions}
-                    memberTypeOptions={memberTypeOptions}
-                    distanceOptions={distanceOptions}
                   />
                 )}
                 
@@ -401,12 +346,7 @@ export default function SearchPage() {
                     setSmoke={setSmoke}
                     drink={drink}
                     setDrink={setDrink}
-                    orientationOptions={orientationOptions}
-                    smokeOptions={smokeOptions}
-                    drinkOptions={drinkOptions}
-                    lastOnlineOptions={lastOnlineOptions}
-                    memberTypeOptions={memberTypeOptions}
-                    distanceOptions={distanceOptions}
+                    updateResults={() => {}}
                   />
                 ) : (
                   <SearchFiltersV2
@@ -436,12 +376,6 @@ export default function SearchPage() {
                     setSmoke={setSmoke}
                     drink={drink}
                     setDrink={setDrink}
-                    orientationOptions={orientationOptions}
-                    smokeOptions={smokeOptions}
-                    drinkOptions={drinkOptions}
-                    lastOnlineOptions={lastOnlineOptions}
-                    memberTypeOptions={memberTypeOptions}
-                    distanceOptions={distanceOptions}
                   />
                 )}
               </div>

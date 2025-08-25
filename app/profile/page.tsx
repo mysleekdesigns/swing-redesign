@@ -23,7 +23,6 @@ import { Eye, Heart, Users, Trophy } from "lucide-react";
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<'about' | 'activity' | 'photos'>('about');
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState<any>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   
   const { stats, lifestylePreferences, recentActivity, additionalImages, hotDate, profileDescription, fantasies, additionalComments } = currentUserProfile;
@@ -45,7 +44,7 @@ export default function ProfilePage() {
           <ProfileHeader profile={currentUserProfile} />
 
           {/* Tab Navigation with Sliding Indicator */}
-          <TabNavigation tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+          <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={(tabId) => setActiveTab(tabId as 'about' | 'activity' | 'photos')} />
           {/* Tab Content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             
@@ -71,9 +70,7 @@ export default function ProfilePage() {
                   {/* Profile Description Section */}
                   {profileDescription && (
                     <ProfileDescription 
-                      displayName={profileDescription.title}
-                      description={profileDescription.content}
-                      lastUpdated={profileDescription.lastUpdated}
+                      description={profileDescription}
                     />
                   )}
 
@@ -93,7 +90,7 @@ export default function ProfilePage() {
               {activeTab === 'activity' && (
                 <RecentActivity 
                   activities={recentActivity} 
-                  getActivityIcon={getActivityIcon}
+                  getActivityIcon={(type: string) => getActivityIcon(type as 'match' | 'event' | 'profile_view' | 'message')}
                   formatActivityTime={formatActivityTime}
                 />
               )}

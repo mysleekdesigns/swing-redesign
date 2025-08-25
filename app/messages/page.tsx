@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Footer } from "@/components/ui/Footer";
 import { Input } from "@/components/ui/input";
@@ -110,9 +111,11 @@ export default function MessagesPage() {
                         )}
                       >
                         <div className="relative flex-shrink-0">
-                          <img
+                          <Image
                             src={participant.avatar}
                             alt={participant.displayName}
+                            width={48}
+                            height={48}
                             className="h-12 w-12 rounded-full object-cover ring-2 ring-background"
                           />
                           {participant.isOnline && (
@@ -176,9 +179,11 @@ export default function MessagesPage() {
                         <ChevronLeft className="h-5 w-5" />
                       </button>
                       <div className="relative">
-                        <img
+                        <Image
                           src={selectedConversation.participants[0].avatar}
                           alt={selectedConversation.participants[0].displayName}
+                          width={40}
+                          height={40}
                           className="h-10 w-10 rounded-full object-cover ring-2 ring-background"
                         />
                         {selectedConversation.participants[0].isOnline && (
@@ -224,9 +229,11 @@ export default function MessagesPage() {
                             )}
                           >
                             {!isSent && (
-                              <img
+                              <Image
                                 src={message.senderAvatar}
                                 alt={message.senderName}
+                                width={32}
+                                height={32}
                                 className="h-8 w-8 rounded-full object-cover ring-2 ring-background"
                               />
                             )}
@@ -240,9 +247,11 @@ export default function MessagesPage() {
                             >
                               {message.type === 'image' ? (
                                 <div>
-                                  <img
-                                    src={message.imageUrl}
+                                  <Image
+                                    src={message.imageUrl || ''}
                                     alt="Shared image"
+                                    width={320}
+                                    height={240}
                                     className="rounded-lg max-w-full"
                                   />
                                   {message.content && (
