@@ -26,10 +26,11 @@ npx tsc --noEmit     # Run TypeScript type checking (strict mode)
 This is a Next.js 15 application using the App Router with the following key characteristics:
 
 - **Framework**: Next.js 15.4.5 with React 19
-- **Styling**: Tailwind CSS v4 with CSS variables and OKLCH color space
+- **Styling**: Tailwind CSS v4 (alpha) with CSS variables and OKLCH color space
 - **UI Components**: shadcn/ui style components (New York style) WITHOUT Radix UI dependencies - custom implementations
 - **Type Safety**: TypeScript with strict mode enabled
 - **Font System**: Geist font family with automatic optimization
+- **Animation**: Motion library and tw-animate-css for animations
 
 ### Project Structure
 - `/app` - Next.js App Router pages and layouts
@@ -37,8 +38,13 @@ This is a Next.js 15 application using the App Router with the following key cha
   - `profile/page.tsx` - User profile page
   - `search/page.tsx` - Search functionality
 - `/components` - Reusable components
-  - `/ui` - shadcn/ui style components WITHOUT Radix (button, carousel, dropdown-menu, theme-toggle, ConventionCard, HotDateCard, UserCard, FilterPill, AdvancedFilters, photo-gallery-modal, Footer, SectionHeader, checkbox, input, label, select, separator)
+  - `/ui` - shadcn/ui style components WITHOUT Radix (button, carousel, dropdown-menu, theme-toggle, checkbox, input, label, select, separator, slider, tabs, etc.)
   - `/layout` - Layout components (Sidebar)
+  - `/sections` - Page-specific sections
+    - `/home` - Home page components (ConventionCard)
+    - `/profile` - Profile page components (ProfileHeader, PhotoGrid, QuickActions, etc.)
+    - `/search` - Search page components (SearchFiltersV1, SearchFiltersV2, ActiveFilters, ResultsHeader, SortDropdown)
+  - `/shared` - Shared components across pages (StatsGrid, TabNavigation)
   - `providers.tsx` - Context providers wrapper
 - `/lib` - Utility functions and context
   - `utils.ts` - Includes `cn()` for className merging
@@ -49,12 +55,15 @@ This is a Next.js 15 application using the App Router with the following key cha
 ### Path Aliases
 - `@/*` maps to the project root, allowing imports like `@/lib/utils`
 
-### Styling System
-- Tailwind CSS v4 with CSS variables for theming
-- Dark mode support with `.dark` class variant
-- Multiple theme variants: default, dark, bubble-gum, cyberpunk
-- OKLCH color space for precise color control
-- Custom utilities in `app/globals.css` including hover-lift effects and status indicators
+### Theme System
+- Four theme variants available:
+  - `light` - Default light theme
+  - `dark` - Dark theme with OKLCH dark colors
+  - `bubble-gum` - Pink/pastel theme
+  - `cyberpunk` - Neon cyberpunk theme (has both light and dark variants)
+- Themes are managed via `theme-context.tsx` with localStorage persistence
+- Theme cycling: light → dark → bubble-gum → cyberpunk → light
+- CSS variables defined in `app/globals.css` using OKLCH color space
 - Responsive breakpoints for mobile/tablet/desktop layouts
 
 ## Configuration
@@ -82,44 +91,32 @@ This is a Next.js 15 application using the App Router with the following key cha
 
 ## Key Dependencies
 
-- **UI Libraries**: Lucide React (icons), Class Variance Authority (component variants), Embla Carousel - NO Radix UI
-- **Styling**: Tailwind Merge, clsx for className utilities, tw-animate-css for animations
-- **Development**: ESLint with Next.js rules, PostCSS with Tailwind
+- **UI Libraries**: 
+  - Lucide React (icons)
+  - Class Variance Authority (component variants)
+  - Embla Carousel (carousel functionality)
+  - Motion (animation library)
+  - NO Radix UI
+- **Styling**: 
+  - Tailwind CSS v4 (alpha)
+  - Tailwind Merge & clsx (className utilities)
+  - tw-animate-css (CSS animations)
+- **Utilities**:
+  - use-debounce (debouncing hooks)
+- **Development**: 
+  - ESLint with Next.js rules
+  - PostCSS with Tailwind
 
 ## Testing
 
 No test framework is currently configured. When adding tests, first check README and package.json for testing approach.
 
-## Agent-Based Workflow
+## Quality Standards
 
-### IMPORTANT: Task Delegation
-- **ALL tasks** (redesigns, features, bug fixes) MUST go through the `project-manager` agent first
-- Claude Code should NEVER attempt to code directly - always delegate to project-manager
-- The project manager researches, plans, and delegates to specialized sub-agents
-
-### Quality Standards
 - All code must pass `npm run lint` before task completion
 - All code must pass `npx tsc --noEmit` before task completion
 - Components must be reusable and follow existing patterns
 - Create only necessary files - prefer editing existing files
-
-### Sub-Agent Specializations
-- `project-manager`: Primary coordinator for ALL tasks - MUST be used as entry point
-- `ui-ux-designer`: Design decisions, user flows, visual modernization
-- `frontend-developer`: React/Next.js implementation, TypeScript code
-- `marketing-expert`: Conversion optimization, SEO, messaging
-- `content-strategist`: Information architecture, copywriting
-- `accessibility-specialist`: WCAG compliance, inclusive design
-- `performance-analyst`: Core Web Vitals, speed optimization
-
-### Development Process
-1. User request → Project Manager (ALWAYS)
-2. Project Manager researches and creates task plan
-3. Project Manager delegates to appropriate sub-agents
-4. Sub-agents work in parallel within their expertise
-5. Each sub-agent runs quality checks before completion
-6. Project Manager verifies all work passes linting/type checking
-7. Task marked complete only after all checks pass
 
 ## Best Practices
 
@@ -129,5 +126,4 @@ No test framework is currently configured. When adding tests, first check README
 - Leverage existing UI components before creating new ones
 - Follow TypeScript strict mode requirements
 - Check existing code patterns before implementing new features
-- The project manager is only supposed to delegate tasks to relevant sub-agents depending on the task at hand. The sub-agents are supposed to do the work.
-- anytime i ask for a task, a feature, a bug fix, any work you must only work on that task. do not go off fixing things i didnt ask for or create new work i didnt ask for
+- Focus on the specific task requested - avoid scope creep
