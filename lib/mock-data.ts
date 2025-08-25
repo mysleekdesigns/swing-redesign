@@ -860,3 +860,314 @@ export function formatActivityTime(timestamp: string): string {
   if (diffInDays < 7) return `${diffInDays}d ago`;
   return activityTime.toLocaleDateString();
 }
+
+// Message interfaces
+export interface Message {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  senderName: string;
+  senderAvatar: string;
+  content: string;
+  timestamp: string;
+  read: boolean;
+  type: 'text' | 'image' | 'voice' | 'system';
+  imageUrl?: string;
+  voiceDuration?: number;
+}
+
+export interface Conversation {
+  id: string;
+  participants: {
+    id: string;
+    username: string;
+    displayName: string;
+    avatar: string;
+    isOnline: boolean;
+    lastSeen?: string;
+  }[];
+  lastMessage: Message;
+  unreadCount: number;
+  isPinned: boolean;
+  isMuted: boolean;
+  createdAt: string;
+}
+
+// Mock conversations data
+export const mockConversations: Conversation[] = [
+  {
+    id: 'conv-1',
+    participants: [
+      {
+        id: '2',
+        username: 'hotpair',
+        displayName: 'Mike & Sarah',
+        avatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+        isOnline: true
+      }
+    ],
+    lastMessage: {
+      id: 'msg-1',
+      conversationId: 'conv-1',
+      senderId: '2',
+      senderName: 'Mike & Sarah',
+      senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+      content: 'Hey! We loved your profile. Would love to chat more about your interests!',
+      timestamp: '2025-08-25T14:30:00Z',
+      read: false,
+      type: 'text'
+    },
+    unreadCount: 3,
+    isPinned: true,
+    isMuted: false,
+    createdAt: '2025-08-20T10:00:00Z'
+  },
+  {
+    id: 'conv-2',
+    participants: [
+      {
+        id: '3',
+        username: 'vixenlife',
+        displayName: 'Jessica',
+        avatar: 'https://images.unsplash.com/photo-1652471949169-9c587e8898cd?w=400&h=600&fit=crop&crop=face',
+        isOnline: false,
+        lastSeen: '2025-08-25T12:00:00Z'
+      }
+    ],
+    lastMessage: {
+      id: 'msg-2',
+      conversationId: 'conv-2',
+      senderId: 'current-user',
+      senderName: 'Alexandra',
+      senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+      content: 'Sounds great! See you at the wine tasting event tomorrow!',
+      timestamp: '2025-08-24T18:45:00Z',
+      read: true,
+      type: 'text'
+    },
+    unreadCount: 0,
+    isPinned: false,
+    isMuted: false,
+    createdAt: '2025-08-15T14:20:00Z'
+  },
+  {
+    id: 'conv-3',
+    participants: [
+      {
+        id: '5',
+        username: 'temptress',
+        displayName: 'Sophia',
+        avatar: 'https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=400&h=600&fit=crop&crop=face',
+        isOnline: true
+      }
+    ],
+    lastMessage: {
+      id: 'msg-3',
+      conversationId: 'conv-3',
+      senderId: '5',
+      senderName: 'Sophia',
+      senderAvatar: 'https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=400&h=600&fit=crop&crop=face',
+      content: 'Sent you some photos from last night!',
+      timestamp: '2025-08-25T09:15:00Z',
+      read: false,
+      type: 'image',
+      imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=400&fit=crop'
+    },
+    unreadCount: 1,
+    isPinned: false,
+    isMuted: false,
+    createdAt: '2025-08-22T16:30:00Z'
+  },
+  {
+    id: 'conv-4',
+    participants: [
+      {
+        id: '7',
+        username: 'dreamvibe',
+        displayName: 'Emma & Jake',
+        avatar: 'https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=400&h=600&fit=crop&crop=face',
+        isOnline: false,
+        lastSeen: '2025-08-24T22:00:00Z'
+      }
+    ],
+    lastMessage: {
+      id: 'msg-4',
+      conversationId: 'conv-4',
+      senderId: '7',
+      senderName: 'Emma & Jake',
+      senderAvatar: 'https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=400&h=600&fit=crop&crop=face',
+      content: 'Thanks for the amazing evening! Looking forward to our next adventure 🎉',
+      timestamp: '2025-08-23T23:30:00Z',
+      read: true,
+      type: 'text'
+    },
+    unreadCount: 0,
+    isPinned: false,
+    isMuted: false,
+    createdAt: '2025-08-18T11:00:00Z'
+  },
+  {
+    id: 'conv-5',
+    participants: [
+      {
+        id: '9',
+        username: 'funcouple',
+        displayName: 'Alex & Sam',
+        avatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+        isOnline: true
+      }
+    ],
+    lastMessage: {
+      id: 'msg-5',
+      conversationId: 'conv-5',
+      senderId: '9',
+      senderName: 'Alex & Sam',
+      senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+      content: 'Are you attending the rooftop party this weekend?',
+      timestamp: '2025-08-25T11:00:00Z',
+      read: false,
+      type: 'text'
+    },
+    unreadCount: 2,
+    isPinned: false,
+    isMuted: false,
+    createdAt: '2025-08-19T13:45:00Z'
+  }
+];
+
+// Mock messages for a specific conversation
+export const mockMessages: Message[] = [
+  {
+    id: 'msg-10',
+    conversationId: 'conv-1',
+    senderId: '2',
+    senderName: 'Mike & Sarah',
+    senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+    content: 'Hey Alexandra! We saw you were interested in wine tasting. We are too!',
+    timestamp: '2025-08-25T10:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-11',
+    conversationId: 'conv-1',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Hi Mike & Sarah! Yes, I love wine tasting! Do you have a favorite spot?',
+    timestamp: '2025-08-25T10:15:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-12',
+    conversationId: 'conv-1',
+    senderId: '2',
+    senderName: 'Mike & Sarah',
+    senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+    content: 'We recently discovered this amazing place in Beverly Hills. They have tastings every Friday!',
+    timestamp: '2025-08-25T10:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-13',
+    conversationId: 'conv-1',
+    senderId: '2',
+    senderName: 'Mike & Sarah',
+    senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+    content: 'Check out this photo from last week!',
+    timestamp: '2025-08-25T10:32:00Z',
+    read: true,
+    type: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=400&fit=crop'
+  },
+  {
+    id: 'msg-14',
+    conversationId: 'conv-1',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'That looks amazing! I would love to join you sometime!',
+    timestamp: '2025-08-25T11:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-15',
+    conversationId: 'conv-1',
+    senderId: '2',
+    senderName: 'Mike & Sarah',
+    senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+    content: 'How about this Friday? We are planning to go around 7 PM',
+    timestamp: '2025-08-25T14:00:00Z',
+    read: false,
+    type: 'text'
+  },
+  {
+    id: 'msg-16',
+    conversationId: 'conv-1',
+    senderId: '2',
+    senderName: 'Mike & Sarah',
+    senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+    content: 'We could grab dinner before too if you are interested?',
+    timestamp: '2025-08-25T14:15:00Z',
+    read: false,
+    type: 'text'
+  },
+  {
+    id: 'msg-1',
+    conversationId: 'conv-1',
+    senderId: '2',
+    senderName: 'Mike & Sarah',
+    senderAvatar: 'https://images.unsplash.com/photo-1522941471521-6ee21ec5cc26?w=400&h=600&fit=crop',
+    content: 'Hey! We loved your profile. Would love to chat more about your interests!',
+    timestamp: '2025-08-25T14:30:00Z',
+    read: false,
+    type: 'text'
+  }
+];
+
+// Helper function to format message timestamp
+export function formatMessageTime(timestamp: string): string {
+  const now = new Date();
+  const messageTime = new Date(timestamp);
+  const diffInMs = now.getTime() - messageTime.getTime();
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+  
+  // If today, show time
+  if (diffInDays === 0) {
+    return messageTime.toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true 
+    });
+  }
+  
+  // If yesterday
+  if (diffInDays === 1) {
+    return 'Yesterday';
+  }
+  
+  // If within a week, show day of week
+  if (diffInDays < 7) {
+    return messageTime.toLocaleDateString('en-US', { weekday: 'short' });
+  }
+  
+  // Otherwise show date
+  return messageTime.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric' 
+  });
+}
+
+// Helper function to get online status text
+export function getOnlineStatus(isOnline: boolean, lastSeen?: string): string {
+  if (isOnline) return 'Online now';
+  if (lastSeen) {
+    return `Last seen ${formatMessageTime(lastSeen)}`;
+  }
+  return 'Offline';
+}

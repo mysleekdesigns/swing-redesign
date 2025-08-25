@@ -38,6 +38,7 @@ export function Sidebar() {
     { icon: Home, label: "Home", href: "/" },
     { icon: UserCircle, label: "My Profile", href: "/profile" },
     { icon: Search, label: "Search", href: "/search" },
+    { icon: MessageSquare, label: "Messages", href: "/messages" },
   ];
 
   const secondaryItems: NavItem[] = [
