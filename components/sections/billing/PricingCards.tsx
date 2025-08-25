@@ -126,12 +126,7 @@ export default function PricingCards() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className={cn(
-                "p-2.5 rounded-lg",
-                plan.popular ? "bg-primary/10 text-primary" : 
-                plan.bestValue ? "bg-accent/10 text-accent" :
-                "bg-muted text-muted-foreground"
-              )}>
+              <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
                 {plan.icon}
               </div>
               <h3 className="text-xl font-bold">{plan.name}</h3>

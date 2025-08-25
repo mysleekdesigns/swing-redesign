@@ -100,15 +100,15 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
   // Get the icon for the current theme
   const getThemeIcon = () => {
     if (currentTheme === 'dark') {
-      return <Moon className="h-5 w-5" />
+      return <Moon className="h-5 w-5 text-primary" />
     } else if (currentTheme === 'dark2') {
       return <Moon className="h-5 w-5 text-primary" />
     } else if (currentTheme === 'bubble-gum') {
-      return <Palette className="h-5 w-5" />
+      return <Palette className="h-5 w-5 text-primary" />
     } else if (currentTheme === 'cyberpunk') {
-      return <Cpu className="h-5 w-5" />
+      return <Cpu className="h-5 w-5 text-primary" />
     }
-    return <Sun className="h-5 w-5" />
+    return <Sun className="h-5 w-5 text-primary" />
   }
 
   const getThemeLabel = () => {
@@ -215,7 +215,7 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
               currentTheme === 'dark2' && "bg-accent"
             )}
           >
-            <Moon className="h-4 w-4 text-primary" />
+            <Moon className={cn("h-4 w-4", currentTheme === 'dark2' && "text-primary")} />
             <span>Dark Mode 2</span>
           </DropdownMenuItem>
           <DropdownMenuItem 
@@ -311,7 +311,7 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
             currentTheme === 'dark2' && "bg-accent"
           )}
         >
-          <Moon className="h-4 w-4 text-primary" />
+          <Moon className={cn("h-4 w-4", currentTheme === 'dark2' && "text-primary")} />
           <span>Dark Mode 2</span>
         </DropdownMenuItem>
         <DropdownMenuItem 

@@ -19,7 +19,7 @@ export default function BillingPage() {
           <div className="bg-card rounded-2xl p-6 sm:p-8 border border-border">
             {/* Header Section */}
             <div className="mb-8 sm:mb-12">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-primary">
+          <h1 className="text-3xl sm:text-4xl lg:text-4xl font-bold mb-4 text-black">
             Membership Subscription
           </h1>
           <p className="text-base text-muted-foreground">
