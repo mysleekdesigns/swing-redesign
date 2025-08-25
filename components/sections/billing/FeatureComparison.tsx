@@ -70,6 +70,7 @@ function FeatureIcon({ value }: { value: boolean | "limited" }) {
 
 export default function FeatureComparison() {
   const [expandedGroups, setExpandedGroups] = useState<string[]>([])
+  const [activeTab, setActiveTab] = useState<string>("paid")
 
   const toggleGroup = (title: string) => {
     setExpandedGroups(prev =>
@@ -79,10 +80,16 @@ export default function FeatureComparison() {
     )
   }
 
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
+    // Reset expanded groups when switching tabs to prevent confusion
+    setExpandedGroups([])
+  }
+
   // Mobile view with tabs
   const MobileView = () => (
     <div className="lg:hidden">
-      <Tabs defaultValue="unlimited" className="w-full">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-6">
           <TabsTrigger value="free">Free</TabsTrigger>
           <TabsTrigger value="paid">1-12 Mo</TabsTrigger>
@@ -97,7 +104,12 @@ export default function FeatureComparison() {
                 className="border rounded-lg overflow-hidden bg-white"
               >
                 <button
-                  onClick={() => toggleGroup(group.title)}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    toggleGroup(group.title)
+                  }}
                   className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
                 >
                   <span className="font-semibold">{group.title}</span>
@@ -216,11 +228,8 @@ export default function FeatureComparison() {
 
   return (
     <>
-      <MobileView />
-      <DesktopView />
-      
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap items-center gap-6 text-sm">
+      <div className="mb-6 flex flex-wrap items-center gap-6 text-sm">
         <div className="flex items-center gap-2">
           <CheckIcon className="size-4 text-primary" />
           <span className="text-muted-foreground">Included</span>
@@ -234,6 +243,9 @@ export default function FeatureComparison() {
           <span className="text-muted-foreground">Not Available</span>
         </div>
       </div>
+      
+      <MobileView />
+      <DesktopView />
     </>
   )
 }

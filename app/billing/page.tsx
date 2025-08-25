@@ -22,14 +22,14 @@ export default function BillingPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Membership Subscription
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Congratulations, you are an Unlimited Member!
           </p>
-          <p className="text-sm sm:text-base text-muted-foreground mt-2">
+          <p className="text-base text-muted-foreground mt-2">
             Unlimited members are a cornerstone of the community and we appreciate the trust you&apos;ve placed in us with your membership.
           </p>
           <div className="mt-6">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               Thank you,<br />
               <span className="font-semibold text-foreground">SwingLifeStyle Team</span>
             </p>
