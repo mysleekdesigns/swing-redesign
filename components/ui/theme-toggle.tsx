@@ -18,7 +18,7 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false)
-  const [fallbackTheme, setFallbackTheme] = useState<'light' | 'dark' | 'bubble-gum' | 'cyberpunk'>('light')
+  const [fallbackTheme, setFallbackTheme] = useState<'light' | 'dark' | 'dark2' | 'bubble-gum' | 'cyberpunk'>('light')
 
   // Always call the safe hook - returns null if context unavailable
   const themeContext = useSafeTheme()
@@ -35,14 +35,16 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
 
     // Only initialize fallback if context is not available
     try {
-      const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'bubble-gum' | 'cyberpunk' | null
+      const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'dark2' | 'bubble-gum' | 'cyberpunk' | null
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
       const initialTheme = savedTheme || systemTheme
       
       setFallbackTheme(initialTheme)
-      document.documentElement.classList.remove('dark', 'bubble-gum', 'cyberpunk')
+      document.documentElement.classList.remove('dark', 'dark2', 'bubble-gum', 'cyberpunk')
       if (initialTheme === 'dark') {
         document.documentElement.classList.add('dark')
+      } else if (initialTheme === 'dark2') {
+        document.documentElement.classList.add('dark2')
       } else if (initialTheme === 'bubble-gum') {
         document.documentElement.classList.add('bubble-gum')
       } else if (initialTheme === 'cyberpunk') {
@@ -54,7 +56,7 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
     }
   }, [mounted, hasContextError, themeContext])
 
-  const handleThemeChange = (newTheme: 'light' | 'dark' | 'bubble-gum' | 'cyberpunk') => {
+  const handleThemeChange = (newTheme: 'light' | 'dark' | 'dark2' | 'bubble-gum' | 'cyberpunk') => {
     if (!mounted) return
 
     if (themeContext && !hasContextError) {
@@ -71,14 +73,16 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
     }
   }
 
-  const handleFallbackThemeChange = (newTheme: 'light' | 'dark' | 'bubble-gum' | 'cyberpunk') => {
+  const handleFallbackThemeChange = (newTheme: 'light' | 'dark' | 'dark2' | 'bubble-gum' | 'cyberpunk') => {
     setFallbackTheme(newTheme)
     
     // Apply theme changes directly
     try {
-      document.documentElement.classList.remove('dark', 'bubble-gum', 'cyberpunk')
+      document.documentElement.classList.remove('dark', 'dark2', 'bubble-gum', 'cyberpunk')
       if (newTheme === 'dark') {
         document.documentElement.classList.add('dark')
+      } else if (newTheme === 'dark2') {
+        document.documentElement.classList.add('dark2')
       } else if (newTheme === 'bubble-gum') {
         document.documentElement.classList.add('bubble-gum')
       } else if (newTheme === 'cyberpunk') {
@@ -97,6 +101,8 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
   const getThemeIcon = () => {
     if (currentTheme === 'dark') {
       return <Moon className="h-5 w-5" />
+    } else if (currentTheme === 'dark2') {
+      return <Moon className="h-5 w-5 text-primary" />
     } else if (currentTheme === 'bubble-gum') {
       return <Palette className="h-5 w-5" />
     } else if (currentTheme === 'cyberpunk') {
@@ -107,6 +113,7 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
 
   const getThemeLabel = () => {
     if (currentTheme === 'dark') return 'Dark Mode'
+    if (currentTheme === 'dark2') return 'Dark Mode 2'
     if (currentTheme === 'bubble-gum') return 'Bubble Gum'
     if (currentTheme === 'cyberpunk') return 'Cyberpunk'
     return 'Light Mode'
@@ -202,6 +209,16 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
             <span>Dark Mode</span>
           </DropdownMenuItem>
           <DropdownMenuItem 
+            onClick={() => handleThemeChange('dark2')}
+            className={cn(
+              "flex items-center gap-2",
+              currentTheme === 'dark2' && "bg-accent"
+            )}
+          >
+            <Moon className="h-4 w-4 text-primary" />
+            <span>Dark Mode 2</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem 
             onClick={() => handleThemeChange('bubble-gum')}
             className={cn(
               "flex items-center gap-2",
@@ -286,6 +303,16 @@ export function ThemeToggle({ className, variant = 'button' }: ThemeToggleProps)
         >
           <Moon className="h-4 w-4" />
           <span>Dark Mode</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem 
+          onClick={() => handleThemeChange('dark2')}
+          className={cn(
+            "flex items-center gap-2",
+            currentTheme === 'dark2' && "bg-accent"
+          )}
+        >
+          <Moon className="h-4 w-4 text-primary" />
+          <span>Dark Mode 2</span>
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => handleThemeChange('bubble-gum')}

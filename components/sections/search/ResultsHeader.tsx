@@ -34,7 +34,7 @@ export function ResultsHeader({
           <button
             ref={sortButtonRef}
             onClick={() => setShowSortDropdown(!showSortDropdown)}
-            className="flex items-center gap-2 px-4 py-4 rounded-xl bg-white dark:bg-gray-800 border border-border hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-4 rounded-xl bg-background border border-border hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
           >
             <span className="text-base font-medium text-foreground">
               Sort: {sortOptions.find(opt => opt.value === sortBy)?.label}

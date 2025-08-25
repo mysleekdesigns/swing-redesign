@@ -19,7 +19,7 @@ export default function BillingPage() {
           <div className="section-glass rounded-2xl p-6 sm:p-8">
             {/* Header Section */}
             <div className="mb-8 sm:mb-12">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-primary">
             Membership Subscription
           </h1>
           <p className="text-base text-muted-foreground">

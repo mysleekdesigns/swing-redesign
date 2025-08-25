@@ -154,7 +154,7 @@ export function SearchFiltersV2({
       <TabsContent value="basic" className="space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Relationship Section */}
-          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-foreground mb-4">Looking For</h3>
             <div className="space-y-4">
               <div className="space-y-3">
@@ -241,7 +241,7 @@ export function SearchFiltersV2({
           </div>
           
           {/* Age Range with Slider */}
-          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-foreground mb-4">Age Range</h3>
             <div className="space-y-6">
               <div className="px-3">
@@ -268,7 +268,7 @@ export function SearchFiltersV2({
         {/* Location, Show Only, and Lifestyle Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Location Section */}
-          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-foreground mb-4">Location</h3>
             <div className="space-y-4">
               <div className="space-y-2">
@@ -280,7 +280,7 @@ export function SearchFiltersV2({
                     placeholder="Enter location..."
                     value={locationSearch}
                     onChange={(e) => setLocationSearch(e.target.value)}
-                    className="pl-10 w-full bg-white dark:bg-white/10 border-border/50"
+                    className="pl-10 w-full bg-background border-border/50"
                   />
                 </div>
               </div>
@@ -307,7 +307,7 @@ export function SearchFiltersV2({
           </div>
 
           {/* Show Only Filters */}
-          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-foreground mb-4">Show Only</h3>
             <div className="grid grid-cols-2 gap-4">
               {[
@@ -338,7 +338,7 @@ export function SearchFiltersV2({
           </div>
           
           {/* Lifestyle & Activity */}
-          <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
+          <div className="bg-background rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-foreground mb-4">Lifestyle & Activity</h3>
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -385,7 +385,7 @@ export function SearchFiltersV2({
                 <div className="space-y-2">
                   <Label className="text-sm text-muted-foreground">Last Online</Label>
                   <Select value={lastOnline} onValueChange={setLastOnline}>
-                    <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectTrigger className="w-full bg-background border-border/50">
                       <SelectValue>
                         {lastOnlineOptions.find(opt => opt.value === lastOnline)?.label}
                       </SelectValue>
@@ -402,7 +402,7 @@ export function SearchFiltersV2({
                 <div className="space-y-2">
                   <Label className="text-sm text-muted-foreground">Member Type</Label>
                   <Select value={memberType} onValueChange={setMemberType}>
-                    <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
+                    <SelectTrigger className="w-full bg-background border-border/50">
                       <SelectValue>
                         {memberTypeOptions.find(opt => opt.value === memberType)?.label}
                       </SelectValue>
@@ -423,7 +423,7 @@ export function SearchFiltersV2({
       </TabsContent>
       
       <TabsContent value="profile" className="space-y-6">
-        <div className="bg-white dark:bg-white/5 rounded-lg p-6 md:p-8 border border-border/50 hover:shadow-md transition-shadow">
+        <div className="bg-background rounded-lg p-6 md:p-8 border border-border/50 hover:shadow-md transition-shadow">
           <div className="max-w-2xl">
             <h3 className="text-lg font-semibold text-foreground mb-6">Profile Search</h3>
             <div className="space-y-4">
@@ -436,7 +436,7 @@ export function SearchFiltersV2({
                     placeholder="Enter username to search..."
                     value={memberSearch}
                     onChange={(e) => setMemberSearch(e.target.value)}
-                    className="pl-10 w-full bg-white dark:bg-white/10 border-border/50 h-11 text-base"
+                    className="pl-10 w-full bg-background border-border/50 h-11 text-base"
                   />
                 </div>
               </div>

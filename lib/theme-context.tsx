@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'light' | 'dark' | 'bubble-gum' | 'cyberpunk'
+type Theme = 'light' | 'dark' | 'dark2' | 'bubble-gum' | 'cyberpunk'
 
 interface ThemeContextType {
   theme: Theme
@@ -25,9 +25,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(initialTheme)
     
     // Apply initial theme classes
-    document.documentElement.classList.remove('dark', 'bubble-gum', 'cyberpunk')
+    document.documentElement.classList.remove('dark', 'dark2', 'bubble-gum', 'cyberpunk')
     if (initialTheme === 'dark') {
       document.documentElement.classList.add('dark')
+    } else if (initialTheme === 'dark2') {
+      document.documentElement.classList.add('dark2')
     } else if (initialTheme === 'bubble-gum') {
       document.documentElement.classList.add('bubble-gum')
     } else if (initialTheme === 'cyberpunk') {
@@ -39,11 +41,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Only allow theme changes after mount to prevent SSR issues
     if (!mounted) return
     
-    // Cycle through four themes: light -> dark -> bubble-gum -> cyberpunk -> light
+    // Cycle through five themes: light -> dark -> dark2 -> bubble-gum -> cyberpunk -> light
     let newTheme: Theme
     if (theme === 'light') {
       newTheme = 'dark'
     } else if (theme === 'dark') {
+      newTheme = 'dark2'
+    } else if (theme === 'dark2') {
       newTheme = 'bubble-gum'
     } else if (theme === 'bubble-gum') {
       newTheme = 'cyberpunk'
@@ -61,9 +65,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('theme', newTheme)
     
     // Apply theme classes
-    document.documentElement.classList.remove('dark', 'bubble-gum', 'cyberpunk')
+    document.documentElement.classList.remove('dark', 'dark2', 'bubble-gum', 'cyberpunk')
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark')
+    } else if (newTheme === 'dark2') {
+      document.documentElement.classList.add('dark2')
     } else if (newTheme === 'bubble-gum') {
       document.documentElement.classList.add('bubble-gum')
     } else if (newTheme === 'cyberpunk') {

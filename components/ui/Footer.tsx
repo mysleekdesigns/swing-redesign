@@ -98,7 +98,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mt-16 bg-[oklch(0.965_0_0)] border border-gray-300 rounded-2xl dark:backdrop-blur-[16px] dark:bg-white/5 dark:border-white/10">
+    <footer className="mt-16 bg-card border border-border rounded-2xl backdrop-blur-sm">
       <div className="px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
         
         {/* Main Footer Content */}
@@ -121,7 +121,7 @@ export function Footer() {
                 </Link>
               </div>
               
-              <p className="text-gray-600 dark:text-muted-foreground text-base leading-relaxed max-w-lg">
+              <p className="text-muted-foreground text-base leading-relaxed max-w-lg">
                 Discover meaningful connections with like-minded people in your area. 
                 Join exclusive events and find your perfect match in the modern dating world.
               </p>
@@ -130,7 +130,7 @@ export function Footer() {
               <div className="space-y-3">
                 {contactInfo.map((contact) => {
                   const Content = (
-                    <div className="flex items-center gap-3 text-base text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors">
+                    <div className="flex items-center gap-3 text-base text-muted-foreground hover:text-foreground transition-colors">
                       <contact.icon className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>{contact.value}</span>
                     </div>
@@ -179,7 +179,7 @@ export function Footer() {
                         <li key={link.label}>
                           <Link
                             href={link.href}
-                            className="flex items-center gap-2 text-[15px] text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
+                            className="flex items-center gap-2 text-[15px] text-muted-foreground hover:text-foreground transition-colors group"
                           >
                             {link.icon && (
                               <link.icon className="w-3 h-3 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -205,7 +205,7 @@ export function Footer() {
                         <li key={link.label}>
                           <Link
                             href={link.href}
-                            className="flex items-center gap-2 text-[15px] text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
+                            className="flex items-center gap-2 text-[15px] text-muted-foreground hover:text-foreground transition-colors group"
                           >
                             {link.icon && (
                               <link.icon className="w-3 h-3 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -231,7 +231,7 @@ export function Footer() {
                         <li key={link.label}>
                           <Link
                             href={link.href}
-                            className="flex items-center gap-2 text-[15px] text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors group"
+                            className="flex items-center gap-2 text-[15px] text-muted-foreground hover:text-foreground transition-colors group"
                           >
                             {link.icon && (
                               <link.icon className="w-4 h-4 text-primary opacity-70 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -249,11 +249,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 dark:border-white/10 py-6 sm:py-8">
+        <div className="border-t border-border py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             
             {/* Copyright */}
-            <div className="flex flex-wrap items-center justify-center gap-1 max-[460px]:gap-x-1 max-[460px]:gap-y-0 text-base max-[460px]:text-[15px] text-gray-600 dark:text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-1 max-[460px]:gap-x-1 max-[460px]:gap-y-0 text-base max-[460px]:text-[15px] text-muted-foreground">
               <span>© {currentYear} Swing Dating.</span>
               <span className="max-[460px]:hidden">All rights reserved.</span>
               <Heart className="w-4 h-4 max-[460px]:w-3.5 max-[460px]:h-3.5 text-primary max-[460px]:ml-0 ml-1" />
@@ -264,18 +264,18 @@ export function Footer() {
               <div className="flex items-center gap-4 max-[460px]:gap-3">
                 <Link 
                   href="/accessibility" 
-                  className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Accessibility
                 </Link>
                 <Link 
                   href="/sitemap" 
-                  className="text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Sitemap
                 </Link>
               </div>
-              <div className="flex items-center gap-1 text-gray-600 dark:text-muted-foreground">
+              <div className="flex items-center gap-1 text-muted-foreground">
                 <span>Made with</span>
                 <Heart className="w-3.5 h-3.5 max-[460px]:w-3 max-[460px]:h-3 text-primary" />
                 <span>in San Francisco</span>

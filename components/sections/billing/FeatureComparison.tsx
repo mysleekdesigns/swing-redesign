@@ -172,7 +172,7 @@ export default function FeatureComparison() {
                 </span>
               </div>
             </th>
-            <th className="text-center py-4 px-4 font-semibold bg-primary/10">
+            <th className="text-center py-4 px-4 font-semibold bg-accent/20">
               <div className="flex flex-col items-center">
                 <span>Unlimited</span>
                 <span className="text-xs font-normal text-muted-foreground mt-1">
@@ -197,7 +197,7 @@ export default function FeatureComparison() {
                 <tr
                   key={`${group.title}-${feature.name}`}
                   className={cn(
-                    "border-b hover:bg-muted/50 transition-colors bg-card",
+                    "border-b hover:bg-muted/50 transition-colors bg-background",
                     index === group.features.length - 1 && "border-b-2"
                   )}
                 >
@@ -212,7 +212,7 @@ export default function FeatureComparison() {
                       <FeatureIcon value={feature.paid} />
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-center bg-primary/10">
+                  <td className="py-3 px-4 text-center bg-accent/20">
                     <div className="flex justify-center">
                       <FeatureIcon value={feature.unlimited} />
                     </div>

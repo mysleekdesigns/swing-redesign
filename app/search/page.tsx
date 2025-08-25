@@ -338,7 +338,7 @@ export default function SearchPage() {
                   {(locationSearch || memberSearch) && (
                     <button
                       onClick={clearAllFilters}
-                      className="inline-flex items-center gap-2 px-4 py-2 text-base font-medium text-primary hover:text-primary/80 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-base font-medium bg-background border border-border hover:bg-accent hover:text-accent-foreground rounded-lg transition-colors"
                     >
                       <X className="w-4 h-4" />
                       Clear all filters

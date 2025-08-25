@@ -36,7 +36,7 @@ export function SortDropdown({
           }}
           className={cn(
             "w-full px-4 py-2 text-left text-base transition-colors hover:bg-accent hover:text-accent-foreground",
-            sortBy === option.value && "bg-primary/20 text-primary font-medium"
+            sortBy === option.value && "bg-accent text-accent-foreground font-medium"
           )}
         >
           {option.label}
