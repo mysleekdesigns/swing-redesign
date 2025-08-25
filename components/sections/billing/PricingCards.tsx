@@ -97,14 +97,12 @@ export default function PricingCards() {
   }
 
   return (
-    <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
       {plans.map((plan) => (
         <div
           key={plan.id}
           className={cn(
-            "relative flex flex-col rounded-2xl border bg-card p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg",
-            plan.popular && "border-primary shadow-primary/20 ring-2 ring-primary/20",
-            plan.bestValue && "border-accent shadow-accent/20 ring-2 ring-accent/20"
+            "relative flex flex-col rounded-2xl border bg-background p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg"
           )}
         >
           {/* Badges */}
@@ -142,18 +140,11 @@ export default function PricingCards() {
           </div>
 
           {/* Pricing */}
-          <div className="mb-8">
-            <div className="flex items-baseline gap-3">
-              <span className="text-4xl font-bold">{plan.price}</span>
-              {plan.originalPrice && (
-                <span className="text-base text-muted-foreground line-through">
-                  {plan.originalPrice}
-                </span>
-              )}
-            </div>
-            {plan.savings && (
-              <span className="inline-block mt-2 text-sm font-medium text-primary">
-                {plan.savings}
+          <div className="mb-8 h-12 flex items-baseline">
+            <span className="text-4xl font-bold">{plan.price}</span>
+            {plan.originalPrice && (
+              <span className="text-base text-muted-foreground line-through ml-3">
+                {plan.originalPrice}
               </span>
             )}
           </div>
@@ -174,11 +165,7 @@ export default function PricingCards() {
             onValueChange={(value) => handlePlanSelect(plan.id, value)}
           >
             <SelectTrigger 
-              className={cn(
-                "w-full",
-                plan.popular && "border-primary hover:bg-primary/5",
-                plan.bestValue && "border-accent hover:bg-accent/5"
-              )}
+              className="w-full bg-muted hover:bg-muted/80"
             >
               <SelectValue placeholder="Choose Plan" />
             </SelectTrigger>

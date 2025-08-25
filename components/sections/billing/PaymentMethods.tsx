@@ -6,7 +6,7 @@ export default function PaymentMethods() {
   return (
     <div className="mt-12 sm:mt-16 space-y-8">
       {/* Payment Methods */}
-      <div className="bg-card rounded-2xl border p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg">
+      <div className="bg-background rounded-2xl border p-6 sm:p-8 shadow-sm transition-all duration-300 hover:shadow-lg">
         <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <div className="p-2 rounded-lg bg-primary/10">
             <CreditCardIcon className="size-6 text-primary" />
@@ -16,7 +16,7 @@ export default function PaymentMethods() {
         
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Card Payment */}
-          <div className="bg-card rounded-xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+          <div className="bg-background rounded-xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md">
             <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-6">
               Secure Online Payment
             </h4>
@@ -75,7 +75,7 @@ export default function PaymentMethods() {
           </div>
 
           {/* Check Payment */}
-          <div className="bg-card rounded-xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+          <div className="bg-background rounded-xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md">
             <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-6">
               Pay by Check
             </h4>

@@ -88,7 +88,7 @@ export default function MessagesPage() {
                       placeholder="Search conversations..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 bg-card border-border/50"
+                      className="pl-10 bg-background border-border/50"
                     />
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function MessagesPage() {
                         onClick={() => setSelectedConversation(conversation)}
                         className={cn(
                           "flex w-full items-start gap-3 p-4 text-left transition-all",
-                          "bg-card rounded-lg shadow-sm border border-border/20",
+                          "bg-background rounded-lg shadow-sm border border-border/20",
                           "hover:shadow-md hover:border-primary/20",
                           isSelected && "border-primary"
                         )}
@@ -242,7 +242,7 @@ export default function MessagesPage() {
                                 "max-w-[70%] rounded-2xl px-4 py-2.5",
                                 isSent
                                   ? "bg-primary text-primary-foreground"
-                                  : "bg-card"
+                                  : "bg-background text-foreground border border-border"
                               )}
                             >
                               {message.type === 'image' ? (
@@ -293,7 +293,7 @@ export default function MessagesPage() {
                         value={messageInput}
                         onChange={(e) => setMessageInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="flex-1 bg-card border-border/50"
+                        className="flex-1 bg-background border-border/50"
                       />
                       <Button
                         onClick={handleSendMessage}
