@@ -650,7 +650,7 @@ export default function SearchPage() {
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="preferences">Preferences</TabsTrigger>
-            <TabsTrigger value="location">Location</TabsTrigger>
+            <TabsTrigger value="location">Search</TabsTrigger>
           </TabsList>
         
         <TabsContent value="basic" className="space-y-6">
@@ -699,40 +699,44 @@ export default function SearchPage() {
                 </div>
                 
                 {/* Orientation Filters */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-sm text-muted-foreground">Male Orientation</Label>
-                    <Select value={maleOrientation} onValueChange={setMaleOrientation}>
-                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                        <SelectValue>
-                          {orientationOptions.find(opt => opt.value === maleOrientation)?.label}
-                        </SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {orientationOptions.map(option => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex flex-wrap gap-2">
+                      {orientationOptions.map(option => (
+                        <button
+                          key={option.value}
+                          onClick={() => setMaleOrientation(option.value)}
+                          className={cn(
+                            "px-3 py-1.5 rounded-full text-sm transition-all",
+                            maleOrientation === option.value
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted hover:bg-muted/80 text-muted-foreground"
+                          )}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Label className="text-sm text-muted-foreground">Female Orientation</Label>
-                    <Select value={femaleOrientation} onValueChange={setFemaleOrientation}>
-                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                        <SelectValue>
-                          {orientationOptions.find(opt => opt.value === femaleOrientation)?.label}
-                        </SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {orientationOptions.map(option => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex flex-wrap gap-2">
+                      {orientationOptions.map(option => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFemaleOrientation(option.value)}
+                          className={cn(
+                            "px-3 py-1.5 rounded-full text-sm transition-all",
+                            femaleOrientation === option.value
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted hover:bg-muted/80 text-muted-foreground"
+                          )}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -801,40 +805,44 @@ export default function SearchPage() {
             <div className="bg-white dark:bg-white/5 rounded-lg p-6 border border-border/50 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-foreground mb-4">Lifestyle & Activity</h3>
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-sm text-muted-foreground">Smoke</Label>
-                    <Select value={smoke} onValueChange={setSmoke}>
-                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                        <SelectValue>
-                          {smokeOptions.find(opt => opt.value === smoke)?.label}
-                        </SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {smokeOptions.map(option => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex flex-wrap gap-2">
+                      {smokeOptions.map(option => (
+                        <button
+                          key={option.value}
+                          onClick={() => setSmoke(option.value)}
+                          className={cn(
+                            "px-3 py-1.5 rounded-full text-sm transition-all",
+                            smoke === option.value
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted hover:bg-muted/80 text-muted-foreground"
+                          )}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Label className="text-sm text-muted-foreground">Drink</Label>
-                    <Select value={drink} onValueChange={setDrink}>
-                      <SelectTrigger className="w-full bg-white dark:bg-white/10 border-border/50">
-                        <SelectValue>
-                          {drinkOptions.find(opt => opt.value === drink)?.label}
-                        </SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {drinkOptions.map(option => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex flex-wrap gap-2">
+                      {drinkOptions.map(option => (
+                        <button
+                          key={option.value}
+                          onClick={() => setDrink(option.value)}
+                          className={cn(
+                            "px-3 py-1.5 rounded-full text-sm transition-all",
+                            drink === option.value
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted hover:bg-muted/80 text-muted-foreground"
+                          )}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
