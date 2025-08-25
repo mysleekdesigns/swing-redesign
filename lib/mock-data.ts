@@ -954,26 +954,25 @@ export const mockConversations: Conversation[] = [
     id: 'conv-3',
     participants: [
       {
-        id: '5',
-        username: 'temptress',
-        displayName: 'Sophia',
-        avatar: 'https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=400&h=600&fit=crop&crop=face',
+        id: '7',
+        username: 'beachlife',
+        displayName: 'Lisa & James',
+        avatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
         isOnline: true
       }
     ],
     lastMessage: {
-      id: 'msg-3',
+      id: 'msg-26',
       conversationId: 'conv-3',
-      senderId: '5',
-      senderName: 'Sophia',
-      senderAvatar: 'https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=400&h=600&fit=crop&crop=face',
-      content: 'Sent you some photos from last night!',
-      timestamp: '2025-08-25T09:15:00Z',
-      read: false,
-      type: 'image',
-      imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=400&fit=crop'
+      senderId: 'current-user',
+      senderName: 'Alexandra',
+      senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+      content: 'Yes! I\'ll bring some snacks 🍿',
+      timestamp: '2025-08-23T23:30:00Z',
+      read: true,
+      type: 'text'
     },
-    unreadCount: 1,
+    unreadCount: 0,
     isPinned: false,
     isMuted: false,
     createdAt: '2025-08-22T16:30:00Z'
@@ -982,22 +981,22 @@ export const mockConversations: Conversation[] = [
     id: 'conv-4',
     participants: [
       {
-        id: '7',
-        username: 'dreamvibe',
-        displayName: 'Emma & Jake',
-        avatar: 'https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=400&h=600&fit=crop&crop=face',
+        id: '8',
+        username: 'travelers',
+        displayName: 'Emma & David',
+        avatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
         isOnline: false,
         lastSeen: '2025-08-24T22:00:00Z'
       }
     ],
     lastMessage: {
-      id: 'msg-4',
+      id: 'msg-36',
       conversationId: 'conv-4',
-      senderId: '7',
-      senderName: 'Emma & Jake',
-      senderAvatar: 'https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?w=400&h=600&fit=crop&crop=face',
-      content: 'Thanks for the amazing evening! Looking forward to our next adventure 🎉',
-      timestamp: '2025-08-23T23:30:00Z',
+      senderId: '8',
+      senderName: 'Emma & David',
+      senderAvatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
+      content: 'September 10th! Can\'t wait!',
+      timestamp: '2025-08-22T19:00:00Z',
       read: true,
       type: 'text'
     },
@@ -1011,8 +1010,8 @@ export const mockConversations: Conversation[] = [
     participants: [
       {
         id: '9',
-        username: 'funcouple',
-        displayName: 'Alex & Sam',
+        username: 'partylovers',
+        displayName: 'Alex & Chris',
         avatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
         isOnline: true
       }
@@ -1021,14 +1020,14 @@ export const mockConversations: Conversation[] = [
       id: 'msg-5',
       conversationId: 'conv-5',
       senderId: '9',
-      senderName: 'Alex & Sam',
+      senderName: 'Alex & Chris',
       senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
       content: 'Are you attending the rooftop party this weekend?',
       timestamp: '2025-08-25T11:00:00Z',
       read: false,
       type: 'text'
     },
-    unreadCount: 2,
+    unreadCount: 1,
     isPinned: false,
     isMuted: false,
     createdAt: '2025-08-19T13:45:00Z'
@@ -1124,6 +1123,325 @@ export const mockMessages: Message[] = [
     content: 'Hey! We loved your profile. Would love to chat more about your interests!',
     timestamp: '2025-08-25T14:30:00Z',
     read: false,
+    type: 'text'
+  },
+  
+  // Lisa & James conversation (conv-3)
+  {
+    id: 'msg-20',
+    conversationId: 'conv-3',
+    senderId: '7',
+    senderName: 'Lisa & James',
+    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    content: 'Hi Alexandra! 👋',
+    timestamp: '2025-08-23T09:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-21',
+    conversationId: 'conv-3',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Hey you two! How was the beach volleyball tournament last weekend?',
+    timestamp: '2025-08-23T09:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-22',
+    conversationId: 'conv-3',
+    senderId: '7',
+    senderName: 'Lisa & James',
+    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    content: 'It was incredible! We made it to the semi-finals and the energy was amazing. The sunset afterwards was absolutely stunning.',
+    timestamp: '2025-08-23T10:15:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-23',
+    conversationId: 'conv-3',
+    senderId: '7',
+    senderName: 'Lisa & James',
+    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    content: 'Look at this sunset from Saturday!',
+    timestamp: '2025-08-23T10:16:00Z',
+    read: true,
+    type: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop'
+  },
+  {
+    id: 'msg-24',
+    conversationId: 'conv-3',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Wow, that view is breathtaking! Count me in for next time!',
+    timestamp: '2025-08-23T11:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-25',
+    conversationId: 'conv-3',
+    senderId: '7',
+    senderName: 'Lisa & James',
+    senderAvatar: 'https://images.unsplash.com/photo-1611432579699-484f7990b127?w=400&h=600&fit=crop',
+    content: 'Perfect! There\'s a beach bonfire party this Saturday at 6pm. Want to join?',
+    timestamp: '2025-08-23T22:45:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-26',
+    conversationId: 'conv-3',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Yes! I\'ll bring some snacks 🍿',
+    timestamp: '2025-08-23T23:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  
+  // Emma & David conversation (conv-4)
+  {
+    id: 'msg-30',
+    conversationId: 'conv-4',
+    senderId: '8',
+    senderName: 'Emma & David',
+    senderAvatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
+    content: 'Alexandra! Guess what?',
+    timestamp: '2025-08-22T15:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-31',
+    conversationId: 'conv-4',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'What? Did you book another trip? 😊',
+    timestamp: '2025-08-22T15:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-32',
+    conversationId: 'conv-4',
+    senderId: '8',
+    senderName: 'Emma & David',
+    senderAvatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
+    content: 'YES! We just booked 2 weeks in Barcelona and the French Riviera! We found this amazing adults-only resort that hosts lifestyle events. Have you been to Europe?',
+    timestamp: '2025-08-22T16:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-33',
+    conversationId: 'conv-4',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'I went to Paris last year and absolutely fell in love with it. Barcelona is on my bucket list!',
+    timestamp: '2025-08-22T16:45:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-34',
+    conversationId: 'conv-4',
+    senderId: '8',
+    senderName: 'Emma & David',
+    senderAvatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
+    content: 'Here\'s where we\'re staying in Barcelona - right by Sagrada Familia!',
+    timestamp: '2025-08-22T17:00:00Z',
+    read: true,
+    type: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&h=400&fit=crop'
+  },
+  {
+    id: 'msg-35',
+    conversationId: 'conv-4',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'That architecture is stunning! When do you leave?',
+    timestamp: '2025-08-22T18:15:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-36',
+    conversationId: 'conv-4',
+    senderId: '8',
+    senderName: 'Emma & David',
+    senderAvatar: 'https://images.unsplash.com/photo-1523662185402-5deb0596e604?w=400&h=600&fit=crop',
+    content: 'September 10th! Can\'t wait!',
+    timestamp: '2025-08-22T19:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  
+  // Alex & Chris conversation (conv-5)
+  {
+    id: 'msg-40',
+    conversationId: 'conv-5',
+    senderId: '9',
+    senderName: 'Alex & Chris',
+    senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+    content: 'Party this Saturday!',
+    timestamp: '2025-08-24T18:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-41',
+    conversationId: 'conv-5',
+    senderId: '9',
+    senderName: 'Alex & Chris',
+    senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+    content: 'Rooftop in downtown. DJ starts at 9pm.',
+    timestamp: '2025-08-24T18:01:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-42',
+    conversationId: 'conv-5',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Sounds amazing! What\'s the vibe?',
+    timestamp: '2025-08-24T19:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-43',
+    conversationId: 'conv-5',
+    senderId: '9',
+    senderName: 'Alex & Chris',
+    senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+    content: 'House music, cocktails, amazing city views! Dress code is upscale casual. We\'re expecting about 60 couples.',
+    timestamp: '2025-08-24T20:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-44',
+    conversationId: 'conv-5',
+    senderId: '9',
+    senderName: 'Alex & Chris',
+    senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+    content: 'Check out the venue!',
+    timestamp: '2025-08-24T20:02:00Z',
+    read: true,
+    type: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&h=400&fit=crop'
+  },
+  {
+    id: 'msg-45',
+    conversationId: 'conv-5',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'That view is incredible! I\'m in!',
+    timestamp: '2025-08-25T09:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-5',
+    conversationId: 'conv-5',
+    senderId: '9',
+    senderName: 'Alex & Chris',
+    senderAvatar: 'https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&h=600&fit=crop',
+    content: 'Are you attending the rooftop party this weekend?',
+    timestamp: '2025-08-25T11:00:00Z',
+    read: false,
+    type: 'text'
+  },
+  
+  // Jessica conversation (conv-2) - Wine & culture conversation
+  {
+    id: 'msg-50',
+    conversationId: 'conv-2',
+    senderId: '3',
+    senderName: 'Jessica',
+    senderAvatar: 'https://images.unsplash.com/photo-1652471949169-9c587e8898cd?w=400&h=600&fit=crop&crop=face',
+    content: 'Alexandra, have you been to the new art gallery on Melrose?',
+    timestamp: '2025-08-24T14:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-51',
+    conversationId: 'conv-2',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Not yet! Is it worth checking out?',
+    timestamp: '2025-08-24T14:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-52',
+    conversationId: 'conv-2',
+    senderId: '3',
+    senderName: 'Jessica',
+    senderAvatar: 'https://images.unsplash.com/photo-1652471949169-9c587e8898cd?w=400&h=600&fit=crop&crop=face',
+    content: 'Absolutely! They have this fascinating contemporary collection and they do wine tastings every Thursday evening. It\'s the perfect combination of art and wine.',
+    timestamp: '2025-08-24T15:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-53',
+    conversationId: 'conv-2',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'That sounds perfect! Want to go together next Thursday?',
+    timestamp: '2025-08-24T15:45:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-54',
+    conversationId: 'conv-2',
+    senderId: '3',
+    senderName: 'Jessica',
+    senderAvatar: 'https://images.unsplash.com/photo-1652471949169-9c587e8898cd?w=400&h=600&fit=crop&crop=face',
+    content: 'I\'d love that! Let\'s meet at 6:30pm. They usually have a selection of organic wines from local vineyards.',
+    timestamp: '2025-08-24T16:30:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-55',
+    conversationId: 'conv-2',
+    senderId: '3',
+    senderName: 'Jessica',
+    senderAvatar: 'https://images.unsplash.com/photo-1652471949169-9c587e8898cd?w=400&h=600&fit=crop&crop=face',
+    content: 'Oh, and there\'s this amazing Italian restaurant next door. Maybe dinner after?',
+    timestamp: '2025-08-24T17:00:00Z',
+    read: true,
+    type: 'text'
+  },
+  {
+    id: 'msg-2',
+    conversationId: 'conv-2',
+    senderId: 'current-user',
+    senderName: 'Alexandra',
+    senderAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces',
+    content: 'Sounds great! See you at the wine tasting event tomorrow!',
+    timestamp: '2025-08-24T18:45:00Z',
+    read: true,
     type: 'text'
   }
 ];

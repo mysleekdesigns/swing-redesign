@@ -16,13 +16,8 @@ import {
 } from "@/lib/mock-data";
 import { 
   Search, 
-  Send, 
-  Paperclip, 
-  Mic, 
-  MoreVertical,
-  Phone,
+  Send,
   Video,
-  Info,
   Pin,
   VolumeX,
   Bell,
@@ -30,15 +25,13 @@ import {
   Trash2,
   ChevronLeft,
   MessageSquare,
-  Image as ImageIcon,
-  Smile
+  Image as ImageIcon
 } from "lucide-react";
 
 export default function MessagesPage() {
   const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(mockConversations[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [messageInput, setMessageInput] = useState("");
-  const [showConversationInfo, setShowConversationInfo] = useState(false);
 
   const filteredConversations = mockConversations.filter(conv => {
     const participant = conv.participants[0];
@@ -84,7 +77,7 @@ export default function MessagesPage() {
                       placeholder="Search conversations..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 bg-muted/30 border-border/50"
+                      className="pl-10 bg-white border-border/50"
                     />
                   </div>
                 </div>
@@ -199,29 +192,7 @@ export default function MessagesPage() {
                         size="icon"
                         className="hover:bg-muted/20"
                       >
-                        <Phone className="h-5 w-5" />
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="hover:bg-muted/20"
-                      >
                         <Video className="h-5 w-5" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="hover:bg-muted/20"
-                        onClick={() => setShowConversationInfo(!showConversationInfo)}
-                      >
-                        <Info className="h-5 w-5" />
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="hover:bg-muted/20"
-                      >
-                        <MoreVertical className="h-5 w-5" />
                       </Button>
                     </div>
                   </div>
@@ -253,7 +224,7 @@ export default function MessagesPage() {
                                 "max-w-[70%] rounded-2xl px-4 py-2.5",
                                 isSent
                                   ? "bg-primary text-primary-foreground"
-                                  : "bg-muted/50 backdrop-blur"
+                                  : "bg-white"
                               )}
                             >
                               {message.type === 'image' ? (
@@ -294,13 +265,6 @@ export default function MessagesPage() {
                         size="icon"
                         className="hover:bg-muted/20"
                       >
-                        <Paperclip className="h-5 w-5" />
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="hover:bg-muted/20"
-                      >
                         <ImageIcon className="h-5 w-5" />
                       </Button>
                       <Input
@@ -309,22 +273,8 @@ export default function MessagesPage() {
                         value={messageInput}
                         onChange={(e) => setMessageInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="flex-1 bg-muted/30 border-border/50"
+                        className="flex-1 bg-white border-border/50"
                       />
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="hover:bg-muted/20"
-                      >
-                        <Smile className="h-5 w-5" />
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="hover:bg-muted/20"
-                      >
-                        <Mic className="h-5 w-5" />
-                      </Button>
                       <Button
                         onClick={handleSendMessage}
                         disabled={!messageInput.trim()}
@@ -347,53 +297,6 @@ export default function MessagesPage() {
                     <p className="text-muted-foreground">
                       Choose a conversation from the list to start messaging
                     </p>
-                  </div>
-                </div>
-              )}
-
-              {/* Conversation Info Sidebar */}
-              {showConversationInfo && selectedConversation && (
-                <div className="w-80 border-l border-border/30 p-4 bg-muted/5">
-                  <div className="space-y-6">
-                    <div className="text-center">
-                      <img
-                        src={selectedConversation.participants[0].avatar}
-                        alt={selectedConversation.participants[0].displayName}
-                        className="mx-auto h-24 w-24 rounded-full object-cover ring-4 ring-background"
-                      />
-                      <h3 className="mt-3 text-lg font-semibold text-foreground">
-                        {selectedConversation.participants[0].displayName}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        @{selectedConversation.participants[0].username}
-                      </p>
-                      <p className="mt-2 text-sm text-muted-foreground">
-                        {getOnlineStatus(
-                          selectedConversation.participants[0].isOnline,
-                          selectedConversation.participants[0].lastSeen
-                        )}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-foreground mb-3">Conversation Options</h4>
-                      <button className="flex w-full items-center gap-3 rounded-lg p-2.5 text-left hover:bg-muted/20 transition-colors">
-                        <Pin className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm">Pin conversation</span>
-                      </button>
-                      <button className="flex w-full items-center gap-3 rounded-lg p-2.5 text-left hover:bg-muted/20 transition-colors">
-                        <Bell className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm">Mute notifications</span>
-                      </button>
-                      <button className="flex w-full items-center gap-3 rounded-lg p-2.5 text-left hover:bg-muted/20 transition-colors">
-                        <Archive className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm">Archive conversation</span>
-                      </button>
-                      <button className="flex w-full items-center gap-3 rounded-lg p-2.5 text-left text-destructive hover:bg-destructive/10 transition-colors">
-                        <Trash2 className="h-4 w-4" />
-                        <span className="text-sm">Delete conversation</span>
-                      </button>
-                    </div>
                   </div>
                 </div>
               )}
