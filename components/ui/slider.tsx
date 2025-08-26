@@ -7,12 +7,13 @@ interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChan
   min?: number;
   max?: number;
   step?: number;
-  value?: [number, number];
-  defaultValue?: [number, number];
-  onValueChange?: (value: [number, number]) => void;
+  value?: number | [number, number];
+  defaultValue?: number | [number, number];
+  onValueChange?: (value: number | [number, number]) => void;
   formatLabel?: (value: number) => string;
   showLabels?: boolean;
   disabled?: boolean;
+  singleValue?: boolean;
 }
 
 const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
@@ -22,21 +23,41 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     max = 100, 
     step = 1, 
     value: controlledValue,
-    defaultValue = [min, max],
+    defaultValue,
     onValueChange,
     formatLabel = (v) => v.toString(),
     showLabels = true,
     disabled = false,
+    singleValue = false,
     ...props 
   }, ref) => {
+    // Determine if single value mode
+    const isSingle = singleValue || typeof controlledValue === 'number' || typeof defaultValue === 'number';
+    
+    // Default values based on mode
+    const getDefaultValue = () => {
+      if (defaultValue !== undefined) return defaultValue;
+      return isSingle ? min : [min, max];
+    };
+    
+    const initialValue = getDefaultValue();
+    
     // Use controlled values directly if provided, otherwise use internal state
     const isControlled = controlledValue !== undefined;
-    const [internalMinVal, setInternalMinVal] = React.useState(defaultValue[0]);
-    const [internalMaxVal, setInternalMaxVal] = React.useState(defaultValue[1]);
+    const [internalMinVal, setInternalMinVal] = React.useState(
+      isSingle ? min : (Array.isArray(initialValue) ? initialValue[0] : min)
+    );
+    const [internalMaxVal, setInternalMaxVal] = React.useState(
+      isSingle ? (typeof initialValue === 'number' ? initialValue : max) : 
+      (Array.isArray(initialValue) ? initialValue[1] : max)
+    );
     
     // Use controlled values if provided, otherwise use internal state
-    const minVal = isControlled ? controlledValue[0] : internalMinVal;
-    const maxVal = isControlled ? controlledValue[1] : internalMaxVal;
+    const minVal = isSingle ? min : 
+      (isControlled ? (Array.isArray(controlledValue) ? controlledValue[0] : min) : internalMinVal);
+    const maxVal = isSingle ? 
+      (isControlled ? (typeof controlledValue === 'number' ? controlledValue : max) : internalMaxVal) :
+      (isControlled ? (Array.isArray(controlledValue) ? controlledValue[1] : max) : internalMaxVal);
     
     const minValRef = React.useRef<HTMLInputElement>(null);
     const maxValRef = React.useRef<HTMLInputElement>(null);
@@ -48,30 +69,28 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       [min, max]
     );
     
-    // Set width of the range to change from the left side
+    // Set width of the range
     React.useEffect(() => {
-      if (maxValRef.current) {
-        const minPercent = getPercent(minVal);
-        const maxPercent = getPercent(+maxValRef.current.value);
-        
+      if (isSingle) {
+        // For single value, show range from min to current value
+        const percent = getPercent(maxVal);
         if (range.current) {
-          range.current.style.left = `${minPercent}%`;
-          range.current.style.width = `${maxPercent - minPercent}%`;
+          range.current.style.left = '0%';
+          range.current.style.width = `${percent}%`;
+        }
+      } else {
+        // For dual value, show range between min and max
+        if (maxValRef.current) {
+          const minPercent = getPercent(minVal);
+          const maxPercent = getPercent(+maxValRef.current.value);
+          
+          if (range.current) {
+            range.current.style.left = `${minPercent}%`;
+            range.current.style.width = `${maxPercent - minPercent}%`;
+          }
         }
       }
-    }, [minVal, getPercent]);
-    
-    // Set width of the range to change from the right side
-    React.useEffect(() => {
-      if (minValRef.current) {
-        const minPercent = getPercent(+minValRef.current.value);
-        const maxPercent = getPercent(maxVal);
-        
-        if (range.current) {
-          range.current.style.width = `${maxPercent - minPercent}%`;
-        }
-      }
-    }, [maxVal, getPercent]);
+    }, [minVal, maxVal, getPercent, isSingle]);
     
     return (
       <div 
@@ -81,14 +100,23 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       >
         {showLabels && (
           <div className="flex justify-between mb-4">
-            <span className="text-sm text-muted-foreground">{formatLabel(minVal)}</span>
-            <span className="text-sm text-muted-foreground">{formatLabel(maxVal)}</span>
+            {isSingle ? (
+              <span className="text-sm text-muted-foreground font-medium">
+                {formatLabel(maxVal)}
+              </span>
+            ) : (
+              <>
+                <span className="text-sm text-muted-foreground">{formatLabel(minVal)}</span>
+                <span className="text-sm text-muted-foreground">{formatLabel(maxVal)}</span>
+              </>
+            )}
           </div>
         )}
         
         <div className="relative">
-          {/* Minimum value input */}
-          <input
+          {/* Minimum value input - only show for dual mode */}
+          {!isSingle && (
+            <input
             type="range"
             min={min}
             max={max}
@@ -149,8 +177,9 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             }}
             disabled={disabled}
           />
+          )}
           
-          {/* Maximum value input */}
+          {/* Maximum/Single value input */}
           <input
             type="range"
             min={min}
@@ -159,12 +188,24 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             value={maxVal}
             ref={maxValRef}
             onChange={(event) => {
-              const value = Math.max(+event.target.value, minVal + 1);
-              if (isControlled) {
-                onValueChange?.([minVal, value]);
+              const value = +event.target.value;
+              if (isSingle) {
+                // For single mode, just update the value
+                if (isControlled) {
+                  onValueChange?.(value);
+                } else {
+                  setInternalMaxVal(value);
+                  onValueChange?.(value);
+                }
               } else {
-                setInternalMaxVal(value);
-                onValueChange?.([minVal, value]);
+                // For dual mode, ensure max is greater than min
+                const clampedValue = Math.max(value, minVal + 1);
+                if (isControlled) {
+                  onValueChange?.([minVal, clampedValue]);
+                } else {
+                  setInternalMaxVal(clampedValue);
+                  onValueChange?.([minVal, clampedValue]);
+                }
               }
             }}
             className={cn(

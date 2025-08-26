@@ -17,7 +17,9 @@ interface AgeSectionProps {
 export function AgeSection({ agePreferences, onChange }: AgeSectionProps) {
   const [ageRange, setAgeRange] = useState<[number, number]>([agePreferences.youngest, agePreferences.oldest]);
 
-  const handleSliderChange = (values: [number, number]) => {
+  const handleSliderChange = (values: number | [number, number]) => {
+    // Ensure we have an array for age range
+    if (!Array.isArray(values)) return;
     setAgeRange(values);
     onChange({ youngest: values[0], oldest: values[1] });
   };

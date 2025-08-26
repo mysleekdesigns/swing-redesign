@@ -19,34 +19,33 @@ export function LocationSection({ location, onChange }: LocationSectionProps) {
         <div className="p-2 rounded-lg bg-primary/10">
           <MapPin className="h-5 w-5 text-primary" />
         </div>
-        <h3 className="text-lg font-semibold text-foreground">Location</h3>
+        <div>
+          <h3 className="text-lg font-semibold text-foreground">Location</h3>
+          <p className="text-sm text-muted-foreground">Please enter your real city name or postal code</p>
+        </div>
       </div>
       
       <div className="space-y-3">
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="current-location" className="text-sm font-medium text-foreground">
             Current Location
           </Label>
-          <p className="text-xs text-muted-foreground mt-1">
-            Please enter your real city name or postal code
-          </p>
-        </div>
-        
-        <div className="flex gap-2">
-          <Input
-            id="current-location"
-            type="text"
-            value={location.current}
-            onChange={(e) => onChange({ current: e.target.value })}
-            placeholder="Enter city or postal code"
-            className="flex-1"
-          />
-          <Button 
-            variant="default" 
-            className="whitespace-nowrap"
-          >
-            Change Location
-          </Button>
+          <div className="flex gap-2">
+            <Input
+              id="current-location"
+              type="text"
+              value={location.current}
+              onChange={(e) => onChange({ current: e.target.value })}
+              placeholder="Enter city or postal code"
+              className="flex-1"
+            />
+            <Button 
+              variant="default" 
+              className="whitespace-nowrap"
+            >
+              Change Location
+            </Button>
+          </div>
         </div>
         
         <p className="text-xs text-muted-foreground">

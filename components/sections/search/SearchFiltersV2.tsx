@@ -251,8 +251,11 @@ export function SearchFiltersV2({
                   step={1}
                   value={localAgeRange}
                   onValueChange={(value) => {
-                    setLocalAgeRange(value); // Immediate UI update
-                    debouncedAgeUpdate(value); // Delayed filter update
+                    // Ensure we have an array for age range
+                    if (Array.isArray(value)) {
+                      setLocalAgeRange(value); // Immediate UI update
+                      debouncedAgeUpdate(value); // Delayed filter update
+                    }
                   }}
                   className="w-full"
                 />

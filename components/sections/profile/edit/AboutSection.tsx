@@ -1,28 +1,57 @@
 "use client";
 
-import { Textarea } from "@/components/ui/textarea";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, Eye } from "lucide-react";
-import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
+import { User } from "lucide-react";
 
 interface AboutSectionProps {
   about: {
-    description: string;
-    lookingFor: string;
+    memberType: string;
+    heightFeet: number;
+    heightInches: number;
+    weight: number;
+    age: number;
+    smoke: boolean;
+    drink: boolean;
+    orientation: string;
   };
-  onChange: (about: { description?: string; lookingFor?: string }) => void;
+  onChange: (about: { 
+    memberType?: string;
+    heightFeet?: number;
+    heightInches?: number;
+    weight?: number;
+    age?: number;
+    smoke?: boolean;
+    drink?: boolean;
+    orientation?: string;
+  }) => void;
 }
 
 export function AboutSection({ about, onChange }: AboutSectionProps) {
-  const [descriptionLength, setDescriptionLength] = useState(about.description.length);
-  const maxDescriptionLength = 2000;
-
-  const handleDescriptionChange = (value: string) => {
-    if (value.length <= maxDescriptionLength) {
-      setDescriptionLength(value.length);
-      onChange({ description: value });
-    }
-  };
+  // Generate feet options (3-8)
+  const feetOptions = Array.from({ length: 6 }, (_, i) => i + 3);
+  
+  // Generate inches options (0-11)
+  const inchesOptions = Array.from({ length: 12 }, (_, i) => i);
+  
+  // Orientation options
+  const orientationOptions = [
+    "Straight",
+    "Bisexual",
+    "Gay",
+    "Lesbian",
+    "Pansexual",
+    "Other"
+  ];
 
   return (
     <div className="rounded-2xl bg-background border border-border p-6 space-y-6">
@@ -30,66 +59,142 @@ export function AboutSection({ about, onChange }: AboutSectionProps) {
         <div className="p-2 rounded-lg bg-primary/10">
           <User className="h-5 w-5 text-primary" />
         </div>
-        <h3 className="text-lg font-semibold text-foreground">About Yourself</h3>
+        <div>
+          <h3 className="text-lg font-semibold text-foreground">Tell Us a Little About You</h3>
+          <p className="text-sm text-muted-foreground mt-1">{about.memberType || "Male Member"}</p>
+        </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Tell us about yourself */}
-        <div className="space-y-3">
-          <div>
-            <Label htmlFor="about-description" className="text-sm font-medium text-foreground">
-              Tell Us a Little About Yourself
-            </Label>
-            <p className="text-xs text-muted-foreground mt-1">
-              Share what makes you unique
-            </p>
-          </div>
-          
-          <Textarea
-            id="about-description"
-            value={about.description}
-            onChange={(e) => handleDescriptionChange(e.target.value)}
-            placeholder="Tell us about your interests, what you enjoy, and what makes you special..."
-            className="min-h-[150px] resize-y"
-          />
-          
-          <div className="flex justify-between items-center">
-            <p className="text-xs text-muted-foreground">
-              This will be visible on your profile
-            </p>
-            <span className="text-xs text-muted-foreground">
-              {descriptionLength} / {maxDescriptionLength}
-            </span>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
+        {/* Height Section */}
+        <div className="col-span-2 md:col-span-1 space-y-2">
+          <Label className="text-sm font-medium text-foreground">Height:</Label>
+          <div className="flex gap-2">
+            <div className="flex-1">
+              <Select
+                value={about.heightFeet.toString()}
+                onValueChange={(value) => onChange({ heightFeet: parseInt(value) })}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {feetOptions.map(ft => (
+                    <SelectItem key={ft} value={ft.toString()}>
+                      {ft}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <span className="text-xs text-muted-foreground mt-1 block text-center">ft</span>
+            </div>
+            <div className="flex-1">
+              <Select
+                value={about.heightInches.toString()}
+                onValueChange={(value) => onChange({ heightInches: parseInt(value) })}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {inchesOptions.map(inch => (
+                    <SelectItem key={inch} value={inch.toString()}>
+                      {inch}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <span className="text-xs text-muted-foreground mt-1 block text-center">in</span>
+            </div>
           </div>
         </div>
 
-        {/* Who are you looking for */}
-        <div className="space-y-3">
-          <div>
-            <Label htmlFor="looking-for" className="text-sm font-medium text-foreground">
-              Who are you looking for?
-            </Label>
-            <p className="text-xs text-muted-foreground mt-1">
-              Describe your ideal match
-            </p>
-          </div>
-          
-          <Textarea
-            id="looking-for"
-            value={about.lookingFor}
-            onChange={(e) => onChange({ lookingFor: e.target.value })}
-            placeholder="Describe the type of person or couple you're hoping to meet..."
-            className="min-h-[150px] resize-y"
-          />
-          
-          <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50 border border-border">
-            <Eye className="h-4 w-4 text-muted-foreground mt-0.5" />
-            <p className="text-xs text-muted-foreground">
-              By choosing &quot;No interest&quot;, the profile is still viewable. However, choosing &quot;Block Them&quot;, 
-              the profile is no longer visible
-            </p>
+        {/* Weight Section */}
+        <div className="col-span-2 md:col-span-1 space-y-2">
+          <Label className="text-sm font-medium text-foreground">Weight:</Label>
+          <div className="flex items-center gap-2">
+            <Input
+              type="number"
+              value={about.weight}
+              onChange={(e) => onChange({ weight: parseInt(e.target.value) || 0 })}
+              className="flex-1"
+              min={50}
+              max={500}
+            />
+            <span className="text-sm text-muted-foreground">Lbs</span>
           </div>
         </div>
+
+        {/* Age Section */}
+        <div className="col-span-2 md:col-span-1 space-y-2">
+          <Label className="text-sm font-medium text-foreground">
+            Age: <span className="text-primary font-semibold">{about.age} Yrs</span>
+          </Label>
+          <Slider
+            min={18}
+            max={100}
+            step={1}
+            value={about.age}
+            onValueChange={(value) => onChange({ age: value as number })}
+            singleValue={true}
+            showLabels={false}
+            className="w-full pt-2"
+          />
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
+            <span>18</span>
+            <span>100</span>
+          </div>
+        </div>
+
+        {/* Smoke Section */}
+        <div className="col-span-1 space-y-2">
+          <Label className="text-sm font-medium text-foreground">Smoke:</Label>
+          <div className="flex items-center h-9">
+            <Checkbox
+              checked={about.smoke}
+              onCheckedChange={(checked) => onChange({ smoke: checked as boolean })}
+              className="h-5 w-5"
+            />
+          </div>
+        </div>
+
+        {/* Drink Section */}
+        <div className="col-span-1 space-y-2">
+          <Label className="text-sm font-medium text-foreground">Drink:</Label>
+          <div className="flex items-center h-9">
+            <Checkbox
+              checked={about.drink}
+              onCheckedChange={(checked) => onChange({ drink: checked as boolean })}
+              className="h-5 w-5"
+            />
+          </div>
+        </div>
+
+        {/* Orientation Section */}
+        <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-2">
+          <Label className="text-sm font-medium text-foreground">Orientation:</Label>
+          <Select
+            value={about.orientation}
+            onValueChange={(value) => onChange({ orientation: value })}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {orientationOptions.map(option => (
+                <SelectItem key={option} value={option.toLowerCase()}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+      
+      <div className="p-3 rounded-lg bg-muted/50 border border-border">
+        <p className="text-xs text-muted-foreground">
+          This information helps us match you with compatible members and will be displayed on your profile
+        </p>
       </div>
     </div>
   );

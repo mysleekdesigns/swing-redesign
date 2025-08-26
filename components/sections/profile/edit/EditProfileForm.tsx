@@ -20,8 +20,14 @@ export interface EditProfileData {
     full: "definitely" | "maybe" | "no";
   };
   about: {
-    description: string;
-    lookingFor: string;
+    memberType: string;
+    heightFeet: number;
+    heightInches: number;
+    weight: number;
+    age: number;
+    smoke: boolean;
+    drink: boolean;
+    orientation: string;
   };
   filters: {
     blockSingles: "no_interest" | "block_them" | "viewable";
@@ -57,8 +63,14 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
       full: "definitely",
     },
     about: {
-      description: "",
-      lookingFor: "",
+      memberType: "Male Member",
+      heightFeet: 6,
+      heightInches: 0,
+      weight: 200,
+      age: 45,
+      smoke: true,
+      drink: true,
+      orientation: "straight",
     },
     filters: {
       blockSingles: "no_interest",
