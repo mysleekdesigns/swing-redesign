@@ -64,13 +64,14 @@ This is a Next.js 15 application using the App Router with the following key cha
 - `@/*` maps to the project root, allowing imports like `@/lib/utils`
 
 ### Theme System
-- Four theme variants available:
+- Five theme variants available:
   - `light` - Default light theme
   - `dark` - Dark theme with OKLCH dark colors
+  - `dark2` - Alternative dark theme variant
   - `bubble-gum` - Pink/pastel theme
   - `cyberpunk` - Neon cyberpunk theme (has both light and dark variants)
 - Themes are managed via `theme-context.tsx` with localStorage persistence
-- Theme cycling: light → dark → bubble-gum → cyberpunk → light
+- Theme cycling: light → dark → dark2 → bubble-gum → cyberpunk → light
 - CSS variables defined in `app/globals.css` using OKLCH color space
 - Responsive breakpoints for mobile/tablet/desktop layouts
 
