@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { LocationSection } from "./LocationSection";
 import { PreferencesSection } from "./PreferencesSection";
 import { AboutSection } from "./AboutSection";
-import { FiltersSection } from "./FiltersSection";
+import { LookingForFiltersSection, PreferenceValue } from "./LookingForFiltersSection";
 import { AgeSection } from "./AgeSection";
 import { LifestyleSection } from "./LifestyleSection";
 import { GuidelinesSection } from "./GuidelinesSection";
@@ -29,13 +29,10 @@ export interface EditProfileData {
     drink: boolean;
     orientation: string;
   };
-  filters: {
-    blockSingles: "no_interest" | "block_them" | "viewable";
-    blockCouples: "no_interest" | "block_them" | "viewable";
-  };
-  singleMembers: {
-    men: "block_them" | "no_interest" | "interested";
-    women: "block_them" | "no_interest" | "interested";
+  lookingFor: {
+    couples: PreferenceValue;
+    singleLadies: PreferenceValue;
+    singleMen: PreferenceValue;
   };
   agePreferences: {
     youngest: number;
@@ -72,13 +69,10 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
       drink: true,
       orientation: "straight",
     },
-    filters: {
-      blockSingles: "no_interest",
-      blockCouples: "no_interest",
-    },
-    singleMembers: {
-      men: "no_interest",
-      women: "no_interest",
+    lookingFor: {
+      couples: "please_choose",
+      singleLadies: "please_choose",
+      singleMen: "please_choose",
     },
     agePreferences: {
       youngest: 25,
@@ -140,21 +134,11 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
           />
         </div>
 
-        {/* Filters Section */}
-        <div className="md:col-span-1 xl:col-span-1">
-          <FiltersSection
-            filters={formData.filters}
-            onChange={(data) => updateFormData("filters", data)}
-          />
-        </div>
-
-        {/* Single Members Section */}
-        <div className="md:col-span-1 xl:col-span-1">
-          <FiltersSection
-            filters={formData.singleMembers}
-            onChange={(data) => updateFormData("singleMembers", data)}
-            title="Single Members Preferences"
-            isSingleMembers
+        {/* Looking For Section - Full width to contain the 3 dropdowns */}
+        <div className="md:col-span-2 xl:col-span-3">
+          <LookingForFiltersSection
+            preferences={formData.lookingFor}
+            onChange={(data) => updateFormData("lookingFor", data)}
           />
         </div>
 
