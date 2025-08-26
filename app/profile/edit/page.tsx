@@ -58,7 +58,7 @@ export default function EditProfilePage() {
                   <Button
                     onClick={handleSave}
                     disabled={isSaving || !hasChanges}
-                    className="bg-primary text-primary-foreground hover:bg-primary/90"
+                    className="hidden sm:inline-flex bg-primary text-primary-foreground hover:bg-primary/90"
                   >
                     {isSaving ? "Saving..." : "Save Changes"}
                   </Button>

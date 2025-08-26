@@ -102,16 +102,16 @@ export function AboutSection({ about, onChange }: AboutSectionProps) {
         {/* Weight Section */}
         <div className="col-span-2 md:col-span-1 space-y-2">
           <Label className="text-sm font-medium text-foreground">Weight:</Label>
-          <div className="flex items-center gap-2">
+          <div>
             <Input
               type="number"
               value={about.weight}
               onChange={(e) => onChange({ weight: parseInt(e.target.value) || 0 })}
-              className="flex-1"
+              className="w-full"
               min={50}
               max={500}
             />
-            <span className="text-sm text-muted-foreground">Lbs</span>
+            <span className="text-xs text-muted-foreground mt-1 block text-center">lbs</span>
           </div>
         </div>
 

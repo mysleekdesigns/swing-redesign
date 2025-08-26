@@ -53,7 +53,7 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
             onValueChange={(value) => onChange({ watch: value as "definitely" | "maybe" | "no" })}
           >
             <SelectTrigger id="watch" className="w-full">
-              <SelectValue placeholder="Select preference" />
+              <SelectValue placeholder="Definitely" />
             </SelectTrigger>
             <SelectContent>
               {preferenceOptions.map((option) => (
@@ -78,7 +78,7 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
             onValueChange={(value) => onChange({ soft: value as "definitely" | "maybe" | "no" })}
           >
             <SelectTrigger id="soft" className="w-full">
-              <SelectValue placeholder="Select preference" />
+              <SelectValue placeholder="Definitely" />
             </SelectTrigger>
             <SelectContent>
               {preferenceOptions.map((option) => (
@@ -103,7 +103,7 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
             onValueChange={(value) => onChange({ full: value as "definitely" | "maybe" | "no" })}
           >
             <SelectTrigger id="full" className="w-full">
-              <SelectValue placeholder="Select preference" />
+              <SelectValue placeholder="Definitely" />
             </SelectTrigger>
             <SelectContent>
               {preferenceOptions.map((option) => (

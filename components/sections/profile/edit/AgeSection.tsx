@@ -40,6 +40,7 @@ export function AgeSection({ agePreferences, onChange }: AgeSectionProps) {
               min={18}
               max={99}
               step={1}
+              showLabels={false}
               className="w-full"
             />
           </div>
@@ -47,7 +48,7 @@ export function AgeSection({ agePreferences, onChange }: AgeSectionProps) {
           <div className="flex justify-between text-xs text-muted-foreground px-2">
             <span>18</span>
             <span className="font-medium text-primary">
-              {agePreferences.youngest} - {agePreferences.oldest} years
+              {agePreferences.youngest} - {agePreferences.oldest}
             </span>
             <span>99</span>
           </div>

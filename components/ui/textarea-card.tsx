@@ -79,7 +79,7 @@ export function TextAreaCard({
               {required && <span className="text-destructive ml-1">*</span>}
             </h3>
             {subtitle && (
-              <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
+              <p className="hidden sm:block text-sm text-muted-foreground mt-1">{subtitle}</p>
             )}
           </div>
         </div>

@@ -83,7 +83,7 @@ export function FiltersSection({
               onValueChange={(value) => onChange({ [key]: value } as FilterType)}
             >
               <SelectTrigger id={`filter-${key}`} className="w-full">
-                <SelectValue placeholder="Select option" />
+                <SelectValue placeholder={isSingleMembers ? "Interested" : "Viewable"} />
               </SelectTrigger>
               <SelectContent>
                 {filterOptions.map((option) => (

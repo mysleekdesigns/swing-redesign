@@ -49,7 +49,7 @@ export function LifestyleSection({ lifestyle, onChange }: LifestyleSectionProps)
               onValueChange={(value) => onChange({ drink: value as "do_not_care" | "yes" | "no" })}
             >
               <SelectTrigger id="drink" className="w-full">
-                <SelectValue placeholder="Select preference" />
+                <SelectValue placeholder="I do not care" />
               </SelectTrigger>
               <SelectContent>
                 {lifestyleOptions.map((option) => (
@@ -77,7 +77,7 @@ export function LifestyleSection({ lifestyle, onChange }: LifestyleSectionProps)
               onValueChange={(value) => onChange({ smoke: value as "do_not_care" | "yes" | "no" })}
             >
               <SelectTrigger id="smoke" className="w-full">
-                <SelectValue placeholder="Select preference" />
+                <SelectValue placeholder="I do not care" />
               </SelectTrigger>
               <SelectContent>
                 {lifestyleOptions.map((option) => (

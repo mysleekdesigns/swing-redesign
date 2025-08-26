@@ -21,6 +21,7 @@ export function WhatLookingForSection({ lookingFor, onChange }: WhatLookingForSe
       minHeight="min-h-[160px]"
       helperText="By choosing 'No Interest', the profile is no longer visible"
       rows={7}
+      required
     />
   );
 }
