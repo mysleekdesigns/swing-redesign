@@ -15,6 +15,7 @@ import {
   Menu,
   Bell,
   CreditCard,
+  Edit,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useTheme } from "@/lib/theme-context";
@@ -38,6 +39,7 @@ export function Sidebar() {
   const navItems: NavItem[] = [
     { icon: Home, label: "Home", href: "/" },
     { icon: UserCircle, label: "My Profile", href: "/profile" },
+    { icon: Edit, label: "Edit Profile", href: "/profile/edit" },
     { icon: Search, label: "Search", href: "/search" },
     { icon: MessageSquare, label: "Messages", href: "/messages" },
     { icon: CreditCard, label: "Billing", href: "/billing" },
@@ -53,6 +55,11 @@ export function Sidebar() {
     if (href === "/") {
       return pathname === "/";
     }
+    // For /profile, only match exact path to avoid matching /profile/edit
+    if (href === "/profile") {
+      return pathname === "/profile";
+    }
+    // For other paths, use startsWith to handle sub-routes
     return pathname.startsWith(href);
   };
 
