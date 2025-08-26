@@ -14,7 +14,7 @@ interface LocationSectionProps {
 
 export function LocationSection({ location, onChange }: LocationSectionProps) {
   return (
-    <div className="rounded-2xl bg-background border border-border p-6 space-y-4">
+    <div className="rounded-2xl bg-background border border-border p-6 space-y-4 h-full">
       <div className="flex items-center gap-3">
         <div className="p-2 rounded-lg bg-primary/10">
           <MapPin className="h-5 w-5 text-primary" />
@@ -43,7 +43,6 @@ export function LocationSection({ location, onChange }: LocationSectionProps) {
           />
           <Button 
             variant="default" 
-            size="sm"
             className="whitespace-nowrap"
           >
             Change Location

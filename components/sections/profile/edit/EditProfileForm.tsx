@@ -15,9 +15,9 @@ export interface EditProfileData {
     current: string;
   };
   preferences: {
-    sunPhotos: "definitely" | "maybe" | "no";
-    fallPhotos: "definitely" | "maybe" | "no";
-    softPhotos: "definitely" | "maybe" | "no";
+    watch: "definitely" | "maybe" | "no";
+    soft: "definitely" | "maybe" | "no";
+    full: "definitely" | "maybe" | "no";
   };
   about: {
     description: string;
@@ -52,9 +52,9 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
       current: "Plantation, FL",
     },
     preferences: {
-      sunPhotos: "definitely",
-      fallPhotos: "definitely",
-      softPhotos: "definitely",
+      watch: "definitely",
+      soft: "definitely",
+      full: "definitely",
     },
     about: {
       description: "",
@@ -105,7 +105,7 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         
         {/* Location Section */}
-        <div className="md:col-span-2 xl:col-span-1">
+        <div className="md:col-span-2 xl:col-span-1 xl:h-full">
           <LocationSection
             location={formData.location}
             onChange={(data) => updateFormData("location", data)}
@@ -113,7 +113,7 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
         </div>
 
         {/* Preferences Section */}
-        <div className="md:col-span-2 xl:col-span-2">
+        <div className="md:col-span-2 xl:col-span-2 xl:h-full">
           <PreferencesSection
             preferences={formData.preferences}
             onChange={(data) => updateFormData("preferences", data)}

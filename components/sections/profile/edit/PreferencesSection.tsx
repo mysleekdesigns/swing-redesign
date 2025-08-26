@@ -8,18 +8,18 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Camera, Settings2 } from "lucide-react";
+import { Settings2 } from "lucide-react";
 
 interface PreferencesSectionProps {
   preferences: {
-    sunPhotos: "definitely" | "maybe" | "no";
-    fallPhotos: "definitely" | "maybe" | "no";
-    softPhotos: "definitely" | "maybe" | "no";
+    watch: "definitely" | "maybe" | "no";
+    soft: "definitely" | "maybe" | "no";
+    full: "definitely" | "maybe" | "no";
   };
   onChange: (preferences: {
-    sunPhotos?: "definitely" | "maybe" | "no";
-    fallPhotos?: "definitely" | "maybe" | "no";
-    softPhotos?: "definitely" | "maybe" | "no";
+    watch?: "definitely" | "maybe" | "no";
+    soft?: "definitely" | "maybe" | "no";
+    full?: "definitely" | "maybe" | "no";
   }) => void;
 }
 
@@ -31,7 +31,7 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
   ];
 
   return (
-    <div className="rounded-2xl bg-background border border-border p-6 space-y-4">
+    <div className="rounded-2xl bg-background border border-border p-6 space-y-4 h-full">
       <div className="flex items-center gap-3">
         <div className="p-2 rounded-lg bg-primary/10">
           <Settings2 className="h-5 w-5 text-primary" />
@@ -43,19 +43,16 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* Sun Photos */}
+        {/* Watch */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Camera className="h-4 w-4 text-muted-foreground" />
-            <Label htmlFor="sun-photos" className="text-sm font-medium text-foreground">
-              Sun Photos
-            </Label>
-          </div>
+          <Label htmlFor="watch" className="text-sm font-medium text-primary">
+            Watch
+          </Label>
           <Select
-            value={preferences.sunPhotos}
-            onValueChange={(value) => onChange({ sunPhotos: value as "definitely" | "maybe" | "no" })}
+            value={preferences.watch}
+            onValueChange={(value) => onChange({ watch: value as "definitely" | "maybe" | "no" })}
           >
-            <SelectTrigger id="sun-photos" className="w-full">
+            <SelectTrigger id="watch" className="w-full">
               <SelectValue placeholder="Select preference" />
             </SelectTrigger>
             <SelectContent>
@@ -67,23 +64,20 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
             </SelectContent>
           </Select>
           <p className="text-xs text-muted-foreground">
-            Are you interested in canal pleasures such as meeting others at a nude beach, or some swim time, but with <span className="font-medium">your sun partner?</span> Things such as these!
+            Are you interested in tame pleasures such as meeting others at a nude beach, or same room sex, but with <span className="font-medium">your own partner?</span> Things such as these?
           </p>
         </div>
 
-        {/* Fall Photos */}
+        {/* Soft */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Camera className="h-4 w-4 text-muted-foreground" />
-            <Label htmlFor="fall-photos" className="text-sm font-medium text-foreground">
-              Fall Photos
-            </Label>
-          </div>
+          <Label htmlFor="soft" className="text-sm font-medium text-warning">
+            Soft
+          </Label>
           <Select
-            value={preferences.fallPhotos}
-            onValueChange={(value) => onChange({ fallPhotos: value as "definitely" | "maybe" | "no" })}
+            value={preferences.soft}
+            onValueChange={(value) => onChange({ soft: value as "definitely" | "maybe" | "no" })}
           >
-            <SelectTrigger id="fall-photos" className="w-full">
+            <SelectTrigger id="soft" className="w-full">
               <SelectValue placeholder="Select preference" />
             </SelectTrigger>
             <SelectContent>
@@ -99,19 +93,16 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
           </p>
         </div>
 
-        {/* Soft Photos */}
+        {/* Full */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Camera className="h-4 w-4 text-muted-foreground" />
-            <Label htmlFor="soft-photos" className="text-sm font-medium text-foreground">
-              Soft Photos
-            </Label>
-          </div>
+          <Label htmlFor="full" className="text-sm font-medium text-destructive">
+            Full
+          </Label>
           <Select
-            value={preferences.softPhotos}
-            onValueChange={(value) => onChange({ softPhotos: value as "definitely" | "maybe" | "no" })}
+            value={preferences.full}
+            onValueChange={(value) => onChange({ full: value as "definitely" | "maybe" | "no" })}
           >
-            <SelectTrigger id="soft-photos" className="w-full">
+            <SelectTrigger id="full" className="w-full">
               <SelectValue placeholder="Select preference" />
             </SelectTrigger>
             <SelectContent>

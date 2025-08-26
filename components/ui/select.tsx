@@ -13,7 +13,7 @@ interface SelectContextValue {
   setOpen: (open: boolean) => void
   selected?: string
   setSelected: (value: string) => void
-  triggerId: string
+  triggerRef: React.RefObject<HTMLButtonElement | null>
 }
 
 const SelectContext = React.createContext<SelectContextValue | undefined>(undefined)
@@ -36,7 +36,7 @@ interface SelectProps {
 function Select({ value, onValueChange, defaultValue, children }: SelectProps) {
   const [open, setOpen] = React.useState(false)
   const [selected, setSelected] = React.useState(value || defaultValue || "")
-  const triggerId = React.useId()
+  const triggerRef = React.useRef<HTMLButtonElement>(null)
 
   React.useEffect(() => {
     if (value !== undefined) {
@@ -61,7 +61,7 @@ function Select({ value, onValueChange, defaultValue, children }: SelectProps) {
         setOpen,
         selected: value || selected,
         setSelected: handleValueChange,
-        triggerId
+        triggerRef
       }}
     >
       <div data-slot="select" className="relative">
@@ -97,16 +97,18 @@ interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
   ({ className, size = "default", children, ...props }, ref) => {
-    const { open, setOpen, triggerId } = useSelectContext()
+    const { open, setOpen, triggerRef, selected } = useSelectContext()
+
+    // Merge the external ref with our internal ref
+    React.useImperativeHandle(ref, () => triggerRef.current as HTMLButtonElement)
 
     return (
       <button
-        ref={ref}
-        id={triggerId}
+        ref={triggerRef}
         data-slot="select-trigger"
         data-size={size}
         data-state={open ? "open" : "closed"}
-        data-placeholder={!useSelectContext().selected}
+        data-placeholder={!selected}
         type="button"
         role="combobox"
         aria-expanded={open}
@@ -134,7 +136,7 @@ interface SelectContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
   ({ className, children, ...props }, ref) => {
-    const { open, setOpen, triggerId } = useSelectContext()
+    const { open, setOpen, triggerRef } = useSelectContext()
     const contentRef = React.useRef<HTMLDivElement>(null)
     const [dropdownPosition, setDropdownPosition] = React.useState({ top: 0, left: 0, width: 0 })
     
@@ -142,26 +144,38 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
     React.useImperativeHandle(ref, () => contentRef.current as HTMLDivElement)
 
     React.useEffect(() => {
-      if (open) {
-        // Find the trigger element by its unique ID and calculate position
-        const trigger = document.getElementById(triggerId) as HTMLElement
+      if (open && triggerRef.current) {
+        // Use the trigger ref directly to calculate position
+        const trigger = triggerRef.current
+        const rect = trigger.getBoundingClientRect()
         
-        if (trigger) {
-          const rect = trigger.getBoundingClientRect()
+        // Ensure we have valid dimensions
+        if (rect.width > 0 && rect.height > 0) {
           setDropdownPosition({
             top: rect.bottom + window.scrollY + 4, // 4px gap
             left: rect.left + window.scrollX,
             width: rect.width
           })
+        } else {
+          // Fallback: try again after a small delay
+          setTimeout(() => {
+            if (triggerRef.current) {
+              const rect = triggerRef.current.getBoundingClientRect()
+              setDropdownPosition({
+                top: rect.bottom + window.scrollY + 4,
+                left: rect.left + window.scrollX,
+                width: rect.width
+              })
+            }
+          }, 10)
         }
       }
-    }, [open, triggerId])
+    }, [open, triggerRef])
 
     React.useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
-          const trigger = document.getElementById(triggerId)
-          if (trigger && !trigger.contains(event.target as Node)) {
+          if (triggerRef.current && !triggerRef.current.contains(event.target as Node)) {
             setOpen(false)
           }
         }
@@ -169,10 +183,8 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
 
       const handleScroll = () => {
         // Update position on scroll
-        const trigger = document.getElementById(triggerId) as HTMLElement
-        
-        if (trigger && open) {
-          const rect = trigger.getBoundingClientRect()
+        if (triggerRef.current && open) {
+          const rect = triggerRef.current.getBoundingClientRect()
           setDropdownPosition({
             top: rect.bottom + window.scrollY + 4,
             left: rect.left + window.scrollX,
@@ -191,9 +203,10 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
           window.removeEventListener("resize", handleScroll)
         }
       }
-    }, [open, setOpen, triggerId])
+    }, [open, setOpen, triggerRef])
 
-    if (!open) return null
+    // Don't render if not open or if position is invalid
+    if (!open || (dropdownPosition.top === 0 && dropdownPosition.left === 0)) return null
 
     const dropdownContent = (
       <div
@@ -206,9 +219,10 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
           top: `${dropdownPosition.top}px`,
           left: `${dropdownPosition.left}px`,
           minWidth: `${dropdownPosition.width}px`,
+          zIndex: 9999,
         }}
         className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 z-[9999] max-h-96 origin-top overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
+          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 max-h-96 origin-top overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
           className
         )}
         {...props}
