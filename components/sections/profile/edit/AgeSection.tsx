@@ -1,7 +1,5 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Calendar, Heart } from "lucide-react";
 import { useState } from "react";
@@ -24,22 +22,6 @@ export function AgeSection({ agePreferences, onChange }: AgeSectionProps) {
     onChange({ youngest: values[0], oldest: values[1] });
   };
 
-  const handleYoungestChange = (value: string) => {
-    const num = parseInt(value) || 18;
-    if (num >= 18 && num <= agePreferences.oldest) {
-      onChange({ youngest: num });
-      setAgeRange([num, ageRange[1]] as [number, number]);
-    }
-  };
-
-  const handleOldestChange = (value: string) => {
-    const num = parseInt(value) || 99;
-    if (num >= agePreferences.youngest && num <= 99) {
-      onChange({ oldest: num });
-      setAgeRange([ageRange[0], num] as [number, number]);
-    }
-  };
-
   return (
     <div className="rounded-2xl bg-background border border-border p-6 space-y-4 h-full">
       <div className="flex items-center gap-3">
@@ -53,38 +35,6 @@ export function AgeSection({ agePreferences, onChange }: AgeSectionProps) {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Heart className="h-4 w-4" />
           <p>Which Ages turn you on?</p>
-        </div>
-        
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="youngest" className="text-sm font-medium text-foreground">
-              Youngest
-            </Label>
-            <Input
-              id="youngest"
-              type="number"
-              min="18"
-              max={agePreferences.oldest}
-              value={agePreferences.youngest}
-              onChange={(e) => handleYoungestChange(e.target.value)}
-              className="w-full"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="oldest" className="text-sm font-medium text-foreground">
-              Oldest
-            </Label>
-            <Input
-              id="oldest"
-              type="number"
-              min={agePreferences.youngest}
-              max="99"
-              value={agePreferences.oldest}
-              onChange={(e) => handleOldestChange(e.target.value)}
-              className="w-full"
-            />
-          </div>
         </div>
         
         <div className="space-y-3">

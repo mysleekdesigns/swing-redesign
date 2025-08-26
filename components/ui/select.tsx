@@ -145,30 +145,53 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
 
     React.useEffect(() => {
       if (open && triggerRef.current) {
-        // Use the trigger ref directly to calculate position
-        const trigger = triggerRef.current
-        const rect = trigger.getBoundingClientRect()
-        
-        // Ensure we have valid dimensions
-        if (rect.width > 0 && rect.height > 0) {
-          setDropdownPosition({
-            top: rect.bottom + window.scrollY + 4, // 4px gap
-            left: rect.left + window.scrollX,
-            width: rect.width
-          })
-        } else {
-          // Fallback: try again after a small delay
-          setTimeout(() => {
-            if (triggerRef.current) {
-              const rect = triggerRef.current.getBoundingClientRect()
-              setDropdownPosition({
-                top: rect.bottom + window.scrollY + 4,
-                left: rect.left + window.scrollX,
-                width: rect.width
-              })
+        const calculatePosition = () => {
+          if (!triggerRef.current) return
+          
+          const trigger = triggerRef.current
+          const rect = trigger.getBoundingClientRect()
+          
+          // Ensure we have valid dimensions
+          if (rect.width > 0 && rect.height > 0) {
+            // For fixed positioning, use viewport-relative coordinates directly
+            let calculatedTop = rect.bottom + 4 // 4px gap
+            const calculatedLeft = rect.left
+            
+            // Check if dropdown would go off the bottom of the viewport
+            const viewportHeight = window.innerHeight
+            const dropdownMaxHeight = 384 // max-h-96 = 24rem = 384px
+            
+            // If dropdown would extend below viewport, position it above the trigger instead
+            if (rect.bottom + dropdownMaxHeight > viewportHeight && rect.top > dropdownMaxHeight) {
+              calculatedTop = rect.top - dropdownMaxHeight - 4
             }
-          }, 10)
+            
+            // Ensure the dropdown doesn't appear disconnected from trigger
+            // For fixed positioning, these are viewport-relative bounds
+            const minTop = Math.max(0, rect.top - 10) // Allow some positioning above trigger
+            const maxTop = Math.min(viewportHeight, rect.bottom + 100) // Prevent positioning too far below
+            
+            if (calculatedTop < minTop || calculatedTop > maxTop) {
+              // Reset to default position below trigger
+              calculatedTop = rect.bottom + 4
+            }
+            
+            setDropdownPosition({
+              top: calculatedTop,
+              left: calculatedLeft,
+              width: rect.width
+            })
+          } else {
+            // Fallback: try again after a small delay if dimensions aren't ready
+            setTimeout(calculatePosition, 10)
+          }
         }
+        
+        // Calculate position immediately
+        calculatePosition()
+        
+        // Also recalculate after a frame to ensure DOM is ready
+        requestAnimationFrame(calculatePosition)
       }
     }, [open, triggerRef])
 
@@ -185,9 +208,20 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
         // Update position on scroll
         if (triggerRef.current && open) {
           const rect = triggerRef.current.getBoundingClientRect()
+          
+          // For fixed positioning, use viewport-relative coordinates directly
+          let calculatedTop = rect.bottom + 4
+          const viewportHeight = window.innerHeight
+          const dropdownMaxHeight = 384
+          
+          // Adjust if would go off-screen
+          if (rect.bottom + dropdownMaxHeight > viewportHeight && rect.top > dropdownMaxHeight) {
+            calculatedTop = rect.top - dropdownMaxHeight - 4
+          }
+          
           setDropdownPosition({
-            top: rect.bottom + window.scrollY + 4,
-            left: rect.left + window.scrollX,
+            top: calculatedTop,
+            left: rect.left,
             width: rect.width
           })
         }

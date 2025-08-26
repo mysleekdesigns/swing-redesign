@@ -8,7 +8,11 @@ import { LookingForFiltersSection, PreferenceValue } from "./LookingForFiltersSe
 import { AgeSection } from "./AgeSection";
 import { LifestyleSection } from "./LifestyleSection";
 import { GuidelinesSection } from "./GuidelinesSection";
-import { TagLineSection } from "./TagLineSection";
+import { ProfileDescriptionSection } from "./ProfileDescriptionSection";
+import { SimpleShortTaglineSection } from "./SimpleShortTaglineSection";
+import { WhatLookingForSection } from "./WhatLookingForSection";
+import { FantasiesSection } from "./FantasiesSection";
+import { AdditionalInfoSection } from "./AdditionalInfoSection";
 
 export interface EditProfileData {
   location: {
@@ -42,7 +46,11 @@ export interface EditProfileData {
     drink: "do_not_care" | "yes" | "no";
     smoke: "do_not_care" | "yes" | "no";
   };
-  tagLine: string;
+  profileDescription: string;
+  shortTagline: string;
+  whatLookingFor: string;
+  fantasies: string;
+  additionalInfo: string;
 }
 
 interface EditProfileFormProps {
@@ -82,7 +90,11 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
       drink: "do_not_care",
       smoke: "do_not_care",
     },
-    tagLine: "",
+    profileDescription: "",
+    shortTagline: "",
+    whatLookingFor: "",
+    fantasies: "",
+    additionalInfo: "",
   });
 
   const [initialData] = useState(formData);
@@ -158,21 +170,51 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
           />
         </div>
 
-        {/* Tag Line Section */}
-        <div className="md:col-span-2 xl:col-span-1">
-          <TagLineSection
-            tagLine={formData.tagLine}
-            onChange={(tagLine) => setFormData((prev) => ({ ...prev, tagLine }))}
-          />
-        </div>
-
         {/* Guidelines Section - Full width */}
         <div className="md:col-span-2 xl:col-span-3">
           <GuidelinesSection />
         </div>
-      </div>
 
-      
+        {/* Short Tag Line Section - Full width (directly under guidelines as requested) */}
+        <div className="md:col-span-2 xl:col-span-3">
+          <SimpleShortTaglineSection
+            tagline={formData.shortTagline}
+            onChange={(shortTagline) => setFormData((prev) => ({ ...prev, shortTagline }))}
+          />
+        </div>
+
+        {/* What are you looking for? - Full width */}
+        <div className="md:col-span-2 xl:col-span-3">
+          <WhatLookingForSection
+            lookingFor={formData.whatLookingFor}
+            onChange={(whatLookingFor) => setFormData((prev) => ({ ...prev, whatLookingFor }))}
+          />
+        </div>
+
+        {/* Describe yourself - Full width */}
+        <div className="md:col-span-2 xl:col-span-3">
+          <ProfileDescriptionSection
+            description={formData.profileDescription}
+            onChange={(profileDescription) => setFormData((prev) => ({ ...prev, profileDescription }))}
+          />
+        </div>
+
+        {/* Tell us about your fantasies and/or real experiences - Full width */}
+        <div className="md:col-span-2 xl:col-span-3">
+          <FantasiesSection
+            fantasies={formData.fantasies}
+            onChange={(fantasies) => setFormData((prev) => ({ ...prev, fantasies }))}
+          />
+        </div>
+
+        {/* Additional information - Full width */}
+        <div className="md:col-span-2 xl:col-span-3">
+          <AdditionalInfoSection
+            additionalInfo={formData.additionalInfo}
+            onChange={(additionalInfo) => setFormData((prev) => ({ ...prev, additionalInfo }))}
+          />
+        </div>
+      </div>
     </div>
   );
 }

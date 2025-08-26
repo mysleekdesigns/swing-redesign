@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MapPin } from "lucide-react";
@@ -30,22 +29,13 @@ export function LocationSection({ location, onChange }: LocationSectionProps) {
           <Label htmlFor="current-location" className="text-sm font-medium text-foreground">
             Current Location
           </Label>
-          <div className="flex gap-2">
-            <Input
-              id="current-location"
-              type="text"
-              value={location.current}
-              onChange={(e) => onChange({ current: e.target.value })}
-              placeholder="Enter city or postal code"
-              className="flex-1"
-            />
-            <Button 
-              variant="default" 
-              className="whitespace-nowrap"
-            >
-              Change Location
-            </Button>
-          </div>
+          <Input
+            id="current-location"
+            type="text"
+            value={location.current}
+            onChange={(e) => onChange({ current: e.target.value })}
+            placeholder="Enter city or postal code"
+          />
         </div>
         
         <p className="text-xs text-muted-foreground">
