@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
+import { PillToggle } from "@/components/ui/pill-toggle";
 import { User } from "lucide-react";
 
 interface AboutSectionProps {
@@ -42,16 +42,6 @@ export function AboutSection({ about, onChange }: AboutSectionProps) {
   
   // Generate inches options (0-11)
   const inchesOptions = Array.from({ length: 12 }, (_, i) => i);
-  
-  // Orientation options
-  const orientationOptions = [
-    "Straight",
-    "Bisexual",
-    "Gay",
-    "Lesbian",
-    "Pansexual",
-    "Other"
-  ];
 
   return (
     <div className="rounded-2xl bg-background border border-border p-6 space-y-6">
@@ -149,45 +139,41 @@ export function AboutSection({ about, onChange }: AboutSectionProps) {
         {/* Smoke Section */}
         <div className="col-span-1 space-y-2">
           <Label className="text-sm font-medium text-foreground">Smoke:</Label>
-          <div className="flex items-center h-9">
-            <Checkbox
-              checked={about.smoke}
-              onCheckedChange={(checked) => onChange({ smoke: checked as boolean })}
-              className="h-5 w-5"
-            />
-          </div>
+          <PillToggle
+            options={[
+              { value: true, label: "Yes" },
+              { value: false, label: "No" }
+            ]}
+            value={about.smoke}
+            onChange={(value) => onChange({ smoke: value as boolean })}
+          />
         </div>
 
         {/* Drink Section */}
         <div className="col-span-1 space-y-2">
           <Label className="text-sm font-medium text-foreground">Drink:</Label>
-          <div className="flex items-center h-9">
-            <Checkbox
-              checked={about.drink}
-              onCheckedChange={(checked) => onChange({ drink: checked as boolean })}
-              className="h-5 w-5"
-            />
-          </div>
+          <PillToggle
+            options={[
+              { value: true, label: "Yes" },
+              { value: false, label: "No" }
+            ]}
+            value={about.drink}
+            onChange={(value) => onChange({ drink: value as boolean })}
+          />
         </div>
 
         {/* Orientation Section */}
         <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-2">
           <Label className="text-sm font-medium text-foreground">Orientation:</Label>
-          <Select
+          <PillToggle
+            options={[
+              { value: "straight", label: "Straight" },
+              { value: "bi-curious", label: "Bi Curious" },
+              { value: "bisexual", label: "Bi" }
+            ]}
             value={about.orientation}
-            onValueChange={(value) => onChange({ orientation: value })}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {orientationOptions.map(option => (
-                <SelectItem key={option} value={option.toLowerCase()}>
-                  {option}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            onChange={(value) => onChange({ orientation: value as string })}
+          />
         </div>
       </div>
       
