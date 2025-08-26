@@ -42,7 +42,7 @@ export function LocationSection({ location, onChange }: LocationSectionProps) {
             className="flex-1"
           />
           <Button 
-            variant="outline" 
+            variant="default" 
             size="sm"
             className="whitespace-nowrap"
           >

@@ -38,7 +38,7 @@ export default function EditProfilePage() {
             <div className="mb-8 sm:mb-12">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h1 className="text-3xl sm:text-4xl lg:text-4xl font-bold mb-4 text-black">
+                  <h1 className="text-3xl sm:text-4xl lg:text-4xl font-bold mb-4 text-foreground">
                     Edit Profile
                   </h1>
                   <p className="text-base text-muted-foreground">

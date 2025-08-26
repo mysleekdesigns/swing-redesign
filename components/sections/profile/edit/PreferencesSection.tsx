@@ -1,6 +1,12 @@
 "use client";
 
-import { SimpleSelect } from "@/components/ui/simple-select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Camera, Settings2 } from "lucide-react";
 
@@ -45,18 +51,21 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
               Sun Photos
             </Label>
           </div>
-          <SimpleSelect
-            id="sun-photos"
+          <Select
             value={preferences.sunPhotos}
-            onChange={(e) => onChange({ sunPhotos: e.target.value as "definitely" | "maybe" | "no" })}
-            className="w-full"
+            onValueChange={(value) => onChange({ sunPhotos: value as "definitely" | "maybe" | "no" })}
           >
-            {preferenceOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </SimpleSelect>
+            <SelectTrigger id="sun-photos" className="w-full">
+              <SelectValue placeholder="Select preference" />
+            </SelectTrigger>
+            <SelectContent>
+              {preferenceOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <p className="text-xs text-muted-foreground">
             Are you interested in canal pleasures such as meeting others at a nude beach, or some swim time, but with <span className="font-medium">your sun partner?</span> Things such as these!
           </p>
@@ -70,18 +79,21 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
               Fall Photos
             </Label>
           </div>
-          <SimpleSelect
-            id="fall-photos"
+          <Select
             value={preferences.fallPhotos}
-            onChange={(e) => onChange({ fallPhotos: e.target.value as "definitely" | "maybe" | "no" })}
-            className="w-full"
+            onValueChange={(value) => onChange({ fallPhotos: value as "definitely" | "maybe" | "no" })}
           >
-            {preferenceOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </SimpleSelect>
+            <SelectTrigger id="fall-photos" className="w-full">
+              <SelectValue placeholder="Select preference" />
+            </SelectTrigger>
+            <SelectContent>
+              {preferenceOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <p className="text-xs text-muted-foreground">
             Are you interested in Moderate pleasures such as touching and <span className="font-medium">oral play with others</span>, and anything else short of intercourse with someone other than your partner?
           </p>
@@ -95,18 +107,21 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
               Soft Photos
             </Label>
           </div>
-          <SimpleSelect
-            id="soft-photos"
+          <Select
             value={preferences.softPhotos}
-            onChange={(e) => onChange({ softPhotos: e.target.value as "definitely" | "maybe" | "no" })}
-            className="w-full"
+            onValueChange={(value) => onChange({ softPhotos: value as "definitely" | "maybe" | "no" })}
           >
-            {preferenceOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </SimpleSelect>
+            <SelectTrigger id="soft-photos" className="w-full">
+              <SelectValue placeholder="Select preference" />
+            </SelectTrigger>
+            <SelectContent>
+              {preferenceOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <p className="text-xs text-muted-foreground">
             Are you interested in Wild pleasures such as having <span className="font-medium">sex</span> with someone other than your partner?
           </p>

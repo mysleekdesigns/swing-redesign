@@ -1,6 +1,12 @@
 "use client";
 
-import { SimpleSelect } from "@/components/ui/simple-select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Filter, Users, UserX } from "lucide-react";
 
@@ -72,18 +78,21 @@ export function FiltersSection({
               </Label>
             </div>
             
-            <SimpleSelect
-              id={`filter-${key}`}
+            <Select
               value={filters[key]}
-              onChange={(e) => onChange({ [key]: e.target.value } as FilterType)}
-              className="w-full"
+              onValueChange={(value) => onChange({ [key]: value } as FilterType)}
             >
-              {filterOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </SimpleSelect>
+              <SelectTrigger id={`filter-${key}`} className="w-full">
+                <SelectValue placeholder="Select option" />
+              </SelectTrigger>
+              <SelectContent>
+                {filterOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             
             {!isSingleMembers && (
               <p className="text-xs text-muted-foreground">

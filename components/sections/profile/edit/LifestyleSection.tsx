@@ -1,6 +1,12 @@
 "use client";
 
-import { SimpleSelect } from "@/components/ui/simple-select";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Wine, Cigarette, Sparkles } from "lucide-react";
 
@@ -42,18 +48,21 @@ export function LifestyleSection({ lifestyle, onChange }: LifestyleSectionProps)
                 Drinking
               </Label>
             </div>
-            <SimpleSelect
-              id="drink"
+            <Select
               value={lifestyle.drink}
-              onChange={(e) => onChange({ drink: e.target.value as "do_not_care" | "yes" | "no" })}
-              className="w-full"
+              onValueChange={(value) => onChange({ drink: value as "do_not_care" | "yes" | "no" })}
             >
-              {lifestyleOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </SimpleSelect>
+              <SelectTrigger id="drink" className="w-full">
+                <SelectValue placeholder="Select preference" />
+              </SelectTrigger>
+              <SelectContent>
+                {lifestyleOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <p className="text-xs text-muted-foreground">
               Filter matches based on drinking preferences
             </p>
@@ -67,18 +76,21 @@ export function LifestyleSection({ lifestyle, onChange }: LifestyleSectionProps)
                 Smoking
               </Label>
             </div>
-            <SimpleSelect
-              id="smoke"
+            <Select
               value={lifestyle.smoke}
-              onChange={(e) => onChange({ smoke: e.target.value as "do_not_care" | "yes" | "no" })}
-              className="w-full"
+              onValueChange={(value) => onChange({ smoke: value as "do_not_care" | "yes" | "no" })}
             >
-              {lifestyleOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </SimpleSelect>
+              <SelectTrigger id="smoke" className="w-full">
+                <SelectValue placeholder="Select preference" />
+              </SelectTrigger>
+              <SelectContent>
+                {lifestyleOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <p className="text-xs text-muted-foreground">
               Filter matches based on smoking preferences
             </p>
