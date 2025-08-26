@@ -176,7 +176,8 @@ export function EditProfileForm({ onChangesMade }: EditProfileFormProps) {
         </div>
       </div>
 
-      
+      {/* Add padding at bottom for mobile fixed buttons */}
+      <div className="h-20 sm:hidden" />
     </div>
   );
 }
