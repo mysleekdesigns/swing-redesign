@@ -35,10 +35,6 @@ export function LifestyleSection({ lifestyle, onChange }: LifestyleSectionProps)
       </div>
       
       <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">
-          Would you like to meet people that Smoke or Drink?
-        </p>
-        
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Drinking Preference */}
           <div className="space-y-2">

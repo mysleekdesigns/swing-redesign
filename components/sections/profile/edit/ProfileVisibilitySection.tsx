@@ -49,7 +49,7 @@ export function ProfileVisibilitySection({
           </div>
           <div>
             <h3 className="text-lg font-semibold text-foreground">Profile Visibility</h3>
-            <p className="text-sm text-muted-foreground mt-1">Control who can see and interact with your profile</p>
+            <p className="hidden sm:block text-sm text-muted-foreground mt-1">Control who can see and interact with your profile</p>
           </div>
         </div>
         <Button

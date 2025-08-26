@@ -38,7 +38,7 @@ export function PreferencesSection({ preferences, onChange }: PreferencesSection
         </div>
         <div>
           <h3 className="text-lg font-semibold text-foreground">Preferences</h3>
-          <p className="text-sm text-muted-foreground">What sort of Pleasures are You Seeking?</p>
+          <p className="hidden sm:block text-sm text-muted-foreground">What sort of Pleasures are You Seeking?</p>
         </div>
       </div>
       

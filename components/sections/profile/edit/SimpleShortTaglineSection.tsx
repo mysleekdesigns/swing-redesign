@@ -37,7 +37,7 @@ export function SimpleShortTaglineSection({ tagline, onChange }: SimpleShortTagl
           <h3 className="text-lg font-semibold text-foreground">
             Short Tag Line: <span className="text-destructive">*</span>
           </h3>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="hidden sm:block text-sm text-muted-foreground mt-1">
             A small teaser text that shows up when people do a search or who&apos;s online. It should be at least 3-5 words.
           </p>
         </div>

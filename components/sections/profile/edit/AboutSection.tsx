@@ -51,7 +51,7 @@ export function AboutSection({ about, onChange }: AboutSectionProps) {
         </div>
         <div>
           <h3 className="text-lg font-semibold text-foreground">Tell Us a Little About You</h3>
-          <p className="text-sm text-muted-foreground mt-1">{about.memberType || "Male Member"}</p>
+          <p className="hidden sm:block text-sm text-muted-foreground mt-1">{about.memberType || "Male Member"}</p>
         </div>
       </div>
       

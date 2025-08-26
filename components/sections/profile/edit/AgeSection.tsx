@@ -1,7 +1,7 @@
 "use client";
 
 import { Slider } from "@/components/ui/slider";
-import { Calendar, Heart } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { useState } from "react";
 
 interface AgeSectionProps {
@@ -32,11 +32,6 @@ export function AgeSection({ agePreferences, onChange }: AgeSectionProps) {
       </div>
       
       <div className="space-y-4">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Heart className="h-4 w-4" />
-          <p>Which Ages turn you on?</p>
-        </div>
-        
         <div className="space-y-3">
           <div className="px-2">
             <Slider

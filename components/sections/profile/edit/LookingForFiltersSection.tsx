@@ -69,7 +69,7 @@ export function LookingForFiltersSection({
         <h3 className="text-xl font-semibold text-foreground">
           Who are you looking for?
         </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="hidden sm:block text-sm text-muted-foreground leading-relaxed">
           By choosing &quot;No Interest&quot;, the profile is still viewable. However, choosing &quot;Block Them&quot;, the profile is no longer visible.
         </p>
       </div>

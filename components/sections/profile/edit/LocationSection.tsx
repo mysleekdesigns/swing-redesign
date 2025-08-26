@@ -20,7 +20,7 @@ export function LocationSection({ location, onChange }: LocationSectionProps) {
         </div>
         <div>
           <h3 className="text-lg font-semibold text-foreground">Location</h3>
-          <p className="text-sm text-muted-foreground">Please enter your real city name or postal code</p>
+          <p className="hidden sm:block text-sm text-muted-foreground">Please enter your real city name or postal code</p>
         </div>
       </div>
       

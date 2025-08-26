@@ -1,11 +1,8 @@
 "use client";
 
-import { AlertTriangle, Info, Shield, ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { AlertTriangle, Info, Shield } from "lucide-react";
 
 export function GuidelinesSection() {
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const guidelines = [
     {
@@ -25,35 +22,17 @@ export function GuidelinesSection() {
     }
   ];
 
-  const shortGuidelines = [guidelines[0]];
-  const displayGuidelines = isExpanded ? guidelines : shortGuidelines;
-
   return (
     <div className="rounded-2xl bg-background border border-warning/50 p-6 space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-warning/10">
-            <AlertTriangle className="h-5 w-5 text-warning" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">Please, do yourself a favor:</h3>
+      <div className="flex items-center gap-3">
+        <div className="p-1.5 sm:p-2 rounded sm:rounded-lg bg-warning/10">
+          <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-warning" />
         </div>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="sm:hidden"
-        >
-          {isExpanded ? (
-            <ChevronUp className="h-4 w-4" />
-          ) : (
-            <ChevronDown className="h-4 w-4" />
-          )}
-        </Button>
+        <h3 className="text-lg font-semibold text-foreground">Please, do yourself a favor:</h3>
       </div>
       
       <div className="space-y-4">
-        {displayGuidelines.map((guideline, index) => (
+        {guidelines.map((guideline, index) => (
           <div key={index} className="space-y-2">
             <div className="flex items-start gap-3">
               <div className="p-1.5 rounded bg-muted/50 mt-0.5">
@@ -69,39 +48,6 @@ export function GuidelinesSection() {
           </div>
         ))}
         
-        {/* Mobile toggle hint */}
-        {!isExpanded && (
-          <div className="sm:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsExpanded(true)}
-              className="text-xs text-primary hover:text-primary/90 p-0 h-auto font-normal"
-            >
-              Show more guidelines...
-            </Button>
-          </div>
-        )}
-        
-        {/* Desktop additional guidelines (always visible) */}
-        <div className="hidden sm:block space-y-4">
-          {guidelines.slice(1).map((guideline, index) => (
-            <div key={index + 1} className="space-y-2">
-              <div className="flex items-start gap-3">
-                <div className="p-1.5 rounded bg-muted/50 mt-0.5">
-                  <guideline.icon className="h-4 w-4 text-muted-foreground" />
-                </div>
-                <div className="flex-1 space-y-1">
-                  <h4 className="text-sm font-medium text-foreground">{guideline.title}</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {guideline.content}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
         <div className="p-3 rounded-lg bg-warning/10 border border-warning/30">
           <div className="flex gap-2 items-start">
             <Info className="h-4 w-4 text-warning mt-0.5 flex-shrink-0" />
@@ -110,11 +56,7 @@ export function GuidelinesSection() {
             </p>
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            {isExpanded || !shortGuidelines.length ? (
-              "All fields below have a 4000 character limit. A small teaser text that shows up when people do a search or who&apos;s online. It should be at least 5-8 words."
-            ) : (
-              "Complete your profile to increase your chances of finding matches."
-            )}
+            All fields below have a 4000 character limit. A small teaser text that shows up when people do a search or who&apos;s online. It should be at least 5-8 words.
           </p>
         </div>
       </div>
