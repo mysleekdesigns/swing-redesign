@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { CreditCardIcon, ShieldCheckIcon, LockIcon, MailIcon, AlertCircleIcon } from "lucide-react"
 
 export default function PaymentMethods() {
@@ -24,31 +25,39 @@ export default function PaymentMethods() {
             {/* Payment Provider Logos */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-muted/30 rounded-lg mb-6">
               <div className="flex items-center justify-center p-3 bg-background rounded-lg">
-                <img 
+                <Image 
                   src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" 
                   alt="Visa" 
-                  className="h-8 object-contain dark:invert"
+                  width={60}
+                  height={32}
+                  className="h-8 w-auto object-contain dark:invert"
                 />
               </div>
               <div className="flex items-center justify-center p-3 bg-background rounded-lg">
-                <img 
+                <Image 
                   src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" 
                   alt="Mastercard" 
-                  className="h-8 object-contain"
+                  width={60}
+                  height={32}
+                  className="h-8 w-auto object-contain"
                 />
               </div>
               <div className="flex items-center justify-center p-3 bg-background rounded-lg">
-                <img 
+                <Image 
                   src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" 
                   alt="American Express" 
-                  className="h-8 object-contain"
+                  width={60}
+                  height={32}
+                  className="h-8 w-auto object-contain"
                 />
               </div>
               <div className="flex items-center justify-center p-3 bg-background rounded-lg">
-                <img 
+                <Image 
                   src="https://upload.wikimedia.org/wikipedia/commons/5/57/Discover_Card_logo.svg" 
                   alt="Discover" 
-                  className="h-8 object-contain"
+                  width={60}
+                  height={32}
+                  className="h-8 w-auto object-contain"
                 />
               </div>
             </div>
