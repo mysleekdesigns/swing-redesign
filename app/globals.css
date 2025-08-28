@@ -519,4 +519,73 @@
     outline: none !important;
     box-shadow: none !important;
   }
+  
+  /* Responsive Font Size Detection Classes */
+  /* These classes are applied by font-size-detector.ts based on user's system font settings */
+  
+  /* Normal font size (default 16px base) */
+  :root.font-size-normal {
+    font-size: 100%; /* 16px */
+  }
+  
+  /* Large font size (when user sets 18px or larger) */
+  :root.font-size-large {
+    font-size: 112.5%; /* 18px base */
+  }
+  
+  /* Extra large font size (when user sets 20px or larger) */
+  :root.font-size-extra-large {
+    font-size: 125%; /* 20px base */
+  }
+  
+  /* High zoom detection (when user has 150% zoom or higher) */
+  :root.high-zoom {
+    /* Can add specific zoom adjustments here if needed */
+  }
+  
+  /* Ensure all text uses rem units for proper scaling */
+  /* This makes text automatically scale with the root font size changes */
+  body {
+    font-size: 1rem; /* Will be 16px, 18px, or 20px based on detected settings */
+    line-height: 1.5;
+  }
+  
+  /* Adjust specific elements that may need fine-tuning at larger sizes */
+  :root.font-size-large h1,
+  :root.font-size-extra-large h1 {
+    line-height: 1.2; /* Tighten line height for larger headings */
+  }
+  
+  :root.font-size-large h2,
+  :root.font-size-extra-large h2 {
+    line-height: 1.25;
+  }
+  
+  /* Ensure buttons and inputs scale properly */
+  :root.font-size-large button,
+  :root.font-size-large input,
+  :root.font-size-large select,
+  :root.font-size-large textarea {
+    font-size: inherit; /* Inherit the scaled size */
+  }
+  
+  :root.font-size-extra-large button,
+  :root.font-size-extra-large input,
+  :root.font-size-extra-large select,
+  :root.font-size-extra-large textarea {
+    font-size: inherit;
+  }
+  
+  /* Prevent iOS zoom on inputs when font size is properly scaled */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  input[type="url"],
+  select,
+  textarea {
+    font-size: max(1rem, 16px); /* Ensures minimum 16px to prevent iOS zoom */
+  }
 }
