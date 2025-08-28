@@ -67,20 +67,20 @@ export default function MessagesPage() {
       <Sidebar />
       
       {/* Main Content */}
-      <main className="2xl:ml-64 2xl:pt-4 p-4 sm:p-6 lg:p-8">
-        <div className="w-full space-y-6">
+      <main className="2xl:ml-64 2xl:pt-4 p-2 sm:p-6 lg:p-8">
+        <div className="w-full">
           
           {/* Messages Container */}
-          <div className="bg-card rounded-2xl overflow-hidden border border-border">
-            <div className="flex h-[calc(100vh-16rem)]">
+          <div className="bg-card rounded-xl lg:rounded-2xl overflow-hidden border border-border h-[calc(100vh-5rem)] sm:h-[calc(100vh-10rem)] lg:h-auto">
+            <div className="flex h-full lg:h-[calc(100vh-16rem)]">
               
               {/* Conversations List */}
               <div className={cn(
-                "w-full border-r border-border/30 lg:w-96",
-                selectedConversation && "hidden lg:block"
+                "w-full border-r border-border/30 lg:w-96 flex flex-col",
+                selectedConversation && "hidden lg:flex"
               )}>
                 {/* Search Bar */}
-                <div className="p-4 border-b border-border/30">
+                <div className="p-4 border-b border-border/30 flex-shrink-0">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
@@ -94,7 +94,7 @@ export default function MessagesPage() {
                 </div>
 
                 {/* Conversations List */}
-                <div className="h-[calc(100%-5rem)] overflow-y-auto p-3 space-y-2">
+                <div className="flex-1 overflow-y-auto p-3 space-y-2">
                   {filteredConversations.map((conversation) => {
                     const participant = conversation.participants[0];
                     const isSelected = selectedConversation?.id === conversation.id;
@@ -324,8 +324,10 @@ export default function MessagesPage() {
           </div>
         </div>
 
-        {/* Footer */}
-        <Footer />
+        {/* Footer - Hidden on mobile for messages */}
+        <div className="hidden lg:block">
+          <Footer />
+        </div>
       </main>
     </div>
   );

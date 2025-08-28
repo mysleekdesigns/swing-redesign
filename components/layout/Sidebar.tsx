@@ -66,7 +66,7 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Navigation Bar */}
-      <div className="2xl:hidden backdrop-blur-[20px] bg-card/10 border-b border-sidebar-border dark:bg-card/5">
+      <div className="2xl:hidden bg-card border-b border-sidebar-border relative z-20">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Left - Menu Button */}
           <button
@@ -117,7 +117,7 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 2xl:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 2xl:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -183,7 +183,7 @@ export function Sidebar() {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-background/50 z-30 2xl:hidden"
+          className="fixed inset-0 bg-black/50 z-40 2xl:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
